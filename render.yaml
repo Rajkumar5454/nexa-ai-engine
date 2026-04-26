@@ -1,0 +1,44 @@
+services:
+  # -------------------------
+  # BACKEND FASTAPI SERVICE
+  # -------------------------
+  - type: web
+    name: nexa-backend
+    env: docker
+    rootDir: backend
+    plan: free
+    region: oregon
+    healthCheckPath: /api/
+    envVars:
+      - key: MONGO_URL
+        value: "mongodb://your-mongo-url-here" # YOU MUST CHANGE THIS IN RENDER DASHBOARD
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: "https://nexa-frontend.onrender.com" # Will be updated automatically or manually
+      - key: USER_OPENAI_API_KEY
+        value: "sk-your-openai-key" # YOU MUST CHANGE THIS IN RENDER DASHBOARD
+      - key: USER_GOOGLE_API_KEY
+        value: "AIza-your-google-key" # YOU MUST CHANGE THIS IN RENDER DASHBOARD
+      - key: RAZORPAY_KEY_ID
+        value: "rzp_test_..." # YOU MUST CHANGE THIS
+      - key: RAZORPAY_KEY_SECRET
+        value: "secret_..." # YOU MUST CHANGE THIS
+      - key: GOOGLE_CLIENT_ID
+        value: "your-google-client-id" # YOU MUST CHANGE THIS
+
+  # -------------------------
+  # FRONTEND REACT SERVICE
+  # -------------------------
+  - type: web
+    name: nexa-frontend
+    env: docker
+    rootDir: frontend
+    plan: free
+    region: oregon
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        fromService:
+          type: web
+          name: nexa-backend
+          property: hostport
