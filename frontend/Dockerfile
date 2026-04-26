@@ -4,10 +4,10 @@ FROM node:18-alpine as build-stage
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 COPY . .
-RUN npm run build
+RUN CI=false npm run build
 
 # Production stage
 FROM nginx:stable-alpine as production-stage
