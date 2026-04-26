@@ -148,6 +148,8 @@ def _get_openai_direct_client():
 
 def _get_emergent_client():
     """Emergent-proxied OpenAI-compat client (used as fallback + for Claude routing)."""
+    if not EMERGENT_KEY:
+        return None
     return openai.OpenAI(
         api_key=EMERGENT_KEY,
         base_url="https://integrations.emergentagent.com/llm",
@@ -235,6 +237,8 @@ class AIService:
 
     async def _call_emergent_chat(self, system, user, max_tokens, provider, model_name, temperature, session_id="default"):
         """Used as a fallback for providers we don't have direct keys for (e.g. Anthropic)."""
+        if not self.emergent_client:
+            raise ValueError("Emergent client is not configured (missing key).")
         # Refactored to use standard OpenAI client against the Emergent proxy instead of LlmChat library
         model = f"{provider}/{model_name}"
         import asyncio
@@ -294,6 +298,8 @@ class AIService:
 
         # CLAUDE → Emergent LLM key (user did not provide an Anthropic key)
         if model.startswith("claude"):
+            if not self.emergent_client:
+                raise ValueError("Claude is not available because the Emergent proxy key is missing.")
             return await asyncio.to_thread(
                 self._call_openai_compat,
                 self.emergent_client, system, user, max_tokens, model, temperature,
@@ -326,10 +332,13 @@ class AIService:
                 print(f"[ai_service] NVIDIA fallback failed: {e}")
 
         # Fallback 2: Emergent proxy
-        return await asyncio.to_thread(
-            self._call_openai_compat,
-            self.emergent_client, system, user, max_tokens, model, temperature,
-        )
+        if self.emergent_client:
+            return await asyncio.to_thread(
+                self._call_openai_compat,
+                self.emergent_client, system, user, max_tokens, model, temperature,
+            )
+            
+        raise ValueError(f"No valid API keys configured to handle model request: {model}")
 
     # ----- User prompt builder -----
 
