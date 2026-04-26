@@ -38,7 +38,4 @@ services:
     region: oregon
     envVars:
       - key: REACT_APP_BACKEND_URL
-        fromService:
-          type: web
-          name: nexa-backend
-          property: hostport
+        value: "https://nexa-backend-o2dy.onrender.com"
