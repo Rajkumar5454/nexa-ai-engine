@@ -1,0 +1,61 @@
+{
+  "summary": "Completed comprehensive testing of Bolt.new clone AI App Builder with three new features: Monaco editor, streaming AI responses, and code export/download. All major features working correctly.",
+  "backend_issues": {
+    "minor_issues": [
+      {
+        "endpoint": "/api/auth/signup",
+        "issue": "Returns 400 'Email already registered' for test user",
+        "impact": "Expected behavior - user already exists",
+        "fix_priority": "LOW"
+      }
+    ]
+  },
+  "frontend_issues": {
+    "minor_ui_issues": [
+      {
+        "component": "CodePanel Copy Button",
+        "issue": "Copy feedback 'Copied' text not clearly visible after clicking copy",
+        "selector": "[data-testid='copy-code-btn']",
+        "fix_priority": "LOW"
+      },
+      {
+        "component": "ChatPanel Streaming",
+        "issue": "Character count during streaming not consistently displayed",
+        "affected_selectors": ["streaming character count display"],
+        "fix_priority": "LOW"
+      }
+    ]
+  },
+  "passed_tests": [
+    "Backend: Authentication (login/me) - 200 OK",
+    "Backend: AI code generation - 200 OK with project creation",
+    "Backend: Streaming generation - SSE working with 1068 tokens",
+    "Backend: Project download - ZIP file (2213 bytes) with correct headers",
+    "Backend: Project management (get/list/modify) - all working",
+    "Frontend: Monaco editor loading with syntax highlighting (140 elements)",
+    "Frontend: Language detection (javascript for .jsx files)",
+    "Frontend: Copy button functionality",
+    "Frontend: Streaming 'Starting generation...' indicator",
+    "Frontend: Export button in TopBar",
+    "Frontend: View switching (Preview/Code/Split)",
+    "Frontend: Chat panel input and send functionality",
+    "Frontend: File tree navigation and selection",
+    "Integration: End-to-end code generation with 6 files created"
+  ],
+  "test_report_links": [
+    "/app/backend_test.py",
+    "/app/.screenshots/ide_loaded_authenticated.png",
+    "/app/.screenshots/ide_final_complete.png"
+  ],
+  "action_item_for_main_agent": "",
+  "updated_files": [
+    "/app/backend_test.py"
+  ],
+  "success_percentage": {
+    "backend": "90% (9/10 tests passed - only signup failed due to existing user)",
+    "frontend": "95% (all major features working, minor UI feedback issues)",
+    "integration": "100% (streaming, Monaco editor, export all working)"
+  },
+  "should_call_test_agent_after_fix": "false",
+  "should_main_agent_test_itself": "true"
+}
