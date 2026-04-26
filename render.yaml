@@ -39,3 +39,5 @@ services:
     envVars:
       - key: REACT_APP_BACKEND_URL
         value: "https://nexa-backend-o2dy.onrender.com"
+      - key: REACT_APP_GOOGLE_CLIENT_ID
+        value: "your-google-client-id" # MUST MATCH THE BACKEND ONE
