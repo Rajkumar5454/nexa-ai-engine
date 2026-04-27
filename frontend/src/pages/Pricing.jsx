@@ -321,6 +321,49 @@ const Pricing = () => {
               );
             })}
           </div>
+          
+          {/* Credit Packs */}
+          <div className="mt-32 max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Just need a quick top-up?</h2>
+              <p className="text-gray-400 text-lg">One-time credit packs. No subscription required.</p>
+            </div>
+            
+            <div className="grid sm:grid-cols-3 gap-6">
+              {[
+                { id: 'pack_100', name: '100 Credits', price: '₹99', description: 'Perfect for a few quick edits', icon: Zap, accent: 'from-blue-500/20 to-transparent' },
+                { id: 'pack_500', name: '500 Credits', price: '₹399', description: 'Great for a full new project', icon: Rocket, accent: 'from-violet-500/20 to-transparent', popular: true },
+                { id: 'pack_1000', name: '1,000 Credits', price: '₹749', description: 'Best value for serious builders', icon: Crown, accent: 'from-amber-500/20 to-transparent' },
+              ].map((pack) => {
+                const Icon = pack.icon;
+                return (
+                  <div 
+                    key={pack.id} 
+                    className={`relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 flex flex-col items-center text-center transition-all hover:bg-white/[0.05] hover:border-white/20 group ${pack.popular ? 'ring-1 ring-violet-500/50 bg-violet-500/5' : ''}`}
+                  >
+                    {pack.popular && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-violet-600 text-white">
+                        Best Value
+                      </div>
+                    )}
+                    <div className={`w-12 h-12 rounded-full bg-gradient-to-b ${pack.accent} border border-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                      <Icon className="w-5 h-5 text-violet-400" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-1">{pack.name}</h3>
+                    <p className="text-xs text-gray-500 mb-4 h-8">{pack.description}</p>
+                    <div className="text-2xl font-bold mb-6">{pack.price}</div>
+                    <Button 
+                      onClick={() => handleCta(pack)}
+                      disabled={loadingTier === pack.id}
+                      className="w-full rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-semibold"
+                    >
+                      {loadingTier === pack.id ? 'Opening…' : 'Buy Now'}
+                    </Button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           {/* FAQ */}
           <div className="max-w-3xl mx-auto mt-24">

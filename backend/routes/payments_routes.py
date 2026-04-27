@@ -24,6 +24,10 @@ PLANS = {
     "pro":      {"name": "Pro",      "amount": 50000,  "credits": 1500,  "duration_days": 30},
     "business": {"name": "Business", "amount": 100000, "credits": 4000,  "duration_days": 30},
     "agency":   {"name": "Agency",   "amount": 200000, "credits": 10000, "duration_days": 30},
+    # One-time Credit Packs
+    "pack_100":  {"name": "100 Credits Pack",  "amount": 9900,   "credits": 100,  "type": "pack"},
+    "pack_500":  {"name": "500 Credits Pack",  "amount": 39900,  "credits": 500,  "type": "pack"},
+    "pack_1000": {"name": "1000 Credits Pack", "amount": 74900,  "credits": 1000, "type": "pack"},
 }
 
 
@@ -117,13 +121,16 @@ async def verify_payment(payload: VerifyPaymentRequest, current_user: User = Dep
 
     # Grant credits + upgrade plan
     new_credits = (current_user.credits or 0) + plan["credits"]
+    update_data = {"credits": new_credits}
+    
+    # Only change the "plan" if it's not a one-time pack
+    if plan.get("type") != "pack":
+        update_data["plan"] = payload.plan_id
+        update_data["plan_updated_at"] = datetime.utcnow().isoformat()
+
     await db.users.update_one(
         {"id": current_user.id},
-        {"$set": {
-            "plan": payload.plan_id,
-            "credits": new_credits,
-            "plan_updated_at": datetime.utcnow().isoformat(),
-        }},
+        {"$set": update_data},
     )
 
     await db.payment_orders.update_one(
