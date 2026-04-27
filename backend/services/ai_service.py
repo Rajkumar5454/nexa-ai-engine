@@ -29,7 +29,10 @@ PALETTES = [
 # MANDATORY AESTHETIC RULES - Applied to ALL models to ensure WOW factor
 MANDATORY_AESTHETIC_RULES = """
 MANDATORY STYLING RULES — DO NOT IGNORE:
+- CONTRAST & READABILITY: Ensure high contrast. NEVER use dark text on dark backgrounds or light on light.
 - NEVER use plain white backgrounds for the whole page. Use `bg-slate-950` for dark themes or `bg-gray-50` for light.
+- RICH CONTENT: DO NOT use placeholders. Every section MUST have at least 1,000 words of niche-specific, professional copy.
+- FULL MASTERPIECE: Every build MUST hit at least 600-1000 lines of code. Build 7-8 distinct pages/routes.
 - Use the PROVIDED PALETTE for all primary actions, icons, and accents.
 - Every HERO SECTION must use a `bg-gradient-to-br` with the provided gradient colors.
 - Use `text-transparent bg-clip-text bg-gradient-to-r` for main headlines to make them pop.
@@ -133,12 +136,12 @@ DEFAULT_MODEL = "gemini-3-1-pro"
 
 # Per-model temperature (higher = more creative variation between runs)
 MODEL_TEMPERATURES = {
-    "gpt-4o-mini": 0.7,
-    "gpt-4o": 0.7,
-    "claude-sonnet-4-5": 0.8,
-    "gemini-3-flash": 0.9,
-    "gemini-3-1-pro": 0.8,
-    "llama-3-3-70b": 0.7,
+    "gpt-4o-mini": 0.4,
+    "gpt-4o": 0.4,
+    "claude-sonnet-4-5": 0.4,
+    "gemini-3-flash": 0.4,
+    "gemini-3-1-pro": 0.4,
+    "llama-3-3-70b": 0.4,
 }
 
 # Maps for providers that aren't routable through the OpenAI-compat proxy
@@ -410,9 +413,6 @@ class AIService:
         is_lite = (self.gemini_native or self.openai_direct) and not self.nvidia_client
         # Increased budgets for richer code generation
         max_tokens_budget = 8192 if is_lite else 16384
-        
-        if is_lite:
-            system_prompt += "\n\nLITE MODE: Build 4-5 ESSENTIAL pages. Aim for ~400-600 lines of detailed React code."
 
         for attempt in range(2):
             try:
