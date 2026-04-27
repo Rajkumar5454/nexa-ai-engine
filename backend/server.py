@@ -24,6 +24,26 @@ from db import client, db
 # Create the main app without a prefix
 app = FastAPI()
 
+# HARDCODED ORIGINS for production reliability
+ALLOWED_ORIGINS = [
+    "https://nexaai.live",
+    "https://www.nexaai.live",
+    "http://nexaai.live",
+    "http://www.nexaai.live",
+    "https://nexa-frontend-bd2d.onrender.com",
+    "https://nexa-frontend-o2dy.onrender.com",
+    "http://localhost:3000",
+    "http://localhost:5173"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
@@ -80,26 +100,6 @@ app.include_router(ai_router, prefix="/api")
 app.include_router(auth_router, prefix="/api")
 app.include_router(projects_router, prefix="/api")
 app.include_router(payments_router, prefix="/api")
-
-# HARDCODED ORIGINS for production reliability
-ALLOWED_ORIGINS = [
-    "https://nexaai.live",
-    "https://www.nexaai.live",
-    "http://nexaai.live",
-    "http://www.nexaai.live",
-    "https://nexa-frontend-bd2d.onrender.com",
-    "https://nexa-frontend-o2dy.onrender.com",
-    "http://localhost:3000",
-    "http://localhost:5173"
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=True,
-    allow_origins=ALLOWED_ORIGINS,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Configure logging
 logging.basicConfig(
