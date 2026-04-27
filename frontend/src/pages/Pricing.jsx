@@ -113,6 +113,9 @@ const faqs = [
 
 const Pricing = () => {
   const navigate = useNavigate();
+  const { user, token, applySession } = useAuth();
+  const { toast } = useToast();
+  const [loadingTier, setLoadingTier] = React.useState(null);
   const [billingType, setBillingType] = React.useState('monthly'); // 'monthly' or 'packs'
 
   const refreshUser = async () => {
