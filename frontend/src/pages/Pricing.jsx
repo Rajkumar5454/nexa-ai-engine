@@ -113,9 +113,7 @@ const faqs = [
 
 const Pricing = () => {
   const navigate = useNavigate();
-  const { user, token, applySession } = useAuth();
-  const { toast } = useToast();
-  const [loadingTier, setLoadingTier] = React.useState(null);
+  const [billingType, setBillingType] = React.useState('monthly'); // 'monthly' or 'packs'
 
   const refreshUser = async () => {
     try {
@@ -157,7 +155,7 @@ const Pricing = () => {
         amount: order.amount,
         currency: order.currency,
         name: 'Nexa.AI',
-        description: `${tier.name} plan — ${order.plan.credits.toLocaleString()} credits`,
+        description: `${tier.name} — ${order.plan.credits.toLocaleString()} credits`,
         order_id: order.order_id,
         prefill: {
           name: user.name,
@@ -178,7 +176,7 @@ const Pricing = () => {
             );
             await refreshUser();
             toast({
-              title: `Welcome to ${tier.name}!`,
+              title: `Success!`,
               description: `${verify.credits_added.toLocaleString()} credits added. New balance: ${verify.credits.toLocaleString()}`,
             });
             navigate('/dashboard');
@@ -253,7 +251,7 @@ const Pricing = () => {
       <main className="relative z-10 pt-32 pb-24">
         <div className="container mx-auto px-6">
           {/* Hero */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs uppercase tracking-wider text-violet-300 mb-6">
               <Sparkles className="w-3.5 h-3.5" /> Simple, honest pricing
             </span>
@@ -261,75 +259,74 @@ const Pricing = () => {
               Build more.{' '}
               <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">Pay less.</span>
             </h1>
-            <p className="text-lg text-gray-400">
-              Start free. Upgrade when your ideas outgrow the starter plan. Cancel anytime — no questions asked.
+            <p className="text-lg text-gray-400 mb-10">
+              Start free. Upgrade when your ideas outgrow the starter plan. Cancel anytime.
             </p>
-          </div>
 
-          {/* Tiers */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto" data-testid="pricing-tiers">
-            {tiers.map((tier) => {
-              const Icon = tier.icon;
-              return (
-                <div
-                  key={tier.id}
-                  data-testid={`pricing-tier-${tier.id}`}
-                  className={`relative rounded-2xl border ${tier.border} bg-white/[0.03] backdrop-blur-xl p-8 flex flex-col ${
-                    tier.highlight ? 'md:scale-[1.03] shadow-2xl shadow-violet-600/20' : ''
-                  }`}
-                >
-                  {tier.badge && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-gradient-to-r from-violet-500 to-blue-500 text-white shadow-lg">
-                      {tier.badge}
-                    </div>
-                  )}
-
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${tier.accent} flex items-center justify-center mb-5`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-
-                  <h3 className="text-2xl font-bold mb-1">{tier.name}</h3>
-                  <p className="text-sm text-gray-400 mb-6">{tier.tagline}</p>
-
-                  <div className="mb-6">
-                    <span className="text-4xl font-bold">{tier.price}</span>
-                    {tier.period && <span className="text-gray-500 ml-1">{tier.period}</span>}
-                  </div>
-
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {tier.features.map((f) => (
-                      <li key={f} className="flex items-start gap-3 text-sm text-gray-300">
-                        <Check className="w-4 h-4 mt-0.5 text-violet-400 shrink-0" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Button
-                    onClick={() => handleCta(tier)}
-                    disabled={loadingTier === tier.id}
-                    data-testid={`pricing-cta-${tier.id}`}
-                    className={`w-full rounded-xl font-semibold ${
-                      tier.highlight
-                        ? 'bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white shadow-lg shadow-violet-600/25'
-                        : 'bg-white/10 hover:bg-white/15 text-white border border-white/10'
-                    } disabled:opacity-60`}
-                  >
-                    {loadingTier === tier.id ? 'Opening…' : (<>{tier.cta} <ArrowRight className="w-4 h-4 ml-1" /></>)}
-                  </Button>
-                </div>
-              );
-            })}
-          </div>
-          
-          {/* Credit Packs */}
-          <div className="mt-32 max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Just need a quick top-up?</h2>
-              <p className="text-gray-400 text-lg">One-time credit packs. No subscription required.</p>
+            {/* TOGGLE SWITCH */}
+            <div className="flex items-center justify-center gap-4 mb-16">
+              <span className={`text-sm font-medium ${billingType === 'monthly' ? 'text-white' : 'text-gray-500'}`}>Monthly Plans</span>
+              <button 
+                onClick={() => setBillingType(billingType === 'monthly' ? 'packs' : 'monthly')}
+                className="w-14 h-7 rounded-full bg-white/10 p-1 relative flex items-center transition-colors hover:bg-white/15"
+              >
+                <div className={`w-5 h-5 rounded-full bg-violet-500 shadow-lg transform transition-transform duration-200 ease-in-out ${billingType === 'packs' ? 'translate-x-7' : 'translate-x-0'}`} />
+              </button>
+              <span className={`text-sm font-medium ${billingType === 'packs' ? 'text-white' : 'text-gray-500'}`}>One-time Packs</span>
             </div>
-            
-            <div className="grid sm:grid-cols-3 gap-6">
+          </div>
+
+          {/* Conditional Rendering */}
+          {billingType === 'monthly' ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
+              {tiers.map((tier) => {
+                const Icon = tier.icon;
+                return (
+                  <div
+                    key={tier.id}
+                    className={`relative rounded-2xl border ${tier.border} bg-white/[0.03] backdrop-blur-xl p-8 flex flex-col ${
+                      tier.highlight ? 'md:scale-[1.03] shadow-2xl shadow-violet-600/20' : ''
+                    }`}
+                  >
+                    {tier.badge && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-gradient-to-r from-violet-500 to-blue-500 text-white shadow-lg">
+                        {tier.badge}
+                      </div>
+                    )}
+                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${tier.accent} flex items-center justify-center mb-5`}>
+                      <Icon className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-1">{tier.name}</h3>
+                    <p className="text-sm text-gray-400 mb-6">{tier.tagline}</p>
+                    <div className="mb-6">
+                      <span className="text-4xl font-bold">{tier.price}</span>
+                      {tier.period && <span className="text-gray-500 ml-1">{tier.period}</span>}
+                    </div>
+                    <ul className="space-y-3 mb-8 flex-1">
+                      {tier.features.map((f) => (
+                        <li key={f} className="flex items-start gap-3 text-sm text-gray-300">
+                          <Check className="w-4 h-4 mt-0.5 text-violet-400 shrink-0" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Button
+                      onClick={() => handleCta(tier)}
+                      disabled={loadingTier === tier.id}
+                      className={`w-full rounded-xl font-semibold ${
+                        tier.highlight
+                          ? 'bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white'
+                          : 'bg-white/10 hover:bg-white/15 text-white'
+                      }`}
+                    >
+                      {loadingTier === tier.id ? 'Opening…' : tier.cta}
+                    </Button>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
               {[
                 { id: 'pack_100', name: '100 Credits', price: '₹99', description: 'Perfect for a few quick edits', icon: Zap, accent: 'from-blue-500/20 to-transparent' },
                 { id: 'pack_500', name: '500 Credits', price: '₹399', description: 'Great for a full new project', icon: Rocket, accent: 'from-violet-500/20 to-transparent', popular: true },
@@ -337,33 +334,30 @@ const Pricing = () => {
               ].map((pack) => {
                 const Icon = pack.icon;
                 return (
-                  <div 
-                    key={pack.id} 
-                    className={`relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 flex flex-col items-center text-center transition-all hover:bg-white/[0.05] hover:border-white/20 group ${pack.popular ? 'ring-1 ring-violet-500/50 bg-violet-500/5' : ''}`}
-                  >
+                  <div key={pack.id} className={`relative rounded-2xl border border-white/10 bg-white/[0.02] p-8 flex flex-col items-center text-center transition-all hover:bg-white/[0.05] group ${pack.popular ? 'ring-1 ring-violet-500/50 bg-violet-500/5 shadow-2xl shadow-violet-500/10' : ''}`}>
                     {pack.popular && (
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-violet-600 text-white">
                         Best Value
                       </div>
                     )}
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-b ${pack.accent} border border-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                      <Icon className="w-5 h-5 text-violet-400" />
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-b ${pack.accent} border border-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                      <Icon className="w-6 h-6 text-violet-400" />
                     </div>
-                    <h3 className="text-xl font-bold mb-1">{pack.name}</h3>
-                    <p className="text-xs text-gray-500 mb-4 h-8">{pack.description}</p>
-                    <div className="text-2xl font-bold mb-6">{pack.price}</div>
+                    <h3 className="text-2xl font-bold mb-2">{pack.name}</h3>
+                    <p className="text-sm text-gray-500 mb-8">{pack.description}</p>
+                    <div className="text-4xl font-bold mb-8">{pack.price}</div>
                     <Button 
                       onClick={() => handleCta(pack)}
                       disabled={loadingTier === pack.id}
-                      className="w-full rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-semibold"
+                      className="w-full rounded-xl bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white font-semibold py-6"
                     >
-                      {loadingTier === pack.id ? 'Opening…' : 'Buy Now'}
+                      {loadingTier === pack.id ? 'Opening…' : 'Get Credits'}
                     </Button>
                   </div>
                 );
               })}
             </div>
-          </div>
+          )}
 
           {/* FAQ */}
           <div className="max-w-3xl mx-auto mt-24">
