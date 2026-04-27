@@ -280,7 +280,7 @@ class AIService:
                     else:
                         target_model = f"models/{model}"
                     return await self._call_gemini_native(
-                        system, user, max_tokens, temperature,
+                        system, user, 4000, temperature,
                         model_name=target_model,
                     )
                 except Exception as e:
