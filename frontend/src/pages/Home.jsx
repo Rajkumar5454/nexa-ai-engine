@@ -397,6 +397,19 @@ const Home = () => {
           </div>
         </div>
       </main>
+      <footer className="mt-24 border-t border-white/5 py-12">
+        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-2">
+            <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-6 w-auto opacity-50" />
+            <p className="text-sm text-gray-500">© 2026 Nexa.AI. All rights reserved.</p>
+          </div>
+          <div className="flex gap-8">
+            <Link to="/privacy" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/pricing" className="text-sm text-gray-500 hover:text-white transition-colors">Pricing</Link>
+            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
