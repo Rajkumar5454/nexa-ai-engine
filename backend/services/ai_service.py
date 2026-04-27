@@ -176,7 +176,7 @@ SUPPORTED_MODELS = {
     "gemini-3-1-pro",
     "llama-3-3-70b",
 }
-DEFAULT_MODEL = "gpt-4o-mini"
+DEFAULT_MODEL = "gemini-3-1-pro"
 
 # Per-model temperature (higher = more creative variation between runs)
 MODEL_TEMPERATURES = {
@@ -190,8 +190,8 @@ MODEL_TEMPERATURES = {
 
 # Maps for providers that aren't routable through the OpenAI-compat proxy
 GEMINI_PROVIDER_MAP = {
-    "gemini-3-flash": ("gemini", "gemini-1.5-flash"),
-    "gemini-3-1-pro": ("gemini", "gemini-1.5-pro"),
+    "gemini-3-flash": ("gemini", "gemini-3-flash"),
+    "gemini-3-1-pro": ("gemini", "gemini-3.1-pro"),
     "llama": ("nvidia", "meta/llama-3.3-70b-instruct"),
 }
 
@@ -284,11 +284,12 @@ class AIService:
         if model.startswith("gemini"):
             if self.gemini_native:
                 try:
-                    # Map frontend names to actual Google model names
-                    if "flash" in model:
-                        target_model = "models/gemini-2.0-flash"
-                    elif "pro" in model:
-                        target_model = "models/gemini-1.5-pro"
+                    # Use the exact model name requested
+                    target_model = f"models/{model}"
+                    if model == "gemini-3-1-pro":
+                        target_model = "models/gemini-3.1-pro"
+                    elif model == "gemini-3-flash":
+                        target_model = "models/gemini-3-flash"
                     else:
                         target_model = f"models/{model}"
                     return await self._call_gemini_native(
