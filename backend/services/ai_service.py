@@ -142,7 +142,7 @@ def _get_openai_direct_client():
     return openai.OpenAI(
         api_key=USER_OPENAI_KEY,
         max_retries=1,
-        timeout=120,
+        timeout=300,
     )
 
 
@@ -154,7 +154,7 @@ def _get_emergent_client():
         api_key=EMERGENT_KEY,
         base_url="https://integrations.emergentagent.com/llm",
         max_retries=1,
-        timeout=120,
+        timeout=300,
     )
 
 
@@ -180,6 +180,7 @@ MODEL_TEMPERATURES = {
 # Maps for providers that aren't routable through the OpenAI-compat proxy
 GEMINI_PROVIDER_MAP = {
     "gemini-3-flash": ("gemini", "gemini-3-flash-preview"),
+    "llama": ("nvidia", "meta/llama-3.3-70b-instruct"),
 }
 
 
@@ -262,7 +263,7 @@ class AIService:
         )
         return response.choices[0].message.content or ""
 
-    async def _call_llm_async(self, system, user, max_tokens=4096, model=DEFAULT_MODEL, temperature=None):
+    async def _call_llm_async(self, system, user, max_tokens=3000, model=DEFAULT_MODEL, temperature=None):
         import asyncio
         if temperature is None:
             temperature = _temperature_for(model)
