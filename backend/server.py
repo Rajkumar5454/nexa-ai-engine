@@ -87,7 +87,10 @@ app.add_middleware(
     allow_origins=[
         "https://nexaai.live",
         "https://www.nexaai.live",
+        "http://nexaai.live",
+        "http://www.nexaai.live",
         "https://nexa-frontend-bd2d.onrender.com",
+        "https://nexa-frontend-o2dy.onrender.com",
         "http://localhost:3000",
         "http://localhost:5173"
     ],
