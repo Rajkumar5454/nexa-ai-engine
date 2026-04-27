@@ -243,9 +243,9 @@ class AIService:
                     # Use the exact model name requested
                     target_model = f"models/{model}"
                     if model == "gemini-3-1-pro":
-                        target_model = "models/gemini-3.1-pro"
+                        target_model = "models/gemini-1.5-pro"
                     elif model == "gemini-3-flash":
-                        target_model = "models/gemini-3-flash"
+                        target_model = "models/gemini-1.5-flash"
                     else:
                         target_model = f"models/{model}"
                     return await self._call_gemini_native(
@@ -305,9 +305,15 @@ class AIService:
 
         # Fallback 2: Emergent proxy
         if self.emergent_client:
+            emergent_model = model
+            if model == "gemini-3-1-pro":
+                emergent_model = "google/gemini-1.5-pro"
+            elif model == "gemini-3-flash":
+                emergent_model = "google/gemini-1.5-flash"
+                
             return await asyncio.to_thread(
                 self._call_openai_compat,
-                self.emergent_client, system, user, max_tokens, model, temperature,
+                self.emergent_client, system, user, max_tokens, emergent_model, temperature,
             )
             
         raise ValueError(f"No valid API keys configured to handle model request: {model}")
