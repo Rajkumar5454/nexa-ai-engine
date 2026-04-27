@@ -354,9 +354,10 @@ class AIService:
             f"PALETTE \"{p['name']}\" — accent={p['accent']}, gradient={p['gradient']}, btn={p['btn']}.\n\n"
             f"CRITICAL: DO NOT use a generic 'Header/Hero/Features' template. Use the STRUCTURAL STRATEGY above to define the architectural bones of the project. "
             f"Make it SPECIFIC to \"{prompt}\".\n\n"
-            "Break the UI down into modular React components. NO giant App function.\n"
-            "4-5 essential routes (Home, Features, Pricing, Contact). Homepage hero + niche-specific sections + footer.\n\n"
-            "~300-400 lines total. Code only — no markdown."
+            "MAX_CAPACITY_MODE: You have a massive token budget. Build a LARGE, detailed masterpiece.\n"
+            "Include 6-8 comprehensive routes (Home, About, Services, Case Studies, Pricing, Contact, Blog).\n"
+            "Every section must be rich with copy and premium visuals specific to the niche.\n\n"
+            "~600-1000 lines total. Code only — no markdown."
         )
 
     # ----- Public API -----
@@ -407,10 +408,11 @@ class AIService:
         last_error = None
         # LITE MODE: If using user's own keys (Free Tier) and no NVIDIA fallback, reduce token budget
         is_lite = (self.gemini_native or self.openai_direct) and not self.nvidia_client
-        max_tokens_budget = 3000 if is_lite else 8192
+        # Increased budgets for richer code generation
+        max_tokens_budget = 8192 if is_lite else 16384
         
         if is_lite:
-            system_prompt += "\n\nLITE MODE: Build 3-4 ESSENTIAL pages (Home, Dashboard, Contact) instead of 9. Keep code under 200 lines to ensure completion on free tier."
+            system_prompt += "\n\nLITE MODE: Build 4-5 ESSENTIAL pages. Aim for ~400-600 lines of detailed React code."
 
         for attempt in range(2):
             try:
