@@ -183,6 +183,43 @@ const Home = () => {
             </div>
           </div>
 
+          {/* Scrolling Ticker */}
+          <div className="flex justify-center mb-10 overflow-hidden">
+            <div className="relative flex items-center w-full max-w-2xl py-3 border-y border-white/5 bg-white/[0.02] backdrop-blur-sm rounded-lg">
+              <div className="whitespace-nowrap animate-marquee flex items-center">
+                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                  Backend integration coming soon
+                </span>
+                <span className="text-violet-500/50">•</span>
+                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                  Database support coming soon
+                </span>
+                <span className="text-violet-500/50">•</span>
+                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                  Authentication features coming soon
+                </span>
+                <span className="text-violet-500/50">•</span>
+                <span className="mx-4 text-[10px] font-bold text-violet-400/70 uppercase tracking-[0.2em]">
+                  Currently providing high-performance Frontend generation
+                </span>
+                <span className="text-violet-500/50">•</span>
+                {/* Duplicate for seamless loop */}
+                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                  Backend integration coming soon
+                </span>
+                <span className="text-violet-500/50">•</span>
+                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                  Database support coming soon
+                </span>
+                <span className="text-violet-500/50">•</span>
+                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
+                  Authentication features coming soon
+                </span>
+                <span className="text-violet-500/50">•</span>
+              </div>
+            </div>
+          </div>
+
           {/* Hero Text */}
           <div className="text-center mb-8 animate-fade-in-up-delay-1">
             <h1 className="text-4xl md:text-6xl font-bold mb-5 tracking-tight leading-[1.1]">
