@@ -164,7 +164,7 @@ SUPPORTED_MODELS = {
     "gpt-4o",
     "claude-sonnet-4-5",
     "gemini-3-flash",
-    "llama-3.3-70b",
+    "llama-3-3-70b",
 }
 DEFAULT_MODEL = "gpt-4o-mini"
 
@@ -174,7 +174,7 @@ MODEL_TEMPERATURES = {
     "gpt-4o": 0.7,
     "claude-sonnet-4-5": 0.8,
     "gemini-3-flash": 0.9,
-    "llama-3.3-70b": 0.7,
+    "llama-3-3-70b": 0.7,
 }
 
 # Maps for providers that aren't routable through the OpenAI-compat proxy
