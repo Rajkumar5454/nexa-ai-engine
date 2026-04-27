@@ -29,14 +29,14 @@ PALETTES = [
 # MANDATORY AESTHETIC RULES - Applied to ALL models to ensure WOW factor
 MANDATORY_AESTHETIC_RULES = """
 MANDATORY STYLING RULES — DO NOT IGNORE:
-- MOTION & ANIMATION: The website MUST feel alive. Use `animate-fadeInUp` for section entrances, `animate-float` for icons/images, and `hover:scale-105` for all cards.
+- UI COMPONENTS: DO NOT just write text. Build at least 8-10 distinct UI sections (Hero with CTA, Feature Grid, Image Gallery, Pricing Table, Testimonials, FAQ, Footer).
+- REAL IMAGES: Use high-quality, niche-specific images for EVERY section. Use Unsplash URLs like `https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80`.
+- MOTION & ANIMATION: Every build MUST feel alive. Use `animate-fadeInUp` for section entrances, `animate-float` for icons/images, and `hover:scale-105` for all cards.
 - CONTRAST & READABILITY: Ensure high contrast. NEVER use dark text on dark backgrounds or light on light.
 - NEVER use plain white backgrounds for the whole page. Use `bg-slate-950` for dark themes or `bg-gray-50` for light.
-- RICH CONTENT: DO NOT use placeholders. Every section MUST have professional, niche-specific copy.
 - FULL MASTERPIECE: Every build MUST hit at least 600-1000 lines of code. Build 7-8 distinct pages/routes.
 - Use the PROVIDED PALETTE for all primary actions, icons, and accents.
 - Every HERO SECTION must use a `bg-gradient-to-br` with the provided gradient colors.
-- Use `text-transparent bg-clip-text bg-gradient-to-r` for main headlines to make them pop.
 - Every card MUST have `shadow-2xl` or `shadow-[0_0_50px_rgba(0,0,0,0.1)]`.
 - Use `rounded-[2.5rem]` or `rounded-full` for a modern, high-end feel. No sharp corners.
 """
