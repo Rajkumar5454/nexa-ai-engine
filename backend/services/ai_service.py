@@ -360,6 +360,11 @@ class AIService:
             "MAX_CAPACITY_MODE: You have a massive token budget. Build a LARGE, detailed masterpiece.\n"
             "Include 6-8 comprehensive routes (Home, About, Services, Case Studies, Pricing, Contact, Blog).\n"
             "Every section must be rich with copy and premium visuals specific to the niche.\n\n"
+            "TECHNICAL SANDBOX RULES (CRITICAL):\n"
+            "1. NO EXTERNAL DEPENDENCIES. You can ONLY import from 'react' and 'react-router-dom'.\n"
+            "2. DO NOT import lucide-react, framer-motion, or heroicons. Use pure inline <svg> tags for all icons.\n"
+            "3. The code MUST compile cleanly. All variables must be defined. No syntax errors.\n"
+            "4. Return a SINGLE valid React file ending with `export default App;`.\n\n"
             "~600-1000 lines total. Code only — no markdown."
         )
 
