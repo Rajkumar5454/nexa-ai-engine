@@ -27,7 +27,9 @@ app = FastAPI()
 # HARDCODED ORIGINS for production reliability
 ALLOWED_ORIGINS = [
     "https://nexaai.live",
+    "https://nexaai.live/",
     "https://www.nexaai.live",
+    "https://www.nexaai.live/",
     "http://nexaai.live",
     "http://www.nexaai.live",
     "https://nexa-frontend-bd2d.onrender.com",
