@@ -54,9 +54,32 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
   const [mode, setMode] = useState('build'); // 'build' or 'chat'
   const [nudgeDismissed, setNudgeDismissed] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [progressStep, setProgressStep] = useState(0);
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
   const { user } = useAuth();
+
+  const progressMessages = [
+    "Preparing the workspace...",
+    "Writing JS and HTML code now...",
+    "Assembling the premium design...",
+    "Optimizing responsive layouts...",
+    "Injecting smart logic...",
+    "Finalizing your website..."
+  ];
+
+  useEffect(() => {
+    let interval;
+    if (isGenerating) {
+      setProgressStep(0);
+      interval = setInterval(() => {
+        setProgressStep(prev => (prev + 1) % progressMessages.length);
+      }, 3500); // Change every 3.5 seconds
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isGenerating]);
 
   const credits = user?.credits ?? null;
   const showLowCreditsNudge =
@@ -202,16 +225,19 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
                 <div>
                   <div className="flex items-center space-x-2 mb-2">
                     <Loader2 className="w-3.5 h-3.5 text-blue-400 animate-spin" />
-                    <span className="text-xs text-blue-400">Generating code... ({charCount} chars)</span>
+                    <span className="text-xs text-blue-400 font-medium">{progressMessages[progressStep]}</span>
                   </div>
-                  <div className="bg-gray-900/50 rounded p-2 max-h-24 overflow-hidden">
+                  <div className="bg-gray-900/50 rounded p-2 max-h-24 overflow-hidden border border-gray-800/50">
+                    <div className="flex justify-between items-center mb-1 px-1">
+                      <span className="text-[10px] text-gray-500 font-mono">Stream: {streamingText.length} chars</span>
+                    </div>
                     <pre className="text-[10px] text-gray-500 font-mono whitespace-pre-wrap break-all">{streamingText.slice(-150)}</pre>
                   </div>
                 </div>
               ) : message.isStreaming ? (
                 <div className="flex items-center space-x-2">
                   <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
-                  <span className="text-sm text-gray-400">Thinking...</span>
+                  <span className="text-sm text-gray-400">{progressMessages[progressStep]}</span>
                 </div>
               ) : (
                 <FormattedMessage content={message.content} />
