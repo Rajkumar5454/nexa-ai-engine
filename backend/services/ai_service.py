@@ -29,16 +29,16 @@ PALETTES = [
 # MANDATORY AESTHETIC RULES - Applied to ALL models to ensure WOW factor
 MANDATORY_AESTHETIC_RULES = """
 MANDATORY STYLING RULES — DO NOT IGNORE:
+- MOTION & ANIMATION: The website MUST feel alive. Use `animate-fadeInUp` for section entrances, `animate-float` for icons/images, and `hover:scale-105` for all cards.
 - CONTRAST & READABILITY: Ensure high contrast. NEVER use dark text on dark backgrounds or light on light.
 - NEVER use plain white backgrounds for the whole page. Use `bg-slate-950` for dark themes or `bg-gray-50` for light.
-- RICH CONTENT: DO NOT use placeholders. Every section MUST have at least 1,000 words of niche-specific, professional copy.
+- RICH CONTENT: DO NOT use placeholders. Every section MUST have professional, niche-specific copy.
 - FULL MASTERPIECE: Every build MUST hit at least 600-1000 lines of code. Build 7-8 distinct pages/routes.
 - Use the PROVIDED PALETTE for all primary actions, icons, and accents.
 - Every HERO SECTION must use a `bg-gradient-to-br` with the provided gradient colors.
 - Use `text-transparent bg-clip-text bg-gradient-to-r` for main headlines to make them pop.
 - Every card MUST have `shadow-2xl` or `shadow-[0_0_50px_rgba(0,0,0,0.1)]`.
 - Use `rounded-[2.5rem]` or `rounded-full` for a modern, high-end feel. No sharp corners.
-- Interactive elements MUST have `hover:scale-105 transition-all duration-300` and `hover:shadow-glow`.
 """
 
 # ---------- Per-model SYSTEM prompts (EACH model has a UNIQUE visual identity) ----------
@@ -576,5 +576,5 @@ class AIService:
             {"path": "/index.html", "content": '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>App</title></head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>', "language": "html"},
             {"path": "/src/main.jsx", "content": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\nimport './index.css';\n\nReactDOM.createRoot(document.getElementById('root')).render(<App />);", "language": "javascript"},
             {"path": "/src/App.jsx", "content": code, "language": "javascript"},
-            {"path": "/src/index.css", "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n*{box-sizing:border-box;margin:0;padding:0}\nhtml{scroll-behavior:smooth}\nbody{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#050505;color:#e5e5e5}\n\n@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}\n@keyframes fadeIn{from{opacity:0}to{opacity:1}}\n\n::-webkit-scrollbar{width:6px}\n::-webkit-scrollbar-track{background:#0a0a0a}\n::-webkit-scrollbar-thumb{background:#333;border-radius:3px}", "language": "css"},
+            {"path": "/src/index.css", "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n*{box-sizing:border-box;margin:0;padding:0}\nhtml{scroll-behavior:smooth}\nbody{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#050505;color:#e5e5e5}\n\n@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}\n@keyframes fadeIn{from{opacity:0}to{opacity:1}}\n@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}\n@keyframes pulse-glow{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.8;transform:scale(1.05)}}\n\n.animate-fadeInUp{animation:fadeInUp 0.8s ease-out forwards}\n.animate-float{animation:float 4s ease-in-out infinite}\n.animate-pulse-glow{animation:pulse-glow 3s ease-in-out infinite}\n\n::-webkit-scrollbar{width:6px}\n::-webkit-scrollbar-track{background:#0a0a0a}\n::-webkit-scrollbar-thumb{background:#333;border-radius:3px}", "language": "css"},
         ]
