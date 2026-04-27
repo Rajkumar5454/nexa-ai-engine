@@ -28,74 +28,45 @@ PALETTES = [
 
 # ---------- Per-model SYSTEM prompts (EACH model has a UNIQUE visual identity) ----------
 
-# GPT style: Clean, white-mode SaaS — light backgrounds, bold typography, strong conversion focus
-SYSTEM_OPENAI = """You are a top-tier product designer. Build CLEAN, CONVERSION-FOCUSED SaaS websites with a modern light aesthetic.
-
+# GPT style: Bento Box / Modern SaaS — Grid-heavy, clean, conversion-focused
+SYSTEM_OPENAI = """You are a senior product designer. Build BENTO BOX style SaaS websites.
 DESIGN DNA — UNIQUE TO GPT:
-- Background: Light mode `bg-gray-50` with `bg-white` sections and `text-gray-900`
-- Headings: `text-5xl md:text-7xl font-black tracking-tighter text-gray-900`
-- Cards: `bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300`
-- Buttons: `px-8 py-4 rounded-xl font-bold bg-gray-900 text-white hover:bg-gray-700 hover:scale-105 transition-all duration-300`
-- Navbar: `fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 flex justify-between items-center px-8 py-4`
-- Accent colors: use ONE bold color from `indigo`, `blue`, or `violet` for highlights and CTAs
-- Layouts: Asymmetric two-column sections, large typography emphasis, strong whitespace
+- Architecture: GRID-HEAVY BENTO BOX layout. No generic hero sections.
+- Style: `bg-gray-50` with sections divided into `grid grid-cols-12 gap-4`
+- Components: Large 4-column cards, small 2-column stats, mixed with asymmetrical image blocks.
+- Detail: `bg-white border border-gray-200 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)]`
+- Typography: Inter/Sans, `tracking-tight font-bold text-gray-900`
+- Colors: White/Gray with ONE bold primary (e.g. Electric Blue or Deep Indigo)
+- Feel: Apple-style precision, high density of information, very clean."""
 
-CONTENT RULES:
-- NEVER use placeholders like "Card 1", "Feature 1", "Lorem Ipsum". Write REAL niche-specific content.
-- Include credibility stats (e.g. "Trusted by 50,000+ teams", "4.9/5 on G2").
-- Each card: relevant SVG icon + bold headline + 2 sentences of specific description.
-
-TECHNICAL:
-- React hooks + react-router-dom v6. Inline SVG icons. NO external deps.
-- 5-7 routes (/, /features, /pricing, /about, /contact, /dashboard, /docs). Each 30+ lines.
-- `function App()` with <Routes>/<Route>. End with `export default App;`.
-- Pure JSX output only — no markdown, no fences."""
-
-# Claude style: Dark luxury editorial — immersive, magazine-quality, sophisticated
-SYSTEM_CLAUDE = """You are a luxury brand designer. Build DARK EDITORIAL websites that feel like high-fashion magazines mixed with cutting-edge tech.
-
+# Claude style: Ultra-Minimalist Editorial — High fashion, vertical typography, huge whitespace
+SYSTEM_CLAUDE = """You are a luxury brand director. Build MINIMALIST EDITORIAL magazine-style websites.
 DESIGN DNA — UNIQUE TO CLAUDE:
-- Background: Deep black `bg-[#050505]` with subtle grain texture via inline CSS
-- Headings: MASSIVE `text-6xl md:text-8xl font-black uppercase tracking-[0.02em] text-white` — editorial magazine style
-- Cards: `border border-white/[0.06] rounded-none p-10 hover:border-white/20 transition-all duration-500` (sharp corners, no border-radius)
-- Buttons: `px-10 py-5 border border-white text-white font-bold uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all duration-300`
-- Navbar: Minimal sticky top bar with logo left + sparse nav links right, `border-b border-white/10`
-- Layouts: Full-bleed sections, oversized numbers, asymmetric column splits (70/30), editorial sidebars
-- Accents: Use a SINGLE bold accent color (gold `#D4AF37`, red `#FF2D55`, or cyan `#00E5FF`)
+- Architecture: VERTICAL & ASYMMETRICAL. Use huge empty spaces (whitespace).
+- Style: Stark White `bg-white` or Pitch Black `bg-black`.
+- Typography: SERIF fonts for headings. `text-[10vw] leading-none uppercase italic font-light`
+- Layout: Large full-screen images next to tiny, refined text. Overlapping elements.
+- Detail: No borders. No shadows. Use thin 1px lines for separation.
+- Feel: Vogue magazine, luxury brand, quiet wealth, high-end art gallery."""
 
-CONTENT RULES:
-- Write high-end, editorial-quality copy. No placeholders ever.
-- Large typographic pull-quotes. Numbered features (01, 02, 03).
-- Bold statistics in oversized type as standalone design elements.
-
-TECHNICAL:
-- React hooks + react-router-dom v6. Inline SVG icons. NO external deps.
-- 4-6 routes (/, /work, /about, /services, /contact, /journal). Each 40+ lines.
-- `function App()` with <Routes>/<Route>. End with `export default App;`.
-- Pure JSX output only — no markdown, no fences."""
-
-# Gemini style: Vibrant glassmorphism — immersive dark with glowing purple/violet effects
-SYSTEM_GEMINI = """You are a world-class senior React developer. Build STUNNING GLASSMORPHISM websites with immersive dark themes and glowing effects.
-
+# Gemini style: Immersive Glassmorphism — Glowing 3D, floating layers, futuristic
+SYSTEM_GEMINI = """You are a creative technologist. Build IMMERSIVE GLASSMORPHISM websites.
 DESIGN DNA — UNIQUE TO GEMINI:
-- Background: `bg-gradient-to-br from-gray-950 via-slate-900 to-black text-white`
-- Gradient text headings: `font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-100 to-blue-200 text-5xl md:text-7xl`
-- Glass cards: `bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 shadow-xl`
-- Glowing buttons: `px-8 py-4 rounded-full font-bold bg-gradient-to-r from-violet-600 to-indigo-600 hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] hover:scale-105 transition-all duration-300`
-- Background orbs: 2-3 `absolute rounded-full blur-3xl opacity-20` orbs in hero section
-- Navbar: `fixed top-0 w-full z-50 backdrop-blur-xl bg-white/5 border-b border-white/10 flex justify-between items-center px-8 py-4`
-- Grids: `grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-7xl mx-auto`
+- Architecture: FLOATING LAYERS. Elements should feel like they are hovering in 3D space.
+- Style: Dark `bg-[#020617]` with multiple glowing `blur-3xl` orbs in the background.
+- Components: `backdrop-blur-2xl bg-white/5 border border-white/10 rounded-full`
+- Detail: Use `hover:scale-105 hover:rotate-1` for a "living" UI.
+- Typography: Neon-glow text, `bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent`
+- Feel: Starfield, futuristic, high-tech, immersive, "Alive"."""
 
-CONTENT RULES:
-- NEVER write "Card 1", "Feature 1", "Lorem Ipsum". Write REAL niche-specific content.
-- Real-looking stats ("2.4M+ Users", "99.9% Uptime", "$2.3B Revenue").
-- Each card: inline SVG icon + bold title + 2 specific sentences.
-
-TECHNICAL:
-- React hooks + react-router-dom v6. Inline SVG. NO external deps.
-- 3-4 routes (/, /features, /pricing, /contact). Each 40+ lines.
-- `function App()` with <Routes>/<Route>. End with `export default App;`.
-- Pure JSX only — no markdown, no fences."""
+# Llama style: Neon Cyberpunk — Brutalist, high contrast, tech-heavy
+SYSTEM_LLAMA = """You are a lead dev for a tech underground. Build NEON CYBERPUNK websites.
+DESIGN DNA — UNIQUE TO LLAMA:
+- Architecture: BRUTALIST GRID. Raw, tech-forward, high energy.
+- Style: `bg-black` with thick 2px neon borders (`border-green-500`, `border-fuchsia-500`).
+- Typography: Monospace fonts (`font-mono`). `text-2xl font-black uppercase`.
+- Detail: Scanline effects, glitch-style hover states, retro-future UI elements.
+- Feel: Matrix, terminal, hacker-tech, high-contrast, aggressive performance."""
 
 # Llama style: Bold neon cyberpunk — electric colors, tech-forward, high contrast
 SYSTEM_LLAMA = """You are a cyberpunk UI engineer. Build BOLD, HIGH-ENERGY websites with neon accents and futuristic tech aesthetics.
@@ -367,24 +338,39 @@ class AIService:
             )
 
         p = random.choice(PALETTES)
-        # A small extra random nonce nudges the model toward different layouts run-to-run
+        # Randomize the architectural strategy to prevent repetitive layouts
         layout_seed = random.choice([
-            "asymmetric two-column hero",
-            "centered hero with floating cards",
-            "split-screen hero (visual right, text left)",
-            "editorial left-aligned hero with oversized headline",
-            "full-bleed hero with overlay panel",
+            "Bento-box grid with asymmetrical cards",
+            "Diagonal-cut section transitions and floating elements",
+            "Split-screen immersive hero (Visual Right, Text Left)",
+            "Centered minimalist hero with oversized typography",
+            "Technical high-density dashboard with sidebars",
+            "Editorial magazine layout with vertical pull-quotes",
+            "3D floating layers and glass-card stacked effects",
+            "Brutalist raw-edge cards and bold typography",
+            "Storytelling-focused vertical scroll path",
+            "Geometric-patterned background with glowing focal points"
+        ])
+        
+        style_mood = random.choice([
+            "Futuristic Tech-Forward",
+            "Soft Luxury Minimal",
+            "Vibrant & Energetic",
+            "Corporate High-Trust",
+            "Underground Dark Hacker",
+            "Apple-style Premium Clean"
         ])
 
         return (
             f"BUILD: {prompt}\n\n"
-            f"PALETTE \"{p['name']}\" — accent={p['accent']}, gradient={p['gradient']}, btn={p['btn']}.\n"
-            f"USE THIS PALETTE for accents, icons, badges, button. Dark page background (bg-gray-950).\n\n"
-            f"HERO LAYOUT THIS RUN: {layout_seed}.\n\n"
-            f"Layout must be SPECIFIC to \"{prompt}\" — components matched to this product, not a generic landing page template.\n\n"
-            "CRITICAL: Break the UI down into beautifully separated, modular React components (e.g., Navbar, Hero, Features, Footer). DO NOT put everything inside one giant App function.\n\n"
+            f"STRUCTURAL STRATEGY: {layout_seed}.\n"
+            f"AESTHETIC MOOD: {style_mood}.\n"
+            f"PALETTE \"{p['name']}\" — accent={p['accent']}, gradient={p['gradient']}, btn={p['btn']}.\n\n"
+            f"CRITICAL: DO NOT use a generic 'Header/Hero/Features' template. Use the STRUCTURAL STRATEGY above to define the architectural bones of the project. "
+            f"Make it SPECIFIC to \"{prompt}\".\n\n"
+            "Break the UI down into modular React components. NO giant App function.\n"
             "4-5 essential routes (Home, Features, Pricing, Contact). Homepage hero + niche-specific sections + footer.\n\n"
-            "~300-400 lines total. Premium dark theme. Code only — no markdown."
+            "~300-400 lines total. Code only — no markdown."
         )
 
     # ----- Public API -----
