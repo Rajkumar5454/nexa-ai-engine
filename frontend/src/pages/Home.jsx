@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Plus, Sparkles, ArrowRight, Zap, Globe, Layers, ChevronDown, Rocket, Database, Lock, Cloud, Webhook, BarChart3 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useAuth } from '../context/AuthContext';
