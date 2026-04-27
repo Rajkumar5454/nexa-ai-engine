@@ -382,7 +382,7 @@ class AIService:
             "4. Return a SINGLE valid React file ending with `export default App;`.\n\n"
             "CRITICAL DESIGN RULES (DO NOT IGNORE):\n"
             "-> ABSOLUTELY NO LOREM IPSUM. You must write real, compelling, niche-specific copy.\n"
-            "-> YOU MUST INCLUDE REAL IMAGES. Use realistic Unsplash URLs (e.g., `https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80`). NEVER use empty colored boxes or placeholders for images.\n"
+            "-> YOU MUST INCLUDE REAL, NICHE-SPECIFIC IMAGES. Use dynamic image services like `https://loremflickr.com/800/600/YOUR_KEYWORD` (e.g., `https://loremflickr.com/800/600/shoes` or `https://loremflickr.com/800/600/luxury`). NEVER use the same static URL for everything, and NEVER use empty colored boxes.\n"
             "-> Build a complete, complex UI. Do not just output giant text cards.\n\n"
             "~600-1000 lines total. Code only — no markdown."
         )
