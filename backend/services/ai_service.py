@@ -314,9 +314,13 @@ class AIService:
     def _build_code_prompt(self, prompt, existing_code=None):
         if existing_code:
             return (
-                f"MODIFY this code:\n\n{existing_code}\n\n"
-                f"CHANGE: {prompt}\n\n"
-                "Keep ALL pages/routes. Return COMPLETE modified code."
+                "ACT AS A CODE MODIFIER. I will provide existing code and a change request.\n"
+                "MANDATORY: You MUST return the COMPLETE, FULL code of the modified App.jsx.\n"
+                "DO NOT use placeholders like '// ... existing code'. Return EVERY line.\n"
+                "Keep all existing pages, routes, and logic unless specifically asked to change them.\n\n"
+                f"EXISTING CODE:\n{existing_code}\n\n"
+                f"CHANGE REQUEST: {prompt}\n\n"
+                "Return only the modified React code for App.jsx."
             )
 
         p = random.choice(PALETTES)
@@ -430,7 +434,9 @@ class AIService:
                 )
                 has_jsx_return = 'return (' in code or 'return <' in code
 
-                if not code or len(code) < 500 or not has_app_component or not has_jsx_return:
+                # Relax validation for modifications
+                min_len = 100 if is_mod else 500
+                if not code or len(code) < min_len or not has_app_component or not has_jsx_return:
                     raise ValueError(
                         f"{resolved_model} returned incomplete output ({len(code)} chars, App component={'yes' if has_app_component else 'NO'}). "
                         f"Try again or pick another model."
