@@ -241,58 +241,58 @@ async def generate_code_stream(request: GenerateCodeRequest, authorization: Opti
 
     async def event_generator():
         try:
-            # Send a progress event
-            yield f"data: {json.dumps({'type': 'token', 'content': 'Generating premium website...'})}\n\n"
-
-            # Use the async generate_code directly (reliable, no proxy timeout issues)
-            result = await ai_service.generate_code(
+            async for event in ai_service.stream_generate_code(
                 request.prompt, request.session_id, existing_code=existing_code, model=request.model
-            )
+            ):
+                if event["type"] == "status":
+                    yield f"data: {json.dumps({'type': 'token', 'content': event['content']})}\n\n"
+                
+                elif event["type"] == "token":
+                    yield f"data: {json.dumps({'type': 'token', 'content': event['content']})}\n\n"
+                
+                elif event["type"] == "done":
+                    result = event["result"]
+                    files = result.get("files", [])
+                    
+                    # Save project
+                    if not project:
+                        proj = Project(name=request.prompt[:60].strip(), files=[File(**f).dict() for f in files])
+                    else:
+                        proj = project
+                        proj.files = [File(**f).dict() for f in files]
 
-            code = ""
-            files = result.get("files", [])
-            for f in files:
-                if "App.jsx" in f.get("path", ""):
-                    code = f.get("content", "")
-                    break
+                    is_mod = existing_code is not None
+                    msg_content = result.get("message", f"Built premium {request.prompt}")
+                    steps = result.get("steps", [])
+                    analysis = result.get("analysis", "")
 
-            # Save project
-            if not project:
-                proj = Project(name=request.prompt[:60].strip(), files=[File(**f).dict() for f in files])
-            else:
-                proj = project
-                proj.files = [File(**f).dict() for f in files]
+                    user_msg = Message(role="user", content=request.prompt)
+                    asst_msg = Message(role="assistant", content=msg_content, files=files, steps=steps)
 
-            is_mod = existing_code is not None
-            code_lines = len(code.split('\n')) if code else 0
-            msg_content = result.get("message", f"Built premium {request.prompt}")
-            steps = result.get("steps", [])
+                    proj.messages.append(user_msg.dict())
+                    proj.messages.append(asst_msg.dict())
+                    proj.updated_at = datetime.now(timezone.utc)
 
-            user_msg = Message(role="user", content=request.prompt)
-            asst_msg = Message(role="assistant", content=msg_content, files=files, steps=steps)
+                    proj_dict = proj.dict()
+                    if user_id:
+                        proj_dict["user_id"] = user_id
 
-            proj.messages.append(user_msg.dict())
-            proj.messages.append(asst_msg.dict())
-            proj.updated_at = datetime.now(timezone.utc)
+                    await db.projects.update_one({"id": proj.id}, {"$set": proj_dict}, upsert=True)
 
-            proj_dict = proj.dict()
-            if user_id:
-                proj_dict["user_id"] = user_id
-
-            await db.projects.update_one({"id": proj.id}, {"$set": proj_dict}, upsert=True)
-
-            final_data = {
-                'type': 'done',
-                'project_id': proj.id,
-                'project_name': proj.name,
-                'message': msg_content,
-                'files': files,
-                'steps': steps,
-                'analysis': result.get("analysis", ""),
-                'credits_remaining': credits_remaining,
-            }
-
-            yield f"data: {json.dumps(final_data)}\n\n"
+                    final_data = {
+                        'type': 'done',
+                        'project_id': proj.id,
+                        'project_name': proj.name,
+                        'message': msg_content,
+                        'files': files,
+                        'steps': steps,
+                        'analysis': analysis,
+                        'credits_remaining': credits_remaining,
+                    }
+                    yield f"data: {json.dumps(final_data)}\n\n"
+                
+                elif event["type"] == "error":
+                    yield f"data: {json.dumps({'type': 'error', 'content': event['content']})}\n\n"
 
         except Exception as e:
             import traceback

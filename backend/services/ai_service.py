@@ -375,6 +375,41 @@ class AIService:
 
     # ----- Public API -----
 
+    async def stream_generate_code(self, prompt, session_id, existing_code=None, model=None):
+        """Async generator that yields status updates and final result"""
+        import asyncio
+        yield {"type": "status", "content": "Analyzing your requirements..."}
+        await asyncio.sleep(0.5)
+        
+        resolved_model = _resolve_model(model)
+        yield {"type": "status", "content": f"Routing request to {resolved_model}..."}
+        
+        # In a future update, we can implement full token-by-token streaming here.
+        # For now, we simulate progress steps while the blocking call runs.
+        try:
+            yield {"type": "status", "content": "Writing JS and HTML structure..."}
+            # Start the actual generation
+            result = await self.generate_code(prompt, session_id, existing_code, model)
+            
+            # Simulate "streaming" the result for visual effect
+            code = ""
+            for f in result.get("files", []):
+                if "App.jsx" in f.get("path", ""):
+                    code = f.get("content", "")
+                    break
+            
+            if code:
+                # Send chunks of code to make it look live
+                chunk_size = 500
+                for i in range(0, min(len(code), 2000), chunk_size):
+                    yield {"type": "token", "content": code[i:i+chunk_size]}
+                    await asyncio.sleep(0.1)
+            
+            yield {"type": "done", "result": result}
+            
+        except Exception as e:
+            yield {"type": "error", "content": str(e)}
+
     async def generate_code(self, prompt, session_id, existing_code=None, model=None):
         import asyncio
         user_prompt = self._build_code_prompt(prompt, existing_code)
