@@ -42,10 +42,11 @@ async def chat(request: ChatRequest, authorization: Optional[str] = Header(None)
             if project_data:
                 project = Project(**project_data)
 
-        # Pass full project to AI for context-aware responses
+        # Pass full project and history to AI for context-aware responses
         response = await ai_service.chat_message(
             request.message,
             request.session_id,
+            conversation_history=project.messages if project else [],
             project=project
         )
 

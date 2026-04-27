@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Send, Plus, Sparkles, Loader2, Zap, MessageSquare, X } from 'lucide-react';
+import { Send, Plus, Sparkles, Loader2, Zap, MessageSquare, X, Mic, Trash2, Camera } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useAuth } from '../../context/AuthContext';
 
@@ -49,10 +49,11 @@ const FormattedMessage = ({ content }) => {
   return <div className="space-y-0">{elements}</div>;
 };
 
-const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = false, onNewProject, streamingText = '', projectId, onAnalyze }) => {
+const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = false, onNewProject, streamingText = '', projectId, onAnalyze, onClearChat }) => {
   const [input, setInput] = useState('');
   const [mode, setMode] = useState('build'); // 'build' or 'chat'
   const [nudgeDismissed, setNudgeDismissed] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -70,7 +71,7 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
   }, [messages, streamingText]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (input.trim() && !isGenerating) {
       if (mode === 'chat' && onChatMessage) {
         onChatMessage(input);
@@ -79,6 +80,31 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
       }
       setInput('');
     }
+  };
+
+  const startVoiceInput = () => {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert("Voice input is not supported in your browser.");
+      return;
+    }
+
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => setIsListening(true);
+    recognition.onend = () => setIsListening(false);
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setInput(transcript);
+    };
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error", event.error);
+      setIsListening(false);
+    };
+
+    recognition.start();
   };
 
   const charCount = streamingText.length;
@@ -103,6 +129,15 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
                 Audit
               </Button>
             )}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-gray-500 hover:text-red-400 h-7 px-2" 
+              title="Clear Chat"
+              onClick={onClearChat}
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </Button>
             <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white h-7 px-2" data-testid="new-chat-btn" onClick={onNewProject}>
               <Plus className="w-3.5 h-3.5" />
             </Button>
@@ -277,8 +312,8 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
       </div>
 
       {/* Input */}
-      <form onSubmit={handleSubmit} className="p-3 border-t border-gray-800">
-        <div className="relative">
+      <div className="p-3 border-t border-gray-800">
+        <form onSubmit={handleSubmit} className="relative">
           <textarea
             data-testid="chat-input"
             value={input}
@@ -286,8 +321,7 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
             placeholder={mode === 'build'
               ? 'Describe the app you want to build...'
               : 'Ask about your project, get suggestions...'}
-            className="w-full bg-gray-900 text-white placeholder-gray-600 rounded-lg px-4 py-3 pr-12 outline-none focus:ring-2 focus:ring-blue-600 resize-none text-sm"
-            rows="3"
+            className="w-full bg-gray-900 text-white placeholder-gray-600 rounded-lg px-4 py-3 pr-12 outline-none focus:ring-2 focus:ring-blue-600 resize-none text-sm min-h-[100px]"
             disabled={isGenerating}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
@@ -296,28 +330,45 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
               }
             }}
           />
-          <button
-            type="submit"
-            data-testid="chat-send-btn"
-            className="absolute right-3 bottom-3 text-gray-400 hover:text-white transition-colors disabled:opacity-50"
-            disabled={!input.trim() || isGenerating}
-          >
-            {isGenerating ? (
-              <Loader2 className="w-5 h-5 animate-spin text-blue-400" />
-            ) : (
-              <Send className="w-5 h-5" />
-            )}
-          </button>
+          <div className="absolute right-3 bottom-3 flex items-center space-x-2">
+            <button
+              type="button"
+              onClick={startVoiceInput}
+              className={`p-1.5 rounded-md transition-colors ${isListening ? 'bg-red-500/20 text-red-400' : 'text-gray-500 hover:text-gray-300'}`}
+              title="Voice Input"
+              disabled={isGenerating}
+            >
+              <Mic className={`w-4 h-4 ${isListening ? 'animate-pulse' : ''}`} />
+            </button>
+            <button
+              type="submit"
+              data-testid="chat-send-btn"
+              className="p-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors disabled:opacity-50"
+              disabled={!input.trim() || isGenerating}
+            >
+              {isGenerating ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Send className="w-4 h-4" />
+              )}
+            </button>
+          </div>
+        </form>
+        <div className="flex items-center justify-between mt-2 px-1">
+          <div className="flex items-center space-x-3">
+             <button className="text-gray-600 hover:text-gray-400 transition-colors" title="Upload Image">
+               <Camera className="w-3.5 h-3.5" />
+             </button>
+             <span className="text-[10px] text-gray-600 uppercase font-medium tracking-wider">
+               {mode === 'build' ? 'Build Mode' : 'AI Partner Mode'}
+             </span>
+          </div>
+          <span className="text-[10px] text-gray-600">Shift + Enter for newline</span>
         </div>
-        <div className="flex items-center justify-between mt-1.5">
-          <span className="text-[11px] text-gray-600">
-            {mode === 'build' ? 'Generates code' : 'Smart analysis'}
-          </span>
-          <span className="text-[11px] text-gray-600">Enter to send</span>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
 
 export default ChatPanel;
+

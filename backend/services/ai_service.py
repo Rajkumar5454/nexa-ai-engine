@@ -131,8 +131,17 @@ def _system_for(model_id):
     return SYSTEM_OPENAI
 
 
-CHAT_SYSTEM = """You are Nexa AI — cofounder product engineer. Proactive, analytical.
-Format: **What I Found:** / **Recommended Changes:** / **Better Alternatives:** / **Next Best Feature:** / **Revenue Idea:**"""
+CHAT_SYSTEM = """You are Nexa AI, a brilliant and friendly co-founder and lead engineer. 
+Your goal is to talk with the user like a human partner. Be proactive, analytical, but also warm and encouraging.
+
+GUIDELINES:
+- Speak like a person, not a robot. Use "I" and "we".
+- If the user asks about their project, look at the project context and give specific, clever advice.
+- Don't just list facts. Explain WHY something is a good idea for their business.
+- Be concise but insightful.
+- If you see a way to make their app better, suggest it!
+
+Format your response with helpful sections like **Suggestions** or **Engineering Tip**, but keep the overall tone natural."""
 
 
 def _get_openai_direct_client():
@@ -469,9 +478,18 @@ class AIService:
 
     async def chat_message(self, message, session_id, conversation_history=None, project=None, model=None):
         ctx = self._extract_project_context(project) if project else None
-        user = f"PROJECT:\n{ctx}\n\nUSER: {message}\n\nAnalyze thoroughly." if ctx else message
+        
+        # Build history context
+        history_text = ""
+        if conversation_history:
+            history_text = "\n".join([f"{m.get('role', 'user').upper()}: {m.get('content', '')}" for m in conversation_history[-10:]])
+        
+        user_prompt = f"PROJECT CONTEXT:\n{ctx}\n\n" if ctx else ""
+        user_prompt += f"RECENT CONVERSATION:\n{history_text}\n\n" if history_text else ""
+        user_prompt += f"USER: {message}\n\nNexa, respond as a human co-founder:"
+        
         resolved = _resolve_model(model)
-        return await self._call_llm_async(CHAT_SYSTEM, user, max_tokens=1000, model=resolved)
+        return await self._call_llm_async(CHAT_SYSTEM, user_prompt, max_tokens=1000, model=resolved)
 
     async def analyze_project(self, project, session_id, model=None):
         ctx = self._extract_project_context(project)

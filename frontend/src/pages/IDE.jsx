@@ -305,6 +305,10 @@ const IDE = () => {
     }
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+  };
+
   const handleNewProject = () => {
     setProjectId(null);
     setProjectName('New Project');
@@ -334,6 +338,7 @@ const IDE = () => {
           streamingText={streamingText}
           projectId={projectId}
           onAnalyze={handleAnalyze}
+          onClearChat={handleClearChat}
         />
 
         <div className="flex-1 flex overflow-hidden">
