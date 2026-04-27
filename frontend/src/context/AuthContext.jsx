@@ -5,7 +5,6 @@ const AuthContext = createContext();
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
 const API = `${BACKEND_URL}/api`;
-console.log('AuthContext: API is set to', API);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
