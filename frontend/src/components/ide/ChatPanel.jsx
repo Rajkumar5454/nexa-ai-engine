@@ -356,8 +356,24 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
         </form>
         <div className="flex items-center justify-between mt-2 px-1">
           <div className="flex items-center space-x-3">
-             <button className="text-gray-600 hover:text-gray-400 transition-colors" title="Upload Image">
-               <Camera className="w-3.5 h-3.5" />
+             <input
+               type="file"
+               id="chat-screenshot-upload"
+               className="hidden"
+               accept="image/*"
+               onChange={(e) => {
+                 const file = e.target.files[0];
+                 if (file) {
+                   alert(`Screenshot "${file.name}" attached! Sending screenshots to AI is being enabled.`);
+                 }
+               }}
+             />
+             <button 
+               className="text-gray-500 hover:text-gray-300 transition-colors" 
+               title="Upload Screenshot"
+               onClick={() => document.getElementById('chat-screenshot-upload').click()}
+             >
+               <Plus className="w-3.5 h-3.5" />
              </button>
              <span className="text-[10px] text-gray-600 uppercase font-medium tracking-wider">
                {mode === 'build' ? 'Build Mode' : 'AI Partner Mode'}
