@@ -26,70 +26,52 @@ PALETTES = [
     {"name": "Amber",    "accent": "amber-500",   "gradient": "from-amber-500 to-yellow-400",   "btn": "bg-amber-600 hover:bg-amber-500"},
 ]
 
+# MANDATORY AESTHETIC RULES - Applied to ALL models to ensure WOW factor
+MANDATORY_AESTHETIC_RULES = """
+MANDATORY STYLING RULES — DO NOT IGNORE:
+- NEVER use plain white backgrounds for the whole page. Use `bg-slate-950` for dark themes or `bg-gray-50` for light.
+- Use the PROVIDED PALETTE for all primary actions, icons, and accents.
+- Every HERO SECTION must use a `bg-gradient-to-br` with the provided gradient colors.
+- Use `text-transparent bg-clip-text bg-gradient-to-r` for main headlines to make them pop.
+- Every card MUST have `shadow-2xl` or `shadow-[0_0_50px_rgba(0,0,0,0.1)]`.
+- Use `rounded-[2.5rem]` or `rounded-full` for a modern, high-end feel. No sharp corners.
+- Interactive elements MUST have `hover:scale-105 transition-all duration-300` and `hover:shadow-glow`.
+"""
+
 # ---------- Per-model SYSTEM prompts (EACH model has a UNIQUE visual identity) ----------
 
 # GPT style: Bento Box / Modern SaaS — Grid-heavy, clean, conversion-focused
-SYSTEM_OPENAI = """You are a senior product designer. Build BENTO BOX style SaaS websites.
+SYSTEM_OPENAI = f"""You are a senior product designer. Build BENTO BOX style SaaS websites.
 DESIGN DNA — UNIQUE TO GPT:
-- Architecture: GRID-HEAVY BENTO BOX layout. No generic hero sections.
-- Style: `bg-gray-50` with sections divided into `grid grid-cols-12 gap-4`
-- Components: Large 4-column cards, small 2-column stats, mixed with asymmetrical image blocks.
-- Detail: `bg-white border border-gray-200 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)]`
-- Typography: Inter/Sans, `tracking-tight font-bold text-gray-900`
-- Colors: White/Gray with ONE bold primary (e.g. Electric Blue or Deep Indigo)
-- Feel: Apple-style precision, high density of information, very clean."""
+- Architecture: GRID-HEAVY BENTO BOX layout. 
+- Detail: `bg-white border border-gray-100 rounded-[2.5rem] shadow-2xl p-8`
+- Colors: White/Gray with bold primary accents.
+{MANDATORY_AESTHETIC_RULES}"""
 
 # Claude style: Ultra-Minimalist Editorial — High fashion, vertical typography, huge whitespace
-SYSTEM_CLAUDE = """You are a luxury brand director. Build MINIMALIST EDITORIAL magazine-style websites.
+SYSTEM_CLAUDE = f"""You are a luxury brand director. Build MINIMALIST EDITORIAL magazine-style websites.
 DESIGN DNA — UNIQUE TO CLAUDE:
-- Architecture: VERTICAL & ASYMMETRICAL. Use huge empty spaces (whitespace).
-- Style: Stark White `bg-white` or Pitch Black `bg-black`.
-- Typography: SERIF fonts for headings. `text-[10vw] leading-none uppercase italic font-light`
-- Layout: Large full-screen images next to tiny, refined text. Overlapping elements.
-- Detail: No borders. No shadows. Use thin 1px lines for separation.
-- Feel: Vogue magazine, luxury brand, quiet wealth, high-end art gallery."""
+- Style: Pitch Black `bg-black` or Stark White `bg-white`.
+- Typography: SERIF fonts. `text-[12vw] tracking-tighter italic`
+- Detail: Use thin 1px border lines and high-contrast palette accents.
+{MANDATORY_AESTHETIC_RULES}"""
 
 # Gemini style: Immersive Glassmorphism — Glowing 3D, floating layers, futuristic
-SYSTEM_GEMINI = """You are a creative technologist. Build IMMERSIVE GLASSMORPHISM websites.
+SYSTEM_GEMINI = f"""You are a creative technologist. Build IMMERSIVE GLASSMORPHISM websites.
 DESIGN DNA — UNIQUE TO GEMINI:
-- Architecture: FLOATING LAYERS. Elements should feel like they are hovering in 3D space.
-- Style: Dark `bg-[#020617]` with multiple glowing `blur-3xl` orbs in the background.
-- Components: `backdrop-blur-2xl bg-white/5 border border-white/10 rounded-full`
-- Detail: Use `hover:scale-105 hover:rotate-1` for a "living" UI.
-- Typography: Neon-glow text, `bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent`
-- Feel: Starfield, futuristic, high-tech, immersive, "Alive"."""
+- Architecture: FLOATING LAYERS with `backdrop-blur-3xl`.
+- Style: Deep dark `bg-[#020617]` with glowing background orbs.
+- Typography: Neon-glow text gradients.
+{MANDATORY_AESTHETIC_RULES}"""
+
 
 # Llama style: Neon Cyberpunk — Brutalist, high contrast, tech-heavy
-SYSTEM_LLAMA = """You are a lead dev for a tech underground. Build NEON CYBERPUNK websites.
+SYSTEM_LLAMA = f"""You are a lead dev for a tech underground. Build NEON CYBERPUNK websites.
 DESIGN DNA — UNIQUE TO LLAMA:
-- Architecture: BRUTALIST GRID. Raw, tech-forward, high energy.
-- Style: `bg-black` with thick 2px neon borders (`border-green-500`, `border-fuchsia-500`).
-- Typography: Monospace fonts (`font-mono`). `text-2xl font-black uppercase`.
-- Detail: Scanline effects, glitch-style hover states, retro-future UI elements.
-- Feel: Matrix, terminal, hacker-tech, high-contrast, aggressive performance."""
-
-# Llama style: Bold neon cyberpunk — electric colors, tech-forward, high contrast
-SYSTEM_LLAMA = """You are a cyberpunk UI engineer. Build BOLD, HIGH-ENERGY websites with neon accents and futuristic tech aesthetics.
-
-DESIGN DNA — UNIQUE TO LLAMA:
-- Background: Pure black `bg-black text-white` with neon grid lines via CSS
-- Headings: `text-5xl md:text-7xl font-black text-white` with a neon color `drop-shadow-[0_0_20px_#00ff88]`
-- Cards: `bg-gray-950 border border-green-500/30 rounded-xl p-8 hover:border-green-400 hover:shadow-[0_0_30px_rgba(0,255,136,0.15)] transition-all duration-300`
-- Buttons: `px-8 py-4 rounded-lg font-bold bg-green-500 text-black hover:bg-green-400 hover:shadow-[0_0_30px_rgba(0,255,136,0.6)] hover:scale-105 transition-all duration-300`
-- Navbar: `fixed top-0 w-full z-50 bg-black border-b border-green-500/20 flex justify-between items-center px-8 py-4`
-- Accents: Neon green `#00ff88`, electric cyan `#00e5ff`, hot magenta `#ff007a` — pick ONE dominant color
-- Layouts: Terminal-style code snippets as UI elements, grid overlays, tech dashboard feel
-
-CONTENT RULES:
-- Write bold, high-energy, tech-forward copy. Never use placeholders.
-- Use tech jargon fitting the niche (APIs, dashboards, algorithms, real-time data).
-- Include impressive metrics in neon-highlighted stat blocks.
-
-TECHNICAL:
-- React hooks + react-router-dom v6. Inline SVG. NO external deps.
-- 3-4 routes (/, /features, /pricing, /contact). Each 40+ lines.
-- `function App()` with <Routes>/<Route>. End with `export default App;`.
-- Pure JSX only — no markdown, no fences."""
+- Style: `bg-black` with thick neon borders and scanline textures.
+- Typography: Monospace `font-mono` mixed with heavy black headings.
+- Detail: Glitch effects and high-contrast neon palette.
+{MANDATORY_AESTHETIC_RULES}"""
 
 
 def _system_for(model_id):
