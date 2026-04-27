@@ -333,7 +333,6 @@ class AIService:
             "Diagonal-cut section transitions and floating elements",
             "Split-screen immersive hero (Visual Right, Text Left)",
             "Centered minimalist hero with oversized typography",
-            "Technical high-density dashboard with sidebars",
             "Editorial magazine layout with vertical pull-quotes",
             "3D floating layers and glass-card stacked effects",
             "Brutalist raw-edge cards and bold typography",
@@ -355,7 +354,7 @@ class AIService:
             f"STRUCTURAL STRATEGY: {layout_seed}.\n"
             f"AESTHETIC MOOD: {style_mood}.\n"
             f"PALETTE \"{p['name']}\" — accent={p['accent']}, gradient={p['gradient']}, btn={p['btn']}.\n\n"
-            f"CRITICAL: DO NOT use a generic 'Header/Hero/Features' template. Use the STRUCTURAL STRATEGY above to define the architectural bones of the project. "
+            f"MANDATORY ARCHITECTURE: You MUST include a fixed, premium Top Navigation Bar (Header) with standard links (Home, About, Services, Login, Sign Up). DO NOT use sidebars for main navigation. Use the STRUCTURAL STRATEGY above for the body content.\n"
             f"Make it SPECIFIC to \"{prompt}\".\n\n"
             "MAX_CAPACITY_MODE: You have a massive token budget. Build a LARGE, detailed masterpiece.\n"
             "Include 6-8 comprehensive routes (Home, About, Services, Case Studies, Pricing, Contact, Blog).\n"
