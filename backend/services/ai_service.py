@@ -34,7 +34,7 @@ MANDATORY STYLING RULES — DO NOT IGNORE:
 - MOTION & ANIMATION: Every build MUST feel alive. Use `animate-fadeInUp` for section entrances, `animate-float` for icons/images, and `hover:scale-105` for all cards.
 - CONTRAST & READABILITY: Ensure high contrast. NEVER use dark text on dark backgrounds or light on light.
 - NEVER use plain white backgrounds for the whole page. Use `bg-slate-950` for dark themes or `bg-gray-50` for light.
-- FULL MASTERPIECE: Every build MUST hit at least 600-1000 lines of code. Build 7-8 distinct pages/routes.
+- FULL MASTERPIECE: Every build MUST hit at least 600-1000 lines of code. Build 6-8 distinct vertical sections stacked on a long-scrolling page.
 - Use the PROVIDED PALETTE for all primary actions, icons, and accents.
 - Every HERO SECTION must use a `bg-gradient-to-br` with the provided gradient colors.
 - Every card MUST have `shadow-2xl` or `shadow-[0_0_50px_rgba(0,0,0,0.1)]`.
@@ -373,14 +373,15 @@ class AIService:
             f"MANDATORY ARCHITECTURE: You MUST include a fixed, premium Top Navigation Bar (Header) with standard links (Home, About, Services, Login, Sign Up). DO NOT use sidebars for main navigation. Use the STRUCTURAL STRATEGY above for the body content.\n"
             f"Make it SPECIFIC to \"{prompt}\".\n\n"
             "MAX_CAPACITY_MODE: You have a massive token budget. Build a LARGE, detailed masterpiece.\n"
-            "ARCHITECTURE: You MUST use `react-router-dom` (BrowserRouter, Routes, Route, Link) to build a true MULTI-PAGE application.\n"
-            "Include at least 3-4 distinct pages (e.g., Home, About, Services, Contact) with their own dedicated React components.\n"
-            "Every page must be rich with copy and premium visuals specific to the niche. DO NOT just build a single-page landing site.\n\n"
+            "ARCHITECTURE: Build a MASSIVE, long-scrolling Single-Page Application (Landing Page style).\n"
+            "You MUST include at least 6-8 distinct vertical sections (e.g., Hero, Features, Gallery, Pricing, Testimonials, FAQ, About Us, Footer).\n"
+            "DO NOT build separate routes or use react-router. Stack the components vertically so the user can scroll down through a rich experience.\n"
+            "Every section must be rich with copy and premium visuals specific to the niche. DO NOT output a short 200-line stub.\n\n"
             "TECHNICAL SANDBOX RULES (CRITICAL):\n"
-            "1. NO EXTERNAL DEPENDENCIES. You can ONLY import from 'react' and 'react-router-dom'.\n"
+            "1. NO EXTERNAL DEPENDENCIES. You can ONLY import from 'react'. Do not use react-router-dom.\n"
             "2. DO NOT import lucide-react, framer-motion, or heroicons. Use pure inline <svg> tags for all icons.\n"
             "3. The code MUST compile cleanly. All variables must be defined. No syntax errors.\n"
-            "4. Return a SINGLE valid React file ending with `export default App;`. Wrap your App in a `<BrowserRouter>`.\n\n"
+            "4. Return a SINGLE valid React file ending with `export default App;`.\n\n"
             "CRITICAL DESIGN RULES (DO NOT IGNORE):\n"
             "-> ABSOLUTELY NO LOREM IPSUM. You must write real, compelling, niche-specific copy.\n"
             "-> YOU MUST INCLUDE REAL, NICHE-SPECIFIC IMAGES. Use dynamic image services like `https://loremflickr.com/800/600/YOUR_KEYWORD?lock=UNIQUE_NUMBER`.\n"
