@@ -120,9 +120,24 @@ const IDE = () => {
   };
 
   const [streamingText, setStreamingText] = useState('');
+  const cancelRef = useRef(null);
+
+  const handleStop = useCallback(() => {
+    if (cancelRef.current) {
+      cancelRef.current();
+      cancelRef.current = null;
+    }
+    setIsGenerating(false);
+    setStreamingText('');
+    
+    // Mark the last message as stopped if it was streaming
+    setMessages(prev => prev.map(m => 
+      m.isStreaming ? { ...m, isStreaming: false, content: m.content + '\n\n[Generation stopped by user]' } : m
+    ));
+  }, []);
 
   const handleSendMessage = async (content) => {
-    // Pre-flight credit check — avoids streaming body-parse issues with 4xx + shows modal immediately
+    // ... (keep credit check) ...
     const modelId = getStoredModel();
     const generateCost = getModelById(modelId).cost;
     if (user && (user.credits ?? 0) < generateCost) {
@@ -155,28 +170,27 @@ const IDE = () => {
       isStreaming: true
     }]);
 
-    const cancelStream = chatAPI.generateCodeStream(
+    cancelRef.current = chatAPI.generateCodeStream(
       content, sessionId, projectId,
       {
         onToken: (token) => {
           setStreamingText(prev => prev + token);
         },
         onDone: (data) => {
-          // Update credit balance in the top bar immediately
+          cancelRef.current = null;
+          // ... (keep rest of onDone logic) ...
           if (typeof data.credits_remaining === 'number' && user) {
             setUser({ ...user, credits: data.credits_remaining });
           } else {
             refreshUser();
           }
 
-          // Replace streaming message with final message
           setMessages(prev => prev.map(m =>
             m.id === streamMsgId
               ? { ...m, content: data.message || 'Code generated successfully', isStreaming: false, actions: data.steps || [] }
               : m
           ));
 
-          // Add analysis message if available
           if (data.analysis) {
             const analysisMsg = {
               id: Date.now() + 2,
@@ -207,6 +221,7 @@ const IDE = () => {
           }
         },
         onError: (errMsg) => {
+          cancelRef.current = null;
           setMessages(prev => prev.map(m =>
             m.id === streamMsgId
               ? { ...m, content: errMsg || 'Sorry, an error occurred. Please try again.', isStreaming: false }
@@ -339,6 +354,7 @@ const IDE = () => {
           projectId={projectId}
           onAnalyze={handleAnalyze}
           onClearChat={handleClearChat}
+          onStop={handleStop}
         />
 
         <div className="flex-1 flex overflow-hidden">
