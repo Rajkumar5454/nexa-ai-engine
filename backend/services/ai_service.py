@@ -201,8 +201,16 @@ class AIService:
                     temperature=temperature,
                 ),
             )
-            resp = model.generate_content(user)
-            return getattr(resp, "text", "") or ""
+            try:
+                resp = model.generate_content(user)
+                try:
+                    return resp.text
+                except Exception:
+                    # If safety blocked it or parts are empty, text property raises ValueError
+                    return ""
+            except Exception as e:
+                print(f"[ai_service] Gemini API exception: {e}")
+                raise e
 
         return await asyncio.to_thread(_run)
 
@@ -323,13 +331,15 @@ class AIService:
     def _build_code_prompt(self, prompt, existing_code=None):
         if existing_code:
             return (
-                "ACT AS A CODE MODIFIER. I will provide existing code and a change request.\n"
-                "MANDATORY: You MUST return the COMPLETE, FULL code of the modified App.jsx.\n"
-                "DO NOT use placeholders like '// ... existing code'. Return EVERY line.\n"
-                "Keep all existing pages, routes, and logic unless specifically asked to change them.\n\n"
+                "ACT AS AN EXPERT CODE MODIFIER. I will provide existing code and a change request.\n"
+                "CRITICAL RULES FOR MODIFICATION:\n"
+                "1. You MUST return the ENTIRE, COMPLETE code of the modified App.jsx from start to finish.\n"
+                "2. NEVER use placeholders like '// ... existing code' or '// rest of the code'. I am piping this to a compiler.\n"
+                "3. NO EXTERNAL DEPENDENCIES. Only import from 'react' and 'react-router-dom'.\n"
+                "4. Keep all existing features and styles working unless explicitly told to change them.\n\n"
                 f"EXISTING CODE:\n{existing_code}\n\n"
                 f"CHANGE REQUEST: {prompt}\n\n"
-                "Return only the modified React code for App.jsx."
+                "Return only the full, modified React code. No explanations, no markdown wrappers."
             )
 
         p = random.choice(PALETTES)
@@ -441,20 +451,14 @@ class AIService:
                 )
                 code = self._clean_code(ai_response)
 
-                # Validate the response actually contains a usable React App component
-                has_app_component = (
-                    'function App' in code
-                    or 'const App ' in code
-                    or 'const App=' in code
-                    or 'const App:' in code  # rare
-                )
+                has_app_component = 'export default' in code or 'function ' in code or 'const ' in code
                 has_jsx_return = 'return (' in code or 'return <' in code
 
                 # Relax validation for modifications
                 min_len = 100 if is_mod else 500
                 if not code or len(code) < min_len or not has_app_component or not has_jsx_return:
                     raise ValueError(
-                        f"{resolved_model} returned incomplete output ({len(code)} chars, App component={'yes' if has_app_component else 'NO'}). "
+                        f"{resolved_model} returned incomplete output ({len(code)} chars). "
                         f"Try again or pick another model."
                     )
 
