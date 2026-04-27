@@ -29,8 +29,8 @@ PALETTES = [
 # MANDATORY AESTHETIC RULES - Applied to ALL models to ensure WOW factor
 MANDATORY_AESTHETIC_RULES = """
 MANDATORY STYLING RULES — DO NOT IGNORE:
-- UI COMPONENTS: DO NOT just write text. Build at least 8-10 distinct UI sections (Hero with CTA, Feature Grid, Image Gallery, Pricing Table, Testimonials, FAQ, Footer).
-- REAL IMAGES: Use high-quality, niche-specific images for EVERY section. Use Unsplash URLs like `https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80`.
+- NO LOREM IPSUM: NEVER use "Lorem ipsum" or placeholder text. You MUST write REAL, compelling, niche-specific copy. Invent realistic details if needed.
+- UI COMPONENTS & IMAGES: Build 8-10 distinct UI sections (Hero, Feature Grid, Gallery, Pricing, Testimonials, FAQ, Footer). EVERY SECTION MUST INCLUDE REAL IMAGES using Unsplash URLs (e.g., `https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80`). Do NOT build text-only blocks.
 - MOTION & ANIMATION: Every build MUST feel alive. Use `animate-fadeInUp` for section entrances, `animate-float` for icons/images, and `hover:scale-105` for all cards.
 - CONTRAST & READABILITY: Ensure high contrast. NEVER use dark text on dark backgrounds or light on light.
 - NEVER use plain white backgrounds for the whole page. Use `bg-slate-950` for dark themes or `bg-gray-50` for light.
@@ -365,6 +365,10 @@ class AIService:
             "2. DO NOT import lucide-react, framer-motion, or heroicons. Use pure inline <svg> tags for all icons.\n"
             "3. The code MUST compile cleanly. All variables must be defined. No syntax errors.\n"
             "4. Return a SINGLE valid React file ending with `export default App;`.\n\n"
+            "CRITICAL DESIGN RULES (DO NOT IGNORE):\n"
+            "-> ABSOLUTELY NO LOREM IPSUM. You must write real, compelling, niche-specific copy.\n"
+            "-> YOU MUST INCLUDE REAL IMAGES. Use realistic Unsplash URLs (e.g., `https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80`). NEVER use empty colored boxes or placeholders for images.\n"
+            "-> Build a complete, complex UI. Do not just output giant text cards.\n\n"
             "~600-1000 lines total. Code only — no markdown."
         )
 
