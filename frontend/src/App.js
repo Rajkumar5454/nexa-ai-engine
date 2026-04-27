@@ -14,8 +14,8 @@ import LowCreditsModal from './components/LowCreditsModal';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// Set base URL for axios if needed (should already be set in services/api.js, but let's be safe here)
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
+// Production Backend URL
+const BACKEND_URL = 'https://nexa-backend-o2dy.onrender.com';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
