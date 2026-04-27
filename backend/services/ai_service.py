@@ -486,7 +486,13 @@ class AIService:
         # Build history context
         history_text = ""
         if conversation_history:
-            history_text = "\n".join([f"{m.get('role', 'user').upper()}: {m.get('content', '')}" for m in conversation_history[-10:]])
+            formatted_history = []
+            for m in conversation_history[-10:]:
+                # Handle both dict and object (Message model)
+                role = m.get('role', 'user') if isinstance(m, dict) else getattr(m, 'role', 'user')
+                content = m.get('content', '') if isinstance(m, dict) else getattr(m, 'content', '')
+                formatted_history.append(f"{role.upper()}: {content}")
+            history_text = "\n".join(formatted_history)
         
         user_prompt = f"PROJECT CONTEXT:\n{ctx}\n\n" if ctx else ""
         user_prompt += f"RECENT CONVERSATION:\n{history_text}\n\n" if history_text else ""
