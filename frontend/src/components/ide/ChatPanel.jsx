@@ -270,6 +270,10 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSubmit(e); } }}
           />
           <div className="absolute right-3 bottom-3 flex items-center space-x-2">
+            <input type="file" id="chat-upload" className="hidden" accept="image/*" onChange={(e) => { if (e.target.files[0]) alert(`Screenshot "${e.target.files[0].name}" attached!`); }} />
+            <button type="button" className="p-1.5 rounded-md transition-colors text-gray-500 hover:text-gray-300" title="Upload" onClick={() => document.getElementById('chat-upload').click()} disabled={isGenerating}>
+              <Plus className="w-4 h-4" />
+            </button>
             <button type="button" onClick={startVoiceInput} className={`p-1.5 rounded-md transition-colors ${isListening ? 'bg-red-500/20 text-red-400' : 'text-gray-500 hover:text-gray-300'}`} disabled={isGenerating}>
               <Mic className={`w-4 h-4 ${isListening ? 'animate-pulse' : ''}`} />
             </button>
@@ -286,10 +290,6 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
         </form>
         <div className="flex items-center justify-between mt-2 px-1">
           <div className="flex items-center space-x-3">
-             <input type="file" id="chat-upload" className="hidden" accept="image/*" onChange={(e) => { if (e.target.files[0]) alert(`Screenshot "${e.target.files[0].name}" attached!`); }} />
-             <button className="text-gray-500 hover:text-gray-300 transition-colors" title="Upload" onClick={() => document.getElementById('chat-upload').click()}>
-               <Plus className="w-3.5 h-3.5" />
-             </button>
              <span className="text-[10px] text-gray-600 uppercase font-medium tracking-wider">{mode === 'build' ? 'Build Mode' : 'AI Partner Mode'}</span>
           </div>
           <span className="text-[10px] text-gray-600">Shift + Enter for newline</span>
