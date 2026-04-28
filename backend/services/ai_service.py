@@ -244,84 +244,78 @@ class AIService:
         if temperature is None:
             temperature = _temperature_for(model)
 
+        # Map internal Nexa names to provider-specific names
+        provider_model = model
+        if model == "gemini-3-1-pro":
+            provider_model = "gemini-1.5-pro"
+        elif model == "gemini-3-flash":
+            provider_model = "gemini-1.5-flash"
+        elif model == "llama-3-3-70b":
+            provider_model = "meta/llama-3.3-70b-instruct"
+        elif model == "claude-sonnet-4-5":
+            provider_model = "anthropic/claude-3-5-sonnet"
+
         # GEMINI → user's Google API key, native SDK
         if model.startswith("gemini"):
             if self.gemini_native:
                 try:
-                    # Use the exact model name requested
-                    target_model = f"models/{model}"
-                    if model == "gemini-3-1-pro":
-                        target_model = "models/gemini-1.5-pro"
-                    elif model == "gemini-3-flash":
-                        target_model = "models/gemini-1.5-flash"
-                    else:
-                        target_model = f"models/{model}"
                     return await self._call_gemini_native(
                         system, user, max_tokens, temperature,
-                        model_name=target_model,
+                        model_name=provider_model,
                     )
                 except Exception as e:
                     print(f"[ai_service] Native Gemini failed: {e}")
-                    # Continue to NVIDIA fallback
+                    # Continue to fallback
 
-        # LLAMA → user selected Llama from the UI, route directly to NVIDIA NIM
+        # LLAMA → route directly to NVIDIA NIM
         if model.startswith("llama"):
             if self.nvidia_client:
-                # Explicitly requested Llama 3.3 70B
-                nvidia_model = "meta/llama-3.3-70b-instruct"
                 return await asyncio.to_thread(
                     self._call_openai_compat,
-                    self.nvidia_client, system, user, max_tokens, nvidia_model, temperature,
+                    self.nvidia_client, system, user, max_tokens, provider_model, temperature,
                 )
-            else:
-                print("[ai_service] Llama requested but no NVIDIA_API_KEY found.")
 
-        # CLAUDE → Emergent LLM key (user did not provide an Anthropic key)
+        # CLAUDE → Emergent proxy
         if model.startswith("claude"):
-            if not self.emergent_client:
-                raise ValueError("Claude is not available because the Emergent proxy key is missing.")
-            return await asyncio.to_thread(
-                self._call_openai_compat,
-                self.emergent_client, system, user, max_tokens, model, temperature,
-            )
-
-        # GPT → user's OpenAI key, direct (with auto-fallback to Emergent if user's key is rate-limited)
-        if self.openai_direct:
-            try:
+            if self.emergent_client:
                 return await asyncio.to_thread(
                     self._call_openai_compat,
-                    self.openai_direct, system, user, max_tokens, model, temperature,
+                    self.emergent_client, system, user, max_tokens, provider_model, temperature,
                 )
-            except (openai.RateLimitError, openai.AuthenticationError, openai.NotFoundError) as e:
-                # User's OpenAI account has issues — fall back to Emergent
-                print(f"[ai_service] User OpenAI call failed, falling back to Emergent: {e}")
-            except Exception as e:
-                print(f"[ai_service] Unexpected error in direct OpenAI call: {e}")
 
-        # Fallback 1: NVIDIA NIM (High quality, high speed, free credits)
+        # GPT → user's OpenAI key, direct
+        if model.startswith("gpt"):
+            if self.openai_direct:
+                try:
+                    return await asyncio.to_thread(
+                        self._call_openai_compat,
+                        self.openai_direct, system, user, max_tokens, provider_model, temperature,
+                    )
+                except Exception as e:
+                    print(f"[ai_service] User OpenAI call failed: {e}")
+
+        # Fallback 1: NVIDIA NIM (Llama 3.3 70B)
         if self.nvidia_client:
             try:
-                # Use Llama 3.3 70B Instruct for high-quality code generation
-                # The 8B model is too small and makes syntax errors (like mapping over undefined objects)
-                nvidia_model = "meta/llama-3.3-70b-instruct"
                 return await asyncio.to_thread(
                     self._call_openai_compat,
-                    self.nvidia_client, system, user, max_tokens, nvidia_model, temperature,
+                    self.nvidia_client, system, user, max_tokens, "meta/llama-3.3-70b-instruct", temperature,
                 )
             except Exception as e:
                 print(f"[ai_service] NVIDIA fallback failed: {e}")
 
         # Fallback 2: Emergent proxy
         if self.emergent_client:
-            emergent_model = model
-            if model == "gemini-3-1-pro":
-                emergent_model = "google/gemini-1.5-pro"
-            elif model == "gemini-3-flash":
-                emergent_model = "google/gemini-1.5-flash"
+            # Map for emergent fallback
+            emergent_fallback_model = provider_model
+            if model.startswith("gemini"):
+                emergent_fallback_model = f"google/{provider_model}"
+            elif model.startswith("gpt"):
+                emergent_fallback_model = f"openai/{provider_model}"
                 
             return await asyncio.to_thread(
                 self._call_openai_compat,
-                self.emergent_client, system, user, max_tokens, emergent_model, temperature,
+                self.emergent_client, system, user, max_tokens, emergent_fallback_model, temperature,
             )
             
         raise ValueError(f"No valid API keys configured to handle model request: {model}")
