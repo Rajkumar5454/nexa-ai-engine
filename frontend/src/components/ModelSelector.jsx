@@ -96,8 +96,14 @@ const ModelSelector = ({ value, onChange, align = 'left', size = 'md', testId = 
                   type="button"
                   key={m.id}
                   data-testid={`${testId}-option-${m.id}`}
-                  onClick={() => { onChange(m.id); setOpen(false); }}
+                  onClick={() => { 
+                    if (!m.comingSoon) {
+                      onChange(m.id); 
+                      setOpen(false); 
+                    }
+                  }}
                   className={`w-full text-left rounded-xl px-3 py-2.5 transition-all flex items-start gap-3 ${
+                    m.comingSoon ? 'opacity-50 cursor-not-allowed' : 
                     selected
                       ? 'bg-gradient-to-br from-violet-500/15 to-blue-500/10 border border-violet-500/30'
                       : 'hover:bg-white/[0.05] border border-transparent'
@@ -110,7 +116,11 @@ const ModelSelector = ({ value, onChange, align = 'left', size = 'md', testId = 
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-semibold text-white truncate">{m.name}</span>
                       {m.badge && (
-                        <span className="text-[9px] uppercase tracking-wider font-bold text-violet-200 bg-violet-500/20 px-1.5 py-0.5 rounded-full">
+                        <span className={`text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded-full ${
+                          m.comingSoon 
+                            ? 'text-gray-300 bg-white/10' 
+                            : 'text-violet-200 bg-violet-500/20'
+                        }`}>
                           {m.badge}
                         </span>
                       )}
@@ -118,11 +128,13 @@ const ModelSelector = ({ value, onChange, align = 'left', size = 'md', testId = 
                     <div className="text-[11px] text-gray-400 mt-0.5 flex items-center gap-1.5">
                       <span>{m.provider} · {m.tagline}</span>
                     </div>
-                    <div className="text-[10px] text-violet-300/80 mt-1 font-medium">
-                      {m.cost} credits / generation
-                    </div>
+                    {!m.comingSoon && (
+                      <div className="text-[10px] text-violet-300/80 mt-1 font-medium">
+                        {m.cost} credits / generation
+                      </div>
+                    )}
                   </div>
-                  {selected && <Check className="w-4 h-4 text-violet-300 shrink-0 mt-1" />}
+                  {selected && !m.comingSoon && <Check className="w-4 h-4 text-violet-300 shrink-0 mt-1" />}
                 </button>
               );
             })}

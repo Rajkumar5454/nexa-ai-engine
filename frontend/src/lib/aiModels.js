@@ -34,9 +34,10 @@ export const AI_MODELS = [
     name: 'Claude 3.5 Sonnet',
     provider: 'Anthropic',
     tagline: 'Dark luxury editorial and brand identity',
-    badge: 'Visual',
+    badge: 'Coming Soon',
     color: 'from-orange-500 to-rose-500',
     cost: 30,
+    comingSoon: true,
   },
   {
     id: 'gemini-3-flash',
