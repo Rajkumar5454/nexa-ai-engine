@@ -152,11 +152,11 @@ const Home = () => {
         <div className="container mx-auto max-w-6xl">
           {/* Hero Section */}
           <div className="flex flex-col items-center text-center mb-10">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-sm text-violet-300 mb-6 animate-fade-in-up">
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-sm text-violet-300 mb-6 animate-fade-in-up border border-violet-500/20 shadow-[0_0_15px_rgba(139,92,246,0.15)]">
               <Sparkles className="w-4 h-4 animate-pulse" />
-              <span>Next-Gen AI Website Generation</span>
+              <span className="font-medium">Next-Gen AI Website Generation</span>
               <div className="w-1 h-1 rounded-full bg-violet-400 mx-1" />
-              <span className="text-violet-400/70">v2.0 Beta</span>
+              <span className="text-white font-bold bg-violet-600/20 px-2 py-0.5 rounded-md">v2.0 Beta</span>
             </div>
 
             {/* Scrolling Ticker */}
