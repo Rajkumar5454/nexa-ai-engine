@@ -309,25 +309,39 @@ const Home = () => {
           {/* Example Websites Section */}
           <div className="mb-32 animate-fade-in-up-delay-4">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Example Websites</h2>
-              <p className="text-gray-400">See what others are creating with Nexa AI</p>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Example Websites</h2>
+              <p className="text-xl text-gray-400 font-light">See what the world's most powerful AI models are creating with Nexa AI</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { title: "FitLife Pro", niche: "Fitness & Gym", color: "from-orange-500 to-red-500" },
-                { title: "Quantum SaaS", niche: "Tech & Software", color: "from-blue-500 to-indigo-500" },
-                { title: "Luxe Decor", niche: "Interior Design", color: "from-emerald-500 to-teal-500" }
+                { title: "FitLife Pro", niche: "Fitness & Gym", img: "/previews/fitness.png", model: "Gemini 3.1 Pro", time: "42s" },
+                { title: "Quantum AI", niche: "SaaS Dashboard", img: "/previews/saas.png", model: "GPT-4o", time: "38s" },
+                { title: "Luxe Decor", niche: "Interior Design", img: "/previews/interior.png", model: "Llama 3.3 70B", time: "45s" },
+                { title: "Chronos", niche: "Luxury E-commerce", img: "/previews/ecommerce.png", model: "Claude 3.5 Sonnet", time: "41s" }
               ].map((site, i) => (
                 <div key={i} className="group relative">
-                  <div className={`absolute -inset-0.5 bg-gradient-to-r ${site.color} rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500`}></div>
-                  <div className="relative bg-[#12101f] border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-all duration-300">
-                    <div className={`h-40 bg-gradient-to-br ${site.color} opacity-40 flex items-center justify-center`}>
-                       <Globe className="w-12 h-12 text-white/50" />
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600/20 to-blue-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <div className="relative bg-[#12101f] border border-white/10 rounded-3xl overflow-hidden hover:border-violet-500/40 transition-all duration-300 shadow-2xl">
+                    <div className="h-48 overflow-hidden relative">
+                      <img src={site.img} alt={site.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#12101f] via-transparent to-transparent opacity-60"></div>
+                      <div className="absolute bottom-3 left-4">
+                        <span className="text-[10px] font-bold text-white bg-violet-600/80 backdrop-blur-md px-2 py-1 rounded-md uppercase tracking-wider">
+                          {site.model}
+                        </span>
+                      </div>
                     </div>
-                    <div className="p-6">
-                      <p className="text-xs font-bold text-violet-400 uppercase tracking-widest mb-1">{site.niche}</p>
-                      <h3 className="text-lg font-bold text-white mb-2">{site.title}</h3>
-                      <p className="text-sm text-gray-500 leading-relaxed">Generated in 14 seconds with customized layout and assets.</p>
+                    <div className="p-5">
+                      <div className="flex justify-between items-start mb-2">
+                        <div>
+                          <p className="text-[10px] font-bold text-violet-400 uppercase tracking-[0.2em] mb-1">{site.niche}</p>
+                          <h3 className="text-lg font-bold text-white group-hover:text-violet-200 transition-colors">{site.title}</h3>
+                        </div>
+                        <span className="text-[10px] text-gray-500 font-medium bg-white/5 px-2 py-1 rounded-md border border-white/5">
+                          {site.time}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">Complete multi-page site with high-end assets and responsive layout.</p>
                     </div>
                   </div>
                 </div>
