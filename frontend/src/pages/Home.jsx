@@ -105,14 +105,18 @@ const Home = () => {
 
               <Button
                 variant="ghost"
-                className="text-gray-400 hover:text-white transition-colors hidden sm:inline-flex"
+                className="text-gray-300 hover:text-white hover:bg-white/10 transition-all hidden sm:inline-flex"
                 onClick={() => navigate('/pricing')}
               >
                 Pricing
               </Button>
               {user ? (
                 <>
-                  <Button variant="ghost" className="text-gray-400 hover:text-white transition-colors" onClick={() => navigate('/dashboard')}>
+                  <Button 
+                    variant="ghost" 
+                    className="text-gray-300 hover:text-white hover:bg-white/10 transition-all" 
+                    onClick={() => navigate('/dashboard')}
+                  >
                     Dashboard
                   </Button>
                   <div className="flex items-center space-x-2">
@@ -123,11 +127,15 @@ const Home = () => {
                 </>
               ) : (
                 <>
-                  <Button variant="ghost" className="text-gray-400 hover:text-white transition-colors" onClick={() => navigate('/login')}>
+                  <Button 
+                    variant="ghost" 
+                    className="text-gray-300 hover:text-white hover:bg-white/10 transition-all" 
+                    onClick={() => navigate('/login')}
+                  >
                     Sign in
                   </Button>
                   <Button
-                    className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full px-6 py-2 shadow-lg shadow-violet-600/20 transition-all hover:scale-105 active:scale-95"
+                    className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full px-6 py-2 shadow-lg shadow-violet-600/20 transition-all hover:scale-105 active:scale-95 border-none"
                     onClick={() => navigate('/signup')}
                   >
                     Get Started
@@ -345,22 +353,22 @@ const Home = () => {
         </div>
       </main>
 
-      <footer className="mt-20 border-t border-white/10 py-16 bg-[#040208]">
+      <footer className="mt-20 border-t border-white/20 py-16 bg-[#040208] relative z-20">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
             <div className="max-w-xs">
               <div className="flex items-center gap-2 mb-6">
-                <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-8 w-auto opacity-90" />
+                <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-8 w-auto opacity-100" />
                 <span className="text-xl font-bold tracking-tight text-white">Nexa AI</span>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed font-light">
+              <p className="text-gray-300 text-sm leading-relaxed font-light">
                 Empowering creators to build the web of tomorrow, one prompt at a time. Professional-grade AI generation for modern teams.
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-16">
               <div>
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Platform</h4>
-                <ul className="space-y-4 text-gray-300 text-sm font-light">
+                <ul className="space-y-4 text-white/70 text-sm font-light">
                   <li><Link to="/ide" className="hover:text-white transition-colors">AI Builder</Link></li>
                   <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
                   <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
@@ -368,21 +376,21 @@ const Home = () => {
               </div>
               <div>
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Legal</h4>
-                <ul className="space-y-4 text-gray-300 text-sm font-light">
+                <ul className="space-y-4 text-white/70 text-sm font-light">
                   <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
                   <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.3em]">© 2026 Nexa AI. Built with precision.</p>
+          <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-[10px] text-gray-300 font-bold uppercase tracking-[0.3em]">© 2026 Nexa AI. Built with precision.</p>
             <div className="flex gap-6">
-              <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                <div className="w-4 h-4 bg-gray-300 rounded-sm" />
+              <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-pointer">
+                <div className="w-4 h-4 bg-gray-200 rounded-sm" />
               </div>
-              <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
-                <div className="w-4 h-4 bg-gray-300 rounded-full" />
+              <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-pointer">
+                <div className="w-4 h-4 bg-gray-200 rounded-full" />
               </div>
             </div>
           </div>
