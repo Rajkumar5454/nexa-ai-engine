@@ -160,7 +160,7 @@ const Home = () => {
             </div>
 
             {/* Scrolling Ticker */}
-            <div className="w-full max-w-lg overflow-hidden mb-8 relative">
+            <div className="w-full max-w-lg overflow-hidden mb-6 relative">
               <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#06040d] to-transparent z-10" />
               <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#06040d] to-transparent z-10" />
               <div className="flex whitespace-nowrap animate-marquee">
@@ -169,7 +169,7 @@ const Home = () => {
                   "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
                 ].map((text, i) => (
                   <div key={i} className="flex items-center px-10">
-                    <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
+                    <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
                     <span className="ml-4 text-[10px] font-bold text-white bg-violet-600 px-2 py-0.5 rounded-sm shadow-[0_0_10px_rgba(139,92,246,0.5)]">SOON</span>
                     <div className="w-2 h-2 rounded-full bg-white/20 mx-8" />
                   </div>
@@ -180,7 +180,7 @@ const Home = () => {
                   "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
                 ].map((text, i) => (
                   <div key={i + 10} className="flex items-center px-10">
-                    <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
+                    <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
                     <span className="ml-4 text-[10px] font-bold text-white bg-violet-600 px-2 py-0.5 rounded-sm shadow-[0_0_10px_rgba(139,92,246,0.5)]">SOON</span>
                     <div className="w-2 h-2 rounded-full bg-white/20 mx-8" />
                   </div>
@@ -188,21 +188,21 @@ const Home = () => {
               </div>
             </div>
 
-            <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-[-0.05em] leading-[0.9] animate-fade-in-up-delay-1">
+            <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-[-0.05em] leading-[0.95] animate-fade-in-up-delay-1">
               Build <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-sm">Fast.</span> <br />
               Ship <span className="relative inline-block text-white">
                 Smarter.
-                <div className="absolute -bottom-2 left-0 w-full h-3 bg-violet-600/40 blur-lg animate-pulse" />
+                <div className="absolute -bottom-1 left-0 w-full h-2 bg-violet-600/40 blur-lg animate-pulse" />
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light animate-fade-in-up-delay-2 mb-10">
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light animate-fade-in-up-delay-2 mb-6">
               Transform your vision into a professional, multi-page website in seconds. 
               Powered by the world's most capable AI models.
             </p>
 
             {/* Premium Prompt Input */}
-            <div className="w-full max-w-4xl mx-auto mb-16 animate-fade-in-up-delay-3">
+            <div className="w-full max-w-4xl mx-auto mb-10 animate-fade-in-up-delay-3">
               <form onSubmit={handleSubmit} className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-600 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
                 <div className="relative glass-morphism rounded-[2rem] p-5 md:p-7 shadow-2xl">
