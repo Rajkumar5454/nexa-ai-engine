@@ -168,10 +168,10 @@ const Home = () => {
                   "Full-Stack Generation", "Backend Logic", "Postgres Integration", 
                   "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
                 ].map((text, i) => (
-                  <div key={i} className="flex items-center px-6">
-                    <span className="text-sm md:text-base font-black uppercase tracking-[0.1em] text-white/90">{text}</span>
-                    <span className="mx-4 text-[9px] font-bold text-violet-400 bg-violet-400/10 px-2 py-0.5 rounded border border-violet-400/20">SOON</span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-violet-500/20 mx-4" />
+                  <div key={i} className="flex items-center px-10">
+                    <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
+                    <span className="ml-4 text-[10px] font-bold text-white bg-violet-600 px-2 py-0.5 rounded-sm shadow-[0_0_10px_rgba(139,92,246,0.5)]">SOON</span>
+                    <div className="w-2 h-2 rounded-full bg-white/20 mx-8" />
                   </div>
                 ))}
                 {/* Duplicate for seamless scroll */}
@@ -179,20 +179,20 @@ const Home = () => {
                   "Full-Stack Generation", "Backend Logic", "Postgres Integration", 
                   "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
                 ].map((text, i) => (
-                  <div key={i + 10} className="flex items-center px-6">
-                    <span className="text-sm md:text-base font-black uppercase tracking-[0.1em] text-white/90">{text}</span>
-                    <span className="mx-4 text-[9px] font-bold text-violet-400 bg-violet-400/10 px-2 py-0.5 rounded border border-violet-400/20">SOON</span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-violet-500/20 mx-4" />
+                  <div key={i + 10} className="flex items-center px-10">
+                    <span className="text-xl md:text-2xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
+                    <span className="ml-4 text-[10px] font-bold text-white bg-violet-600 px-2 py-0.5 rounded-sm shadow-[0_0_10px_rgba(139,92,246,0.5)]">SOON</span>
+                    <div className="w-2 h-2 rounded-full bg-white/20 mx-8" />
                   </div>
                 ))}
               </div>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none animate-fade-in-up-delay-1">
+            <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-[-0.05em] leading-[0.9] animate-fade-in-up-delay-1">
               Build <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-sm">Fast.</span> <br />
-              Ship <span className="relative inline-block">
+              Ship <span className="relative inline-block text-white">
                 Smarter.
-                <div className="absolute -bottom-2 left-0 w-full h-2 bg-violet-600/30 blur-md" />
+                <div className="absolute -bottom-2 left-0 w-full h-3 bg-violet-600/40 blur-lg animate-pulse" />
               </span>
             </h1>
             

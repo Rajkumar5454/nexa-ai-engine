@@ -244,6 +244,8 @@ class AIService:
         if temperature is None:
             temperature = _temperature_for(model)
 
+        print(f"[AI_SERVICE] 🤖 Calling LLM: {model} (Temp: {temperature}, Tokens: {max_tokens})")
+
         # Map internal Nexa names to provider-specific names
         provider_model = model
         if model == "gemini-3-1-pro":
@@ -432,6 +434,9 @@ class AIService:
         system_prompt = _system_for(resolved_model)
         temperature = _temperature_for(resolved_model)
 
+        print(f"\n[AI_SERVICE] 🚀 {'MODIFYING' if is_mod else 'GENERATING'} project: '{prompt[:60]}...'")
+        print(f"[AI_SERVICE] 📍 Selected Model: {resolved_model}")
+
         last_error = None
         # LITE MODE: If using user's own keys (Free Tier) and no NVIDIA fallback, reduce token budget
         is_lite = (self.gemini_native or self.openai_direct) and not self.nvidia_client
@@ -449,6 +454,7 @@ class AIService:
                     ),
                     timeout=300,
                 )
+                print(f"[AI_SERVICE] ✅ Generation successful with {resolved_model} ({len(ai_response)} chars)")
                 code = self._clean_code(ai_response)
 
                 has_app_component = 'export default' in code or 'function ' in code or 'const ' in code
