@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Plus, Sparkles, ArrowRight, Zap, Globe, Layers, ChevronDown, Rocket, Database, Lock, Cloud, Webhook, BarChart3 } from 'lucide-react';
+import { Plus, Sparkles, ArrowRight, Zap, Globe, Layers, ChevronDown, Rocket, Database, Lock, Cloud, Webhook, BarChart3, Users, Cpu, ShieldCheck } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { useAuth } from '../context/AuthContext';
 import ModelSelector from '../components/ModelSelector';
@@ -17,8 +17,6 @@ const COMING_SOON_FEATURES = [
 
 const Home = () => {
   const [prompt, setPrompt] = useState('');
-  const [importModal, setImportModal] = useState(null); // 'github' or 'figma'
-  const [importUrl, setImportUrl] = useState('');
   const [showFeatures, setShowFeatures] = useState(false);
   const [selectedModel, setSelectedModel] = useState(getStoredModel());
   const navigate = useNavigate();
@@ -40,46 +38,33 @@ const Home = () => {
     }
   };
 
-  const handleImport = () => {
-    if (!importUrl.trim()) return;
-    const importPrompt = importModal === 'github'
-      ? `Import and rebuild this GitHub project: ${importUrl}`
-      : `Import and rebuild this Figma design: ${importUrl}`;
-    if (user) {
-      navigate('/ide', { state: { initialPrompt: importPrompt } });
-    } else {
-      navigate('/signup');
-    }
-    setImportModal(null);
-    setImportUrl('');
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0c0a1a] via-[#0f0d24] to-[#0a0a1a] text-white relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-600/8 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-600/8 rounded-full blur-[100px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/5 rounded-full blur-[150px]" />
+    <div className="min-h-screen bg-[#06040d] text-white relative overflow-hidden">
+      {/* Premium Background Effects */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-600/10 rounded-full blur-[120px] animate-pulse-glow" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] animate-pulse-glow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-indigo-600/5 rounded-full blur-[150px]" />
+        <div className="absolute inset-0 bg-grid-white opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#06040d]/50 to-[#06040d]" />
+      </div>
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-xl bg-[#0c0a1a]/60">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-xl bg-[#06040d]/60">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-10 w-auto object-contain" />
+            <div className="flex items-center gap-2 group cursor-pointer" onClick={() => navigate('/')}>
+              <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-10 w-auto object-contain transition-transform group-hover:scale-110" />
               <span className="text-xl font-bold tracking-tight">
                 <span className="text-white">Nexa</span>
                 <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent"> AI</span>
               </span>
             </div>
             <div className="flex items-center space-x-4">
-              {/* Features dropdown */}
               <div className="relative hidden md:block">
                 <button
-                  data-testid="nav-features-btn"
                   onMouseEnter={() => setShowFeatures(true)}
                   onMouseLeave={() => setShowFeatures(false)}
-                  onClick={() => setShowFeatures((v) => !v)}
                   className="flex items-center gap-1 text-sm text-gray-300 hover:text-white transition-colors px-3 py-2"
                 >
                   Features
@@ -87,10 +72,9 @@ const Home = () => {
                 </button>
                 {showFeatures && (
                   <div
-                    data-testid="features-dropdown"
                     onMouseEnter={() => setShowFeatures(true)}
                     onMouseLeave={() => setShowFeatures(false)}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[480px] rounded-2xl border border-white/10 bg-[#0c0a1a]/95 backdrop-blur-xl shadow-2xl shadow-violet-900/20 p-2"
+                    className="absolute top-full right-0 mt-2 w-[480px] glass-morphism rounded-2xl shadow-2xl shadow-violet-900/20 p-2 animate-fade-in-up"
                   >
                     <div className="flex items-center justify-between px-3 py-2">
                       <span className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Roadmap</span>
@@ -100,11 +84,7 @@ const Home = () => {
                       {COMING_SOON_FEATURES.map((f) => {
                         const Icon = f.icon;
                         return (
-                          <div
-                            key={f.title}
-                            data-testid={`feature-soon-${f.title.toLowerCase().replace(/\W+/g, '-')}`}
-                            className="group p-3 rounded-xl hover:bg-white/[0.04] transition-colors cursor-not-allowed"
-                          >
+                          <div key={f.title} className="group p-3 rounded-xl hover:bg-white/[0.04] transition-colors cursor-not-allowed">
                             <div className="flex items-start gap-3">
                               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500/20 to-blue-500/20 border border-violet-500/30 flex items-center justify-center shrink-0">
                                 <Icon className="w-4 h-4 text-violet-300" />
@@ -118,9 +98,6 @@ const Home = () => {
                         );
                       })}
                     </div>
-                    <div className="mt-2 px-3 py-2 border-t border-white/5 text-[11px] text-gray-500 text-center">
-                      Want one of these now? <button onClick={() => navigate('/pricing')} className="text-violet-300 hover:text-white font-medium">Upgrade →</button>
-                    </div>
                   </div>
                 )}
               </div>
@@ -129,37 +106,27 @@ const Home = () => {
                 variant="ghost"
                 className="text-gray-400 hover:text-white transition-colors hidden sm:inline-flex"
                 onClick={() => navigate('/pricing')}
-                data-testid="nav-pricing-btn"
               >
                 Pricing
               </Button>
               {user ? (
                 <>
-                  <Button
-                    variant="ghost"
-                    className="text-gray-400 hover:text-white transition-colors"
-                    onClick={() => navigate('/dashboard')}
-                  >
+                  <Button variant="ghost" className="text-gray-400 hover:text-white transition-colors" onClick={() => navigate('/dashboard')}>
                     Dashboard
                   </Button>
                   <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-xs font-bold">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-xs font-bold ring-2 ring-violet-500/20">
                       {user.name?.charAt(0).toUpperCase()}
                     </div>
-                    <span className="text-sm text-gray-300">{user.name}</span>
                   </div>
                 </>
               ) : (
                 <>
-                  <Button
-                    variant="ghost"
-                    className="text-gray-400 hover:text-white transition-colors"
-                    onClick={() => navigate('/login')}
-                  >
+                  <Button variant="ghost" className="text-gray-400 hover:text-white transition-colors" onClick={() => navigate('/login')}>
                     Sign in
                   </Button>
                   <Button
-                    className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full px-5 shadow-lg shadow-violet-600/20"
+                    className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full px-6 py-2 shadow-lg shadow-violet-600/20 transition-all hover:scale-105 active:scale-95"
                     onClick={() => navigate('/signup')}
                   >
                     Get Started
@@ -172,147 +139,111 @@ const Home = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-28 pb-20 px-6 relative z-10">
-        <div className="container mx-auto max-w-4xl">
-          {/* Announcement Badge */}
-          <div className="flex justify-center mb-8 animate-fade-in-up-delay-1">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-sm text-violet-300">
-              <Sparkles className="w-4 h-4" />
-              <span>AI-Powered Website Builder</span>
-              <ArrowRight className="w-3 h-3" />
+      <main className="pt-32 pb-20 px-6 relative z-10">
+        <div className="container mx-auto max-w-6xl">
+          {/* Hero Section */}
+          <div className="flex flex-col items-center text-center mb-16">
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-sm text-violet-300 mb-8 animate-fade-in-up">
+              <Sparkles className="w-4 h-4 animate-pulse" />
+              <span>Next-Gen AI Website Generation</span>
+              <div className="w-1 h-1 rounded-full bg-violet-400 mx-1" />
+              <span className="text-violet-400/70">v2.0 Beta</span>
             </div>
-          </div>
 
-          {/* Scrolling Ticker */}
-          <div className="flex justify-center mb-10 overflow-hidden">
-            <div className="relative flex items-center w-full max-w-2xl py-3 border-y border-white/5 bg-white/[0.02] backdrop-blur-sm rounded-lg">
-              <div className="whitespace-nowrap animate-marquee flex items-center">
-                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                  Backend integration coming soon
-                </span>
-                <span className="text-violet-500/50">•</span>
-                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                  Database support coming soon
-                </span>
-                <span className="text-violet-500/50">•</span>
-                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                  Authentication features coming soon
-                </span>
-                <span className="text-violet-500/50">•</span>
-                <span className="mx-4 text-[10px] font-bold text-violet-400/70 uppercase tracking-[0.2em]">
-                  Currently providing high-performance Frontend generation
-                </span>
-                <span className="text-violet-500/50">•</span>
-                {/* Duplicate for seamless loop */}
-                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                  Backend integration coming soon
-                </span>
-                <span className="text-violet-500/50">•</span>
-                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                  Database support coming soon
-                </span>
-                <span className="text-violet-500/50">•</span>
-                <span className="mx-4 text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em]">
-                  Authentication features coming soon
-                </span>
-                <span className="text-violet-500/50">•</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Text */}
-          <div className="text-center mb-12 animate-fade-in-up-delay-1 pt-10">
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight leading-[1.05]">
-              Build <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">Stunning Websites</span> <br className="hidden md:block" /> from a Single Prompt
+            <h1 className="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-none animate-fade-in-up-delay-1">
+              Build <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-sm">Fast.</span> <br />
+              Ship <span className="relative inline-block">
+                Smarter.
+                <div className="absolute -bottom-2 left-0 w-full h-2 bg-violet-600/30 blur-md" />
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light">
-              Describe your idea and instantly generate a fully designed website. 
-              Professional layouts, working routes, and immersive UI in seconds.
+            
+            <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light animate-fade-in-up-delay-2 mb-12">
+              Transform your vision into a professional, multi-page website in seconds. 
+              Powered by the world's most capable AI models.
             </p>
-          </div>
 
-          {/* Prompt Input Area */}
-          <div className="mb-20">
-            <form onSubmit={handleSubmit} className="mb-6 animate-fade-in-up-delay-2">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-violet-600/20 via-blue-600/20 to-cyan-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="relative bg-[#12101f]/80 backdrop-blur-2xl rounded-3xl border border-white/10 p-8 hover:border-violet-500/40 transition-all duration-500 shadow-2xl shadow-black/50">
-                  <textarea
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        handleSubmit(e);
-                      }
-                    }}
-                    placeholder="Describe the website you want to build (e.g. 'A luxury fitness brand landing page with high-contrast neon design')..."
-                    className="w-full bg-transparent text-white placeholder-gray-600 outline-none resize-none text-xl font-light"
-                    rows="3"
-                  />
-                  <div className="flex flex-col md:flex-row items-center justify-between mt-8 gap-4">
+            {/* Premium Prompt Input */}
+            <div className="w-full max-w-4xl mx-auto mb-20 animate-fade-in-up-delay-3">
+              <form onSubmit={handleSubmit} className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-600 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
+                <div className="relative glass-morphism rounded-[2rem] p-6 md:p-8 overflow-hidden shadow-2xl">
+                  <div className="absolute top-0 left-0 w-full h-full bg-grid-white opacity-[0.02] pointer-events-none" />
+                  <div className="flex items-start gap-4">
+                    <div className="hidden md:flex w-12 h-12 shrink-0 rounded-2xl bg-violet-600/10 items-center justify-center border border-violet-500/20">
+                      <Sparkles className="w-6 h-6 text-violet-400" />
+                    </div>
+                    <textarea
+                      value={prompt}
+                      onChange={(e) => setPrompt(e.target.value)}
+                      placeholder="Describe the website of your dreams..."
+                      className="flex-1 bg-transparent text-white placeholder-gray-600 outline-none resize-none text-xl md:text-2xl font-light mt-1"
+                      rows="2"
+                    />
+                  </div>
+                  <div className="flex flex-col md:flex-row items-center justify-between mt-8 pt-6 border-t border-white/5 gap-4">
                     <div className="flex items-center gap-3 w-full md:w-auto">
-                      <input
-                        type="file"
-                        id="image-upload-home"
-                        className="hidden"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files[0];
-                          if (file) {
-                            alert(`Screenshot "${file.name}" selected! Vision support coming soon.`);
-                          }
-                        }}
-                      />
-                      <button
-                        type="button"
-                        onClick={() => document.getElementById('image-upload-home').click()}
-                        className="flex items-center justify-center w-12 h-12 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group/plus active:scale-95"
-                        title="Upload Screenshot"
-                      >
-                        <Plus className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" />
-                      </button>
                       <ModelSelector
                         value={selectedModel}
                         onChange={handleModelChange}
                         size="lg"
                         align="left"
-                        testId="home-model-selector"
                       />
-                    </div>
-                    <div className="flex items-center gap-3 w-full md:w-auto">
-                      <Button
-                        type="submit"
-                        className="w-full md:w-auto bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-2xl px-8 py-6 h-auto text-lg font-semibold shadow-xl shadow-violet-600/30 hover:scale-[1.03] active:scale-95 transition-all"
+                      <button
+                        type="button"
+                        onClick={() => document.getElementById('image-upload-home').click()}
+                        className="flex items-center justify-center w-12 h-12 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-105 active:scale-95"
                       >
-                        <Sparkles className="w-5 h-5 mr-2" />
-                        Generate Now
-                      </Button>
+                        <Plus className="w-6 h-6 text-gray-400" />
+                        <input type="file" id="image-upload-home" className="hidden" accept="image/*" />
+                      </button>
                     </div>
+                    <Button
+                      type="submit"
+                      className="w-full md:w-auto bg-gradient-to-r from-violet-600 to-blue-600 hover:scale-105 active:scale-95 text-white rounded-2xl px-10 py-7 h-auto text-xl font-bold shadow-xl shadow-violet-600/30 transition-all group"
+                    >
+                      <Zap className="w-6 h-6 mr-2 group-hover:animate-pulse" />
+                      Generate Now
+                    </Button>
                   </div>
                 </div>
-              </div>
-            </form>
-
-            <div className="flex flex-col items-center gap-4 animate-fade-in-up-delay-3">
-              <p className="text-gray-500 text-sm">No credit card required to start</p>
-              <Button 
-                variant="outline" 
-                className="rounded-full px-8 border-white/10 bg-white/5 hover:bg-white/10 text-gray-300 h-12"
-                onClick={() => navigate('/signup')}
-              >
-                Start Building Now
-              </Button>
+              </form>
             </div>
           </div>
 
-          {/* Example Websites Section */}
-          <div className="mb-32 animate-fade-in-up-delay-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Example Websites</h2>
-              <p className="text-xl text-gray-400 font-light">See what the world's most powerful AI models are creating with Nexa AI</p>
+          {/* Trust Section */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-32 animate-fade-in-up-delay-4 border-y border-white/5 py-12 glass-morphism rounded-[2rem] px-8">
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">10,000+</div>
+              <div className="text-sm text-gray-500 uppercase tracking-widest font-bold">Websites Built</div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="flex justify-center items-center gap-2 text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">
+                <Cpu className="w-6 h-6 text-violet-400" />
+                4 Engines
+              </div>
+              <div className="text-sm text-gray-500 uppercase tracking-widest font-bold">Gemini, GPT, Claude, Llama</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">Multi-Page</div>
+              <div className="text-sm text-gray-500 uppercase tracking-widest font-bold">Full Architecture</div>
+            </div>
+            <div className="text-center">
+              <div className="flex justify-center items-center gap-2 text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">
+                <ShieldCheck className="w-6 h-6 text-blue-400" />
+                100% Secure
+              </div>
+              <div className="text-sm text-gray-500 uppercase tracking-widest font-bold">Clean & Scalable Code</div>
+            </div>
+          </div>
+
+          {/* Showcase Section */}
+          <div className="mb-40">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-6xl font-black mb-4 tracking-tighter">Masterpiece Gallery</h2>
+              <p className="text-xl text-gray-400 font-light max-w-2xl mx-auto">Explore high-performance websites generated in under 60 seconds.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { title: "FitLife Pro", niche: "Fitness & Gym", img: "/previews/fitness.png", model: "Gemini 3.1 Pro", time: "42s" },
                 { title: "Quantum AI", niche: "SaaS Dashboard", img: "/previews/saas.png", model: "GPT-4o", time: "38s" },
@@ -320,28 +251,30 @@ const Home = () => {
                 { title: "Chronos", niche: "Luxury E-commerce", img: "/previews/ecommerce.png", model: "Claude 3.5 Sonnet", time: "41s" }
               ].map((site, i) => (
                 <div key={i} className="group relative">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600/20 to-blue-600/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
-                  <div className="relative bg-[#12101f] border border-white/10 rounded-3xl overflow-hidden hover:border-violet-500/40 transition-all duration-300 shadow-2xl">
-                    <div className="h-48 overflow-hidden relative">
-                      <img src={site.img} alt={site.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#12101f] via-transparent to-transparent opacity-60"></div>
-                      <div className="absolute bottom-3 left-4">
-                        <span className="text-[10px] font-bold text-white bg-violet-600/80 backdrop-blur-md px-2 py-1 rounded-md uppercase tracking-wider">
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600/40 to-blue-600/40 rounded-[2rem] blur opacity-0 group-hover:opacity-100 transition duration-500" />
+                  <div className="relative glass-morphism rounded-[2rem] overflow-hidden transition-all duration-500 h-full">
+                    <div className="h-56 overflow-hidden relative">
+                      <img src={site.img} alt={site.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#06040d] via-transparent to-transparent opacity-60" />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <Button className="bg-white text-black hover:bg-gray-200 rounded-full px-6 font-bold">Preview Website</Button>
+                      </div>
+                      <div className="absolute bottom-4 left-5">
+                        <span className="text-[10px] font-black text-white bg-violet-600/90 backdrop-blur-md px-3 py-1.5 rounded-full uppercase tracking-tighter ring-1 ring-white/20">
                           {site.model}
                         </span>
                       </div>
                     </div>
-                    <div className="p-5">
+                    <div className="p-6">
                       <div className="flex justify-between items-start mb-2">
                         <div>
-                          <p className="text-[10px] font-bold text-violet-400 uppercase tracking-[0.2em] mb-1">{site.niche}</p>
-                          <h3 className="text-lg font-bold text-white group-hover:text-violet-200 transition-colors">{site.title}</h3>
+                          <p className="text-[10px] font-black text-violet-400 uppercase tracking-widest mb-1">{site.niche}</p>
+                          <h3 className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors">{site.title}</h3>
                         </div>
-                        <span className="text-[10px] text-gray-500 font-medium bg-white/5 px-2 py-1 rounded-md border border-white/5">
+                        <span className="text-[10px] text-gray-400 font-bold glass-morphism px-3 py-1 rounded-full border border-white/10">
                           {site.time}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">Complete multi-page site with high-end assets and responsive layout.</p>
                     </div>
                   </div>
                 </div>
@@ -349,50 +282,103 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Features Section */}
-          <div className="animate-fade-in-up-delay-4 mb-20">
+          {/* Advantage Section */}
+          <div className="mb-40">
             <div className="text-center mb-20">
-              <p className="text-xs uppercase tracking-widest text-violet-400 mb-4 font-bold">The Nexa Advantage</p>
-              <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-                Built for <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">Scale & Speed</span>
-              </h2>
+              <span className="text-xs uppercase tracking-[0.4em] text-violet-400 font-black mb-4 block">Nexa Advantage</span>
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter">Engineered for <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">Greatness</span></h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="group bg-white/[0.03] border border-white/5 rounded-3xl p-10 hover:bg-white/[0.05] hover:border-violet-500/30 hover:-translate-y-2 transition-all duration-500 shadow-2xl">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center mb-8 border border-violet-500/20 group-hover:scale-110 transition-transform">
-                  <Zap className="w-8 h-8 text-violet-400" />
+              {[
+                { icon: Zap, color: "violet", title: "Instant Velocity", desc: "From blank canvas to production-ready code in under 60 seconds. No more development bottlenecks." },
+                { icon: Layers, color: "blue", title: "Elite Aesthetics", desc: "Our AI is trained on premium design systems, ensuring your site looks like a million-dollar startup." },
+                { icon: Globe, color: "cyan", title: "Universal Response", desc: "Flawless performance across all viewports. Every layout is meticulously crafted for mobile, tablet, and desktop." }
+              ].map((item, i) => (
+                <div key={i} className="group glass-morphism rounded-[2.5rem] p-10 hover:bg-white/[0.05] hover:-translate-y-2 transition-all duration-500 shadow-2xl">
+                  <div className={`w-16 h-16 rounded-2xl bg-${item.color}-500/10 flex items-center justify-center mb-8 border border-${item.color}-500/20 group-hover:scale-110 group-hover:rotate-6 transition-all`}>
+                    <item.icon className={`w-8 h-8 text-${item.color}-400`} />
+                  </div>
+                  <h3 className="text-2xl font-black text-white mb-4 tracking-tight">{item.title}</h3>
+                  <p className="text-gray-400 leading-relaxed text-lg font-light">{item.desc}</p>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Instant Generation</h3>
-                <p className="text-gray-400 leading-relaxed text-lg">Your entire website architecture is ready in seconds, not hours. Real code, real fast.</p>
-              </div>
-              <div className="group bg-white/[0.03] border border-white/5 rounded-3xl p-10 hover:bg-white/[0.05] hover:border-blue-500/30 hover:-translate-y-2 transition-all duration-500 shadow-2xl">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-500/5 flex items-center justify-center mb-8 border border-blue-500/20 group-hover:scale-110 transition-transform">
-                  <Layers className="w-8 h-8 text-blue-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Modern UI Design</h3>
-                <p className="text-gray-400 leading-relaxed text-lg">Every generated site uses the latest design trends—glassmorphism, neon, and sleek grids.</p>
-              </div>
-              <div className="group bg-white/[0.03] border border-white/5 rounded-3xl p-10 hover:bg-white/[0.05] hover:border-cyan-500/30 hover:-translate-y-2 transition-all duration-500 shadow-2xl">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 flex items-center justify-center mb-8 border border-cyan-500/20 group-hover:scale-110 transition-transform">
-                  <Globe className="w-8 h-8 text-cyan-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Mobile Responsive</h3>
-                <p className="text-gray-400 leading-relaxed text-lg">Your websites look perfect on every device. Fully adaptive layouts generated automatically.</p>
+              ))}
+            </div>
+          </div>
+
+          {/* Final CTA Section */}
+          <div className="relative group rounded-[3rem] overflow-hidden p-1 bg-gradient-to-r from-violet-600/50 via-blue-600/50 to-cyan-600/50 animate-fade-in-up">
+            <div className="relative bg-[#080611] rounded-[2.9rem] py-24 px-8 text-center overflow-hidden">
+              <div className="absolute inset-0 bg-grid-white opacity-[0.03] pointer-events-none" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[150%] bg-violet-600/10 rounded-full blur-[120px] -translate-y-1/2" />
+              
+              <h2 className="text-5xl md:text-7xl font-black mb-8 tracking-tighter relative z-10">
+                Ready to Build Your <br />
+                <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Dream Website?</span>
+              </h2>
+              <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-12 font-light relative z-10">
+                Join the future of web development. Generate, customize, and ship stunning websites instantly with Nexa.AI.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10">
+                <Button 
+                  onClick={() => navigate('/signup')}
+                  className="bg-white text-black hover:bg-gray-200 rounded-full px-12 py-8 text-2xl font-black shadow-2xl shadow-white/10 transition-all hover:scale-105 active:scale-95"
+                >
+                  Get Started for Free
+                </Button>
+                <Button 
+                  variant="ghost"
+                  onClick={() => navigate('/pricing')}
+                  className="text-white hover:bg-white/5 rounded-full px-10 py-8 text-xl font-bold border border-white/10"
+                >
+                  View Pricing
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </main>
-      <footer className="mt-12 border-t border-white/5 py-12 bg-black/20">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-6 w-auto opacity-50" />
-            <p className="text-sm text-gray-500">© 2026 Nexa.AI. Professional AI Website Generation.</p>
+
+      <footer className="mt-20 border-t border-white/5 py-16 bg-[#06040d]">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
+            <div className="max-w-xs">
+              <div className="flex items-center gap-2 mb-6">
+                <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-8 w-auto opacity-80" />
+                <span className="text-xl font-bold tracking-tight">Nexa AI</span>
+              </div>
+              <p className="text-gray-500 text-sm leading-relaxed font-light">
+                Empowering creators to build the web of tomorrow, one prompt at a time. Professional-grade AI generation for modern teams.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-16">
+              <div>
+                <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Platform</h4>
+                <ul className="space-y-4 text-gray-500 text-sm font-light">
+                  <li><Link to="/ide" className="hover:text-white transition-colors">AI Builder</Link></li>
+                  <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
+                  <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Legal</h4>
+                <ul className="space-y-4 text-gray-500 text-sm font-light">
+                  <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                  <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="flex gap-8">
-            <Link to="/privacy" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/pricing" className="text-sm text-gray-500 hover:text-white transition-colors">Pricing</Link>
-            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</a>
+          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p className="text-[10px] text-gray-600 font-bold uppercase tracking-[0.3em]">© 2026 Nexa AI. Built with precision.</p>
+            <div className="flex gap-6">
+              <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer">
+                <div className="w-4 h-4 bg-gray-400 rounded-sm" />
+              </div>
+              <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer">
+                <div className="w-4 h-4 bg-gray-400 rounded-full" />
+              </div>
+            </div>
           </div>
         </div>
       </footer>
