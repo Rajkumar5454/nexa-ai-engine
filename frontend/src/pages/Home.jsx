@@ -19,6 +19,7 @@ const Home = () => {
   const [prompt, setPrompt] = useState('');
   const [showFeatures, setShowFeatures] = useState(false);
   const [selectedModel, setSelectedModel] = useState(getStoredModel());
+  const [previewImage, setPreviewImage] = useState(null);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -200,9 +201,9 @@ const Home = () => {
                     </div>
                     <Button
                       type="submit"
-                      className="w-full md:w-auto bg-gradient-to-r from-violet-600 to-blue-600 hover:scale-105 active:scale-95 text-white rounded-2xl px-10 py-7 h-auto text-xl font-bold shadow-xl shadow-violet-600/30 transition-all group"
+                      className="w-full md:w-auto bg-gradient-to-r from-violet-600 to-blue-600 hover:scale-105 active:scale-95 text-white rounded-2xl px-8 py-5 h-auto text-lg font-bold shadow-xl shadow-violet-600/30 transition-all group"
                     >
-                      <Zap className="w-6 h-6 mr-2 group-hover:animate-pulse" />
+                      <Zap className="w-5 h-5 mr-2 group-hover:animate-pulse" />
                       Generate Now
                     </Button>
                   </div>
@@ -258,7 +259,7 @@ const Home = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-[#06040d] via-transparent to-transparent opacity-60" />
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <Button 
-                          onClick={() => navigate('/ide', { state: { initialPrompt: `Create a website like ${site.title} for ${site.niche}` } })}
+                          onClick={() => setPreviewImage(site.img)}
                           className="bg-white text-black hover:bg-gray-200 rounded-full px-6 font-bold"
                         >
                           Preview Website
@@ -387,6 +388,37 @@ const Home = () => {
           </div>
         </div>
       </footer>
+
+      {/* Image Preview Modal */}
+      {previewImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 animate-fade-in"
+          onClick={() => setPreviewImage(null)}
+        >
+          <div className="relative max-w-5xl w-full h-[80vh] bg-[#0c0a1a] rounded-3xl overflow-hidden border border-white/10 shadow-2xl" onClick={e => e.stopPropagation()}>
+            <button 
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-white hover:text-black transition-all"
+              onClick={() => setPreviewImage(null)}
+            >
+              <Plus className="w-6 h-6 rotate-45" />
+            </button>
+            <div className="w-full h-full overflow-y-auto">
+              <img src={previewImage} alt="Website Preview" className="w-full h-auto" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent flex justify-center">
+              <Button 
+                onClick={() => {
+                  setPreviewImage(null);
+                  navigate('/signup');
+                }}
+                className="bg-gradient-to-r from-violet-600 to-blue-600 text-white rounded-full px-8 py-4 font-bold"
+              >
+                Generate a Site Like This
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
