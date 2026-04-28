@@ -176,8 +176,8 @@ const Home = () => {
             <div className="w-full max-w-4xl mx-auto mb-16 animate-fade-in-up-delay-3">
               <form onSubmit={handleSubmit} className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-600 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-                <div className="relative glass-morphism rounded-[2rem] p-5 md:p-7 overflow-hidden shadow-2xl">
-                  <div className="absolute top-0 left-0 w-full h-full bg-grid-white opacity-[0.02] pointer-events-none" />
+                <div className="relative glass-morphism rounded-[2rem] p-5 md:p-7 shadow-2xl">
+                  <div className="absolute top-0 left-0 w-full h-full bg-grid-white opacity-[0.02] pointer-events-none rounded-[2rem]" />
                   <div className="flex items-start gap-4">
                     <div className="hidden md:flex w-12 h-12 shrink-0 rounded-2xl bg-violet-600/10 items-center justify-center border border-violet-500/20">
                       <Sparkles className="w-6 h-6 text-violet-400" />
@@ -201,17 +201,17 @@ const Home = () => {
                       <button
                         type="button"
                         onClick={() => document.getElementById('image-upload-home').click()}
-                        className="flex items-center justify-center w-12 h-12 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all hover:scale-105 active:scale-95"
+                        className="flex items-center justify-center w-10 h-10 rounded-full glass-morphism border border-white/10 hover:bg-white/10 transition-colors cursor-pointer text-gray-400"
                       >
-                        <Plus className="w-6 h-6 text-gray-400" />
+                        <Plus className="w-4 h-4" />
                         <input type="file" id="image-upload-home" className="hidden" accept="image/*" />
                       </button>
                     </div>
                     <Button
                       type="submit"
-                      className="w-full md:w-auto bg-gradient-to-r from-violet-600 to-blue-600 hover:scale-105 active:scale-95 text-white rounded-2xl px-8 py-5 h-auto text-lg font-bold shadow-xl shadow-violet-600/30 transition-all group"
+                      className="w-full md:w-auto bg-gradient-to-r from-violet-600 to-blue-600 hover:scale-105 active:scale-95 text-white rounded-2xl px-6 py-3.5 h-auto text-base font-bold shadow-xl shadow-violet-600/30 transition-all group border-none"
                     >
-                      <Zap className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+                      <Zap className="w-4 h-4 mr-2 group-hover:animate-pulse" />
                       Generate Now
                     </Button>
                   </div>
