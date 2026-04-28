@@ -139,18 +139,18 @@ const Home = () => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-32 pb-20 px-6 relative z-10">
+      <main className="pt-24 pb-20 px-6 relative z-10">
         <div className="container mx-auto max-w-6xl">
           {/* Hero Section */}
-          <div className="flex flex-col items-center text-center mb-16">
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-sm text-violet-300 mb-8 animate-fade-in-up">
+          <div className="flex flex-col items-center text-center mb-10">
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-sm text-violet-300 mb-6 animate-fade-in-up">
               <Sparkles className="w-4 h-4 animate-pulse" />
               <span>Next-Gen AI Website Generation</span>
               <div className="w-1 h-1 rounded-full bg-violet-400 mx-1" />
               <span className="text-violet-400/70">v2.0 Beta</span>
             </div>
 
-            <h1 className="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-none animate-fade-in-up-delay-1">
+            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none animate-fade-in-up-delay-1">
               Build <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-sm">Fast.</span> <br />
               Ship <span className="relative inline-block">
                 Smarter.
@@ -158,16 +158,16 @@ const Home = () => {
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light animate-fade-in-up-delay-2 mb-12">
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light animate-fade-in-up-delay-2 mb-10">
               Transform your vision into a professional, multi-page website in seconds. 
               Powered by the world's most capable AI models.
             </p>
 
             {/* Premium Prompt Input */}
-            <div className="w-full max-w-4xl mx-auto mb-20 animate-fade-in-up-delay-3">
+            <div className="w-full max-w-4xl mx-auto mb-16 animate-fade-in-up-delay-3">
               <form onSubmit={handleSubmit} className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-600 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-                <div className="relative glass-morphism rounded-[2rem] p-6 md:p-8 overflow-hidden shadow-2xl">
+                <div className="relative glass-morphism rounded-[2rem] p-5 md:p-7 overflow-hidden shadow-2xl">
                   <div className="absolute top-0 left-0 w-full h-full bg-grid-white opacity-[0.02] pointer-events-none" />
                   <div className="flex items-start gap-4">
                     <div className="hidden md:flex w-12 h-12 shrink-0 rounded-2xl bg-violet-600/10 items-center justify-center border border-violet-500/20">
@@ -181,7 +181,7 @@ const Home = () => {
                       rows="2"
                     />
                   </div>
-                  <div className="flex flex-col md:flex-row items-center justify-between mt-8 pt-6 border-t border-white/5 gap-4">
+                  <div className="flex flex-col md:flex-row items-center justify-between mt-6 pt-6 border-t border-white/5 gap-4">
                     <div className="flex items-center gap-3 w-full md:w-auto">
                       <ModelSelector
                         value={selectedModel}
@@ -257,7 +257,12 @@ const Home = () => {
                       <img src={site.img} alt={site.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#06040d] via-transparent to-transparent opacity-60" />
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <Button className="bg-white text-black hover:bg-gray-200 rounded-full px-6 font-bold">Preview Website</Button>
+                        <Button 
+                          onClick={() => navigate('/ide', { state: { initialPrompt: `Create a website like ${site.title} for ${site.niche}` } })}
+                          className="bg-white text-black hover:bg-gray-200 rounded-full px-6 font-bold"
+                        >
+                          Preview Website
+                        </Button>
                       </div>
                       <div className="absolute bottom-4 left-5">
                         <span className="text-[10px] font-black text-white bg-violet-600/90 backdrop-blur-md px-3 py-1.5 rounded-full uppercase tracking-tighter ring-1 ring-white/20">
@@ -347,14 +352,14 @@ const Home = () => {
                 <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-8 w-auto opacity-80" />
                 <span className="text-xl font-bold tracking-tight">Nexa AI</span>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed font-light">
+              <p className="text-gray-400 text-sm leading-relaxed font-light">
                 Empowering creators to build the web of tomorrow, one prompt at a time. Professional-grade AI generation for modern teams.
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-16">
               <div>
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Platform</h4>
-                <ul className="space-y-4 text-gray-500 text-sm font-light">
+                <ul className="space-y-4 text-gray-400 text-sm font-light">
                   <li><Link to="/ide" className="hover:text-white transition-colors">AI Builder</Link></li>
                   <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
                   <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
@@ -362,7 +367,7 @@ const Home = () => {
               </div>
               <div>
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Legal</h4>
-                <ul className="space-y-4 text-gray-500 text-sm font-light">
+                <ul className="space-y-4 text-gray-400 text-sm font-light">
                   <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
                   <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
                 </ul>
@@ -370,7 +375,7 @@ const Home = () => {
             </div>
           </div>
           <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-[10px] text-gray-600 font-bold uppercase tracking-[0.3em]">© 2026 Nexa AI. Built with precision.</p>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.3em]">© 2026 Nexa AI. Built with precision.</p>
             <div className="flex gap-6">
               <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer">
                 <div className="w-4 h-4 bg-gray-400 rounded-sm" />
