@@ -9,14 +9,13 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import List
 import uuid
 from datetime import datetime, timezone
+ROOT_DIR = Path(__file__).parent
+load_dotenv(ROOT_DIR / '.env')
+
 from routes.ai_routes import router as ai_router
 from routes.auth_routes import router as auth_router
 from routes.projects_routes import router as projects_router
 from routes.payments_routes import router as payments_router
-
-
-ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
 from db import client, db

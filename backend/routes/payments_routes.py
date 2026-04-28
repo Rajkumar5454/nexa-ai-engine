@@ -12,12 +12,12 @@ router = APIRouter(prefix="/payments", tags=["payments"])
 
 from db import db
 
-RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID")
-RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET")
-
-razorpay_client = None
-if RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET:
-    razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
+def get_razorpay_client():
+    key_id = os.environ.get("RAZORPAY_KEY_ID")
+    key_secret = os.environ.get("RAZORPAY_KEY_SECRET")
+    if not key_id or not key_secret:
+        return None
+    return razorpay.Client(auth=(key_id, key_secret))
 
 # Pricing plans — amount in paise (INR * 100), credits granted on payment.
 PLANS = {
@@ -45,17 +45,19 @@ class VerifyPaymentRequest(BaseModel):
 @router.get("/config")
 async def get_config():
     """Public endpoint — returns key_id for Razorpay Checkout and plan details."""
+    key_id = os.environ.get("RAZORPAY_KEY_ID")
     return {
-        "key_id": RAZORPAY_KEY_ID,
+        "key_id": key_id,
         "plans": PLANS,
-        "enabled": bool(razorpay_client),
+        "enabled": bool(key_id and os.environ.get("RAZORPAY_KEY_SECRET")),
     }
 
 
 @router.post("/create-order")
 async def create_order(payload: CreateOrderRequest, current_user: User = Depends(get_current_user)):
-    if not razorpay_client:
-        raise HTTPException(status_code=500, detail="Razorpay is not configured")
+    client = get_razorpay_client()
+    if not client:
+        raise HTTPException(status_code=500, detail="Razorpay is not configured (missing keys)")
 
     plan = PLANS.get(payload.plan_id)
     if not plan:
@@ -65,7 +67,7 @@ async def create_order(payload: CreateOrderRequest, current_user: User = Depends
     receipt = f"nx_{payload.plan_id}_{current_user.id[:8]}_{int(datetime.utcnow().timestamp())}"[:40]
 
     try:
-        order = razorpay_client.order.create({
+        order = client.order.create({
             "amount": plan["amount"],
             "currency": "INR",
             "receipt": receipt,
@@ -93,14 +95,15 @@ async def create_order(payload: CreateOrderRequest, current_user: User = Depends
         "order_id": order["id"],
         "amount": order["amount"],
         "currency": order["currency"],
-        "key_id": RAZORPAY_KEY_ID,
+        "key_id": os.environ.get("RAZORPAY_KEY_ID"),
         "plan": plan,
     }
 
 
 @router.post("/verify")
 async def verify_payment(payload: VerifyPaymentRequest, current_user: User = Depends(get_current_user)):
-    if not razorpay_client:
+    client = get_razorpay_client()
+    if not client:
         raise HTTPException(status_code=500, detail="Razorpay is not configured")
 
     plan = PLANS.get(payload.plan_id)
@@ -109,7 +112,7 @@ async def verify_payment(payload: VerifyPaymentRequest, current_user: User = Dep
 
     # Verify signature using Razorpay utility (HMAC SHA256 of order_id|payment_id)
     try:
-        razorpay_client.utility.verify_payment_signature({
+        client.utility.verify_payment_signature({
             "razorpay_order_id": payload.razorpay_order_id,
             "razorpay_payment_id": payload.razorpay_payment_id,
             "razorpay_signature": payload.razorpay_signature,

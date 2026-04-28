@@ -30,7 +30,7 @@ PALETTES = [
 MANDATORY_AESTHETIC_RULES = """
 MANDATORY STYLING RULES — DO NOT IGNORE:
 - NO LOREM IPSUM: NEVER use "Lorem ipsum" or placeholder text. You MUST write REAL, compelling, niche-specific copy. Invent realistic details if needed.
-- UI COMPONENTS & IMAGES: Build 8-10 distinct UI sections (Hero, Feature Grid, Gallery, Pricing, Testimonials, FAQ, Footer). EVERY SECTION MUST INCLUDE REAL IMAGES using Unsplash URLs (e.g., `https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80`). Do NOT build text-only blocks.
+- UI COMPONENTS & IMAGES: Build 8-10 distinct UI sections. EVERY SECTION MUST INCLUDE REAL IMAGES. Use dynamic image services like `https://loremflickr.com/800/600/YOUR_NICHE_KEYWORD?lock=UNIQUE_NUMBER`. DO NOT use generic example URLs. If the site is about clothing, use `https://loremflickr.com/800/600/clothing?lock=1`, `?lock=2`, etc. NEVER use random objects like watches or cats unless explicitly requested.
 - MOTION & ANIMATION: Every build MUST feel alive. Use `animate-fadeInUp` for section entrances, `animate-float` for icons/images, and `hover:scale-105` for all cards.
 - CONTRAST & READABILITY: Ensure high contrast. NEVER use dark text on dark backgrounds or light on light.
 - NEVER use plain white backgrounds for the whole page. Use `bg-slate-950` for dark themes or `bg-gray-50` for light.
