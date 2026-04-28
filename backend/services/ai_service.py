@@ -247,9 +247,9 @@ class AIService:
         # Map internal Nexa names to provider-specific names
         provider_model = model
         if model == "gemini-3-1-pro":
-            provider_model = "gemini-1.5-pro"
+            provider_model = "gemini-1.5-pro-latest"
         elif model == "gemini-3-flash":
-            provider_model = "gemini-1.5-flash"
+            provider_model = "gemini-1.5-flash-latest"
         elif model == "llama-3-3-70b":
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
@@ -308,10 +308,10 @@ class AIService:
         if self.emergent_client:
             # Map for emergent fallback
             emergent_fallback_model = provider_model
-            if model.startswith("gemini"):
-                emergent_fallback_model = f"google/{provider_model}"
-            elif model.startswith("gpt"):
-                emergent_fallback_model = f"openai/{provider_model}"
+            if model == "gemini-3-1-pro":
+                emergent_fallback_model = "google/gemini-1.5-pro-latest"
+            elif model == "gemini-3-flash":
+                emergent_fallback_model = "google/gemini-1.5-flash-latest"
                 
             return await asyncio.to_thread(
                 self._call_openai_compat,
