@@ -186,26 +186,40 @@ const Home = () => {
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
                       placeholder="Describe the website of your dreams..."
-                      className="flex-1 bg-transparent text-white placeholder-gray-600 outline-none resize-none text-xl md:text-2xl font-light mt-1"
+                      className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none resize-none text-xl md:text-2xl font-light mt-1"
                       rows="2"
                     />
                   </div>
-                  <div className="flex flex-col md:flex-row items-center justify-between mt-6 pt-6 border-t border-white/5 gap-4">
+                  <div className="flex flex-col md:flex-row items-center justify-between mt-6 pt-6 border-t border-white/10 gap-4">
                     <div className="flex items-center gap-3 w-full md:w-auto">
-                      <ModelSelector
-                        value={selectedModel}
-                        onChange={handleModelChange}
-                        size="lg"
-                        align="left"
-                      />
                       <button
                         type="button"
                         onClick={() => document.getElementById('image-upload-home').click()}
-                        className="flex items-center justify-center w-10 h-10 rounded-full glass-morphism border border-white/10 hover:bg-white/10 transition-colors cursor-pointer text-gray-400"
+                        className="flex items-center justify-center w-10 h-10 rounded-full glass-morphism border border-white/20 hover:bg-white/20 hover:border-violet-500/50 transition-all cursor-pointer text-white"
+                        title="Upload Image"
                       >
                         <Plus className="w-4 h-4" />
                         <input type="file" id="image-upload-home" className="hidden" accept="image/*" />
                       </button>
+                      <ModelSelector
+                        value={selectedModel}
+                        onChange={(modelId) => {
+                          setSelectedModel(modelId);
+                          setStoredModel(modelId);
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-wrap gap-2 hidden md:flex">
+                      {['SaaS Platform', 'E-commerce', 'Portfolio'].map(tag => (
+                        <button
+                          key={tag}
+                          type="button"
+                          onClick={() => setPrompt(`Create a professional ${tag.toLowerCase()} website for...`)}
+                          className="text-[10px] uppercase tracking-wider font-bold text-gray-400 hover:text-violet-300 transition-colors px-2 py-1 rounded-md bg-white/5 border border-white/5"
+                        >
+                          {tag}
+                        </button>
+                      ))}
                     </div>
                     <Button
                       type="submit"
