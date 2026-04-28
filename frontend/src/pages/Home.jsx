@@ -168,10 +168,10 @@ const Home = () => {
                   "Full-Stack Generation", "Backend Logic", "Postgres Integration", 
                   "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
                 ].map((text, i) => (
-                  <div key={i} className="flex items-center px-4">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-400/60">{text}</span>
-                    <span className="mx-4 text-[8px] text-white/20">COMING SOON</span>
-                    <div className="w-1 h-1 rounded-full bg-white/10 mx-2" />
+                  <div key={i} className="flex items-center px-6">
+                    <span className="text-sm md:text-base font-black uppercase tracking-[0.1em] text-white/90">{text}</span>
+                    <span className="mx-4 text-[9px] font-bold text-violet-400 bg-violet-400/10 px-2 py-0.5 rounded border border-violet-400/20">SOON</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-violet-500/20 mx-4" />
                   </div>
                 ))}
                 {/* Duplicate for seamless scroll */}
@@ -179,10 +179,10 @@ const Home = () => {
                   "Full-Stack Generation", "Backend Logic", "Postgres Integration", 
                   "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
                 ].map((text, i) => (
-                  <div key={i + 10} className="flex items-center px-4">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-400/60">{text}</span>
-                    <span className="mx-4 text-[8px] text-white/20">COMING SOON</span>
-                    <div className="w-1 h-1 rounded-full bg-white/10 mx-2" />
+                  <div key={i + 10} className="flex items-center px-6">
+                    <span className="text-sm md:text-base font-black uppercase tracking-[0.1em] text-white/90">{text}</span>
+                    <span className="mx-4 text-[9px] font-bold text-violet-400 bg-violet-400/10 px-2 py-0.5 rounded border border-violet-400/20">SOON</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-violet-500/20 mx-4" />
                   </div>
                 ))}
               </div>
