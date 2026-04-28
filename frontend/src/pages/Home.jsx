@@ -159,6 +159,35 @@ const Home = () => {
               <span className="text-violet-400/70">v2.0 Beta</span>
             </div>
 
+            {/* Scrolling Ticker */}
+            <div className="w-full max-w-lg overflow-hidden mb-8 relative">
+              <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#06040d] to-transparent z-10" />
+              <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#06040d] to-transparent z-10" />
+              <div className="flex whitespace-nowrap animate-marquee">
+                {[
+                  "Full-Stack Generation", "Backend Logic", "Postgres Integration", 
+                  "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
+                ].map((text, i) => (
+                  <div key={i} className="flex items-center px-4">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-400/60">{text}</span>
+                    <span className="mx-4 text-[8px] text-white/20">COMING SOON</span>
+                    <div className="w-1 h-1 rounded-full bg-white/10 mx-2" />
+                  </div>
+                ))}
+                {/* Duplicate for seamless scroll */}
+                {[
+                  "Full-Stack Generation", "Backend Logic", "Postgres Integration", 
+                  "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
+                ].map((text, i) => (
+                  <div key={i + 10} className="flex items-center px-4">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-400/60">{text}</span>
+                    <span className="mx-4 text-[8px] text-white/20">COMING SOON</span>
+                    <div className="w-1 h-1 rounded-full bg-white/10 mx-2" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-none animate-fade-in-up-delay-1">
               Build <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-sm">Fast.</span> <br />
               Ship <span className="relative inline-block">
