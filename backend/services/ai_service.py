@@ -189,13 +189,13 @@ class AIService:
 
     # ----- Provider transports -----
 
-    async def _call_gemini_native(self, system, user, max_tokens, temperature, model_name="gemini-1.5-pro"):
+    async def _call_gemini_native(self, system, user, max_tokens, temperature, model_name="gemini-3.1-pro"):
         """Call Gemini directly with the user's Google API key, with robust fallbacks."""
         import asyncio
 
         def _run():
             # Try a sequence of standard Gemini models to avoid 404s across different accounts/regions
-            fallbacks = [model_name, "gemini-1.5-flash", "gemini-pro", "gemini-1.0-pro"]
+            fallbacks = [model_name, "gemini-3.1-pro", "gemini-3-flash"]
             last_err = None
             
             for m_name in fallbacks:
@@ -265,9 +265,9 @@ class AIService:
         # Map internal Nexa names to provider-specific names
         provider_model = model
         if model == "gemini-3-1-pro":
-            provider_model = "gemini-1.5-pro"
+            provider_model = "gemini-3.1-pro"
         elif model == "gemini-3-flash":
-            provider_model = "gemini-1.5-flash"
+            provider_model = "gemini-3-flash"
         elif model == "llama-3-3-70b":
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
