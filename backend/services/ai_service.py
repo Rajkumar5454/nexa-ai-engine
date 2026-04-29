@@ -257,9 +257,9 @@ class AIService:
         # Map internal Nexa names to provider-specific names
         provider_model = model
         if model == "gemini-3-1-pro":
-            provider_model = "models/gemini-1.5-pro-latest"
+            provider_model = "gemini-1.5-pro"
         elif model == "gemini-3-flash":
-            provider_model = "models/gemini-1.5-flash-latest"
+            provider_model = "gemini-1.5-flash"
         elif model == "llama-3-3-70b":
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
