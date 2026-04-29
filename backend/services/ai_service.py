@@ -189,32 +189,40 @@ class AIService:
 
     # ----- Provider transports -----
 
-    async def _call_gemini_native(self, system, user, max_tokens, temperature, model_name="gemini-2.5-flash"):
-        """Call Gemini directly with the user's Google API key (google-generativeai SDK)."""
+    async def _call_gemini_native(self, system, user, max_tokens, temperature, model_name="gemini-1.5-pro"):
+        """Call Gemini directly with the user's Google API key, with robust fallbacks."""
         import asyncio
 
         def _run():
-            model = genai.GenerativeModel(
-                model_name=model_name,
-                system_instruction=system,
-                generation_config=genai.types.GenerationConfig(
-                    max_output_tokens=max_tokens,
-                    temperature=temperature,
-                ),
-            )
-            try:
-                print(f"[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: {model_name})...")
-                resp = model.generate_content(user)
-                print(f"[AI_SERVICE] 🎯 Response received from Google Gemini.")
+            # Try a sequence of standard Gemini models to avoid 404s across different accounts/regions
+            fallbacks = [model_name, "gemini-1.5-flash", "gemini-pro", "gemini-1.0-pro"]
+            last_err = None
+            
+            for m_name in fallbacks:
                 try:
-                    return resp.text
-                except Exception:
-                    # If safety blocked it or parts are empty, text property raises ValueError
-                    print("[AI_SERVICE] ⚠️ Gemini response empty or blocked by safety filters.")
-                    return ""
-            except Exception as e:
-                print(f"[AI_SERVICE] ❌ Gemini API exception: {e}")
-                raise e
+                    print(f"[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: {m_name})...")
+                    model = genai.GenerativeModel(
+                        model_name=m_name,
+                        system_instruction=system,
+                        generation_config=genai.types.GenerationConfig(
+                            max_output_tokens=max_tokens,
+                            temperature=temperature,
+                        ),
+                    )
+                    resp = model.generate_content(user)
+                    print(f"[AI_SERVICE] 🎯 Response received from Google Gemini ({m_name}).")
+                    try:
+                        return resp.text
+                    except Exception:
+                        print("[AI_SERVICE] ⚠️ Gemini response empty or blocked by safety filters.")
+                        return ""
+                except Exception as e:
+                    print(f"[AI_SERVICE] ⚠️ Failed with {m_name}: {e}")
+                    last_err = e
+                    continue # Try the next model in the fallback list
+                    
+            print(f"[AI_SERVICE] ❌ All Gemini models failed. Last error: {last_err}")
+            raise last_err
 
         return await asyncio.to_thread(_run)
 
