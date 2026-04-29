@@ -157,10 +157,11 @@ async def generate_code(request: GenerateCodeRequest, authorization: Optional[st
             project.files = new_files
 
         user_message = Message(role="user", content=request.prompt)
+        result_files = [File(**f) if isinstance(f, dict) else f for f in result.get("files", [])]
         assistant_message = Message(
             role="assistant",
             content=result.get("message", "Generated code successfully"),
-            files=result.get("files", []),
+            files=result_files,
             steps=result.get("steps", [])
         )
 
