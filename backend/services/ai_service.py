@@ -33,7 +33,7 @@ MANDATORY STYLING RULES — DO NOT IGNORE:
 - "WOW" FACTOR: Simple is a FAILURE. Build websites that look like $100k custom builds.
 - VIBRANT AESTHETICS: Use deep gradients, glowing background orbs (`rounded-full blur-3xl opacity-20`), and glassmorphism.
 - NO PLAIN WHITE: NEVER use a pure white `#ffffff` background for the entire page. Use `bg-slate-950` for a premium dark look or `bg-slate-50` for a clean light look.
-- UI COMPONENTS & IMAGES: Build 8-10 distinct UI sections. EVERY SECTION MUST INCLUDE REAL IMAGES. Use `https://loremflickr.com/800/600/YOUR_NICHE_KEYWORD?lock=UNIQUE_NUMBER`.
+- UI COMPONENTS & IMAGES: Build 8-10 distinct UI sections. EVERY SECTION MUST INCLUDE REAL IMAGES. Use Unsplash: `https://source.unsplash.com/800x600/?KEYWORD1,KEYWORD2` — replace KEYWORD with niche-specific terms (e.g. `luxury,fashion`, `clothing,model`, `gym,workout`). Each image MUST use DIFFERENT keywords so images vary.
 - MOTION: Use `animate-fadeInUp`, `animate-float`, and `hover:scale-105` for everything.
 - FULL MASTERPIECE: Every build MUST hit at least 800-1200 lines of code. 
 - Use the PROVIDED PALETTE for all primary actions, icons, and accents.
@@ -412,9 +412,10 @@ class AIService:
             "4. Return a SINGLE valid React file ending with `export default App;`.\n\n"
             "CRITICAL DESIGN RULES (DO NOT IGNORE):\n"
             "-> ABSOLUTELY NO LOREM IPSUM. You must write real, compelling, niche-specific copy.\n"
-            "-> YOU MUST INCLUDE REAL, NICHE-SPECIFIC IMAGES. Use dynamic image services like `https://loremflickr.com/800/600/YOUR_KEYWORD?lock=UNIQUE_NUMBER`.\n"
-            "   (e.g., `https://loremflickr.com/800/600/gym?lock=1`, `https://loremflickr.com/800/600/gym?lock=2`).\n"
-            "   You MUST append `?lock=1`, `?lock=2`, etc., to every URL so the browser doesn't cache and repeat the exact same image!\n"
+            "-> YOU MUST INCLUDE REAL, NICHE-SPECIFIC IMAGES using Unsplash:\n"
+            "   Format: `https://source.unsplash.com/800x600/?KEYWORD1,KEYWORD2`\n"
+            "   Example for a luxury clothing site: `https://source.unsplash.com/800x600/?luxury,fashion`, `https://source.unsplash.com/800x600/?clothing,model`, `https://source.unsplash.com/800x600/?silk,dress`\n"
+            "   YOU MUST USE DIFFERENT KEYWORDS for each image so every image is unique and relevant.\n"
             "-> Build a complete, complex UI. Do not just output giant text cards.\n\n"
             "~600-1000 lines total. Code only — no markdown."
         )
