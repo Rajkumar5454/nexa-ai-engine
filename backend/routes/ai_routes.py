@@ -56,11 +56,11 @@ async def chat(request: ChatRequest, authorization: Optional[str] = Header(None)
         if not project:
             project = Project(
                 name=request.message[:50],
-                messages=[user_message.dict(), assistant_message.dict()]
+                messages=[user_message, assistant_message]
             )
         else:
-            project.messages.append(user_message.dict())
-            project.messages.append(assistant_message.dict())
+            project.messages.append(user_message)
+            project.messages.append(assistant_message)
             project.updated_at = datetime.now(timezone.utc)
 
         project_dict = project.dict()
@@ -165,8 +165,8 @@ async def generate_code(request: GenerateCodeRequest, authorization: Optional[st
             steps=result.get("steps", [])
         )
 
-        project.messages.append(user_message.dict())
-        project.messages.append(assistant_message.dict())
+        project.messages.append(user_message)
+        project.messages.append(assistant_message)
         project.updated_at = datetime.now(timezone.utc)
 
         project_dict = project.dict()
@@ -272,8 +272,8 @@ async def generate_code_stream(request: GenerateCodeRequest, authorization: Opti
                     result_files = [File(**f) if isinstance(f, dict) else f for f in files]
                     asst_msg = Message(role="assistant", content=msg_content, files=result_files, steps=steps)
 
-                    proj.messages.append(user_msg.dict())
-                    proj.messages.append(asst_msg.dict())
+                    proj.messages.append(user_msg)
+                    proj.messages.append(asst_msg)
                     proj.updated_at = datetime.now(timezone.utc)
 
                     proj_dict = proj.dict()
