@@ -397,7 +397,7 @@ class AIService:
             f"STRUCTURAL STRATEGY: {layout_seed}.\n"
             f"AESTHETIC MOOD: {style_mood}.\n"
             f"PALETTE \"{p['name']}\" — accent={p['accent']}, gradient={p['gradient']}, btn={p['btn']}.\n\n"
-            f"MANDATORY ARCHITECTURE: You MUST include a fixed, premium Top Navigation Bar (Header) with standard links (Home, About, Services, Login, Sign Up). DO NOT use sidebars for main navigation. Use the STRUCTURAL STRATEGY above for the body content.\n"
+            f"MANDATORY ARCHITECTURE: You MUST include a fixed, premium Top Navigation Bar (Header) with a SOLID, non-transparent background (use `bg-slate-900/95` or similar) and standard links. It MUST be clearly distinct from the Hero section. DO NOT use sidebars for main navigation. Use the STRUCTURAL STRATEGY above for the body content.\n"
             f"Make it SPECIFIC to \"{prompt}\".\n\n"
             "MAX_CAPACITY_MODE: You have a massive token budget. Build a LARGE, detailed masterpiece.\n"
             "ARCHITECTURE: Build a MASSIVE, long-scrolling Single-Page Application (Landing Page style).\n"
