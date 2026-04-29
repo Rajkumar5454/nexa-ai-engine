@@ -285,7 +285,19 @@ class AIService:
                     )
                 except Exception as e:
                     print(f"[ai_service] Native Gemini failed: {e}")
-                    # Continue to fallback
+                    # Continue to Emergent fallback specifically for Gemini
+            
+            if self.emergent_client:
+                # Map to Emergent's OpenAI-compat model names for Google
+                emergent_model = f"google/{provider_model}"
+                try:
+                    print(f"[AI_SERVICE] 🔄 Routing Gemini to Emergent Proxy (Model: {emergent_model})...")
+                    return await asyncio.to_thread(
+                        self._call_openai_compat,
+                        self.emergent_client, system, user, max_tokens, emergent_model, temperature,
+                    )
+                except Exception as e:
+                    print(f"[AI_SERVICE] ❌ Emergent Gemini proxy failed: {e}")
 
         # LLAMA → route directly to NVIDIA NIM
         if model.startswith("llama"):
