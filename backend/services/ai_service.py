@@ -216,8 +216,16 @@ class AIService:
                         print("[AI_SERVICE] ⚠️ Gemini response empty or blocked by safety filters.")
                         return ""
                 except Exception as e:
-                    print(f"[AI_SERVICE] ⚠️ Failed with {m_name}: {e}")
+                    err_msg = str(e)
+                    print(f"[AI_SERVICE] ⚠️ Failed with {m_name}: {err_msg[:200]}")
                     last_err = e
+                    
+                    # If it's a rate limit, wait a bit before trying the next model in the list
+                    if "429" in err_msg or "quota" in err_msg.lower():
+                        import time
+                        print(f"[AI_SERVICE] ⏳ Quota hit for {m_name}. Waiting 10s before next fallback...")
+                        time.sleep(10)
+                        
                     continue # Try the next model in the fallback list
                     
             print(f"[AI_SERVICE] ❌ All Gemini models failed. Last error: {last_err}")
