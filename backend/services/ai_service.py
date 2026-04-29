@@ -244,14 +244,14 @@ class AIService:
         if temperature is None:
             temperature = _temperature_for(model)
 
-        print(f"[AI_SERVICE] 🤖 Calling LLM: {model} (Temp: {temperature}, Tokens: {max_tokens})")
+        print(f"[AI_SERVICE] 🤖 Calling LLM: {model} (Provider ID: {provider_model}, Temp: {temperature}, Tokens: {max_tokens})")
 
         # Map internal Nexa names to provider-specific names
         provider_model = model
         if model == "gemini-3-1-pro":
-            provider_model = "gemini-1.5-pro"
+            provider_model = "models/gemini-1.5-pro-latest"
         elif model == "gemini-3-flash":
-            provider_model = "gemini-1.5-flash"
+            provider_model = "models/gemini-1.5-flash-latest"
         elif model == "llama-3-3-70b":
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
