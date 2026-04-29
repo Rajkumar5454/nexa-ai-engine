@@ -194,8 +194,8 @@ class AIService:
         import asyncio
 
         def _run():
-            # Try a sequence of standard Gemini models to avoid 404s across different accounts/regions
-            fallbacks = [model_name, "gemini-3.1-pro", "gemini-3-flash"]
+            # Exact model names confirmed available on this API key
+            fallbacks = [model_name, "gemini-3.1-pro-preview", "gemini-3-flash-preview", "gemini-2.5-pro", "gemini-2.5-flash"]
             last_err = None
             
             for m_name in fallbacks:
@@ -262,12 +262,12 @@ class AIService:
         if temperature is None:
             temperature = _temperature_for(model)
 
-        # Map internal Nexa names to provider-specific names
+        # Map internal Nexa names to exact provider model IDs (confirmed from API key's ListModels)
         provider_model = model
         if model == "gemini-3-1-pro":
-            provider_model = "gemini-3.1-pro"
+            provider_model = "gemini-3.1-pro-preview"
         elif model == "gemini-3-flash":
-            provider_model = "gemini-3-flash"
+            provider_model = "gemini-3-flash-preview"
         elif model == "llama-3-3-70b":
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
