@@ -37,7 +37,20 @@ const PreviewPanel = ({ files = [] }) => {
           mainComponentName = exportDefaultMatch[1];
         }
 
-        let cleanCode = appFile.content
+        // Strict code extraction: strip conversational text and markdown fences
+        let rawContent = appFile.content;
+        const codeBlockMatch = rawContent.match(/```(?:jsx|javascript|js)?\s*([\s\S]*?)```/);
+        if (codeBlockMatch) {
+          rawContent = codeBlockMatch[1];
+        } else {
+          // If no markdown, try to find the first meaningful code start
+          const firstCodeStart = rawContent.search(/(?:import|export|const|function|class)\s+/);
+          if (firstCodeStart > -1) {
+            rawContent = rawContent.substring(firstCodeStart);
+          }
+        }
+
+        let cleanCode = rawContent
           .replace(/import\s+[\s\S]*?from\s+['"].*?['"];?/g, '')
           .replace(/export\s+default\s+(?:function\s+)?\w+\s*\(?/g, (match) => {
              if (match.includes('function')) return 'function ' + mainComponentName + ' (';
