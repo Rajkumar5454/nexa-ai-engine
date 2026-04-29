@@ -43,10 +43,10 @@ const PreviewPanel = ({ files = [] }) => {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Preview</title>
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com" crossorigin="anonymous"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -308,10 +308,16 @@ const PreviewPanel = ({ files = [] }) => {
     window.onerror = function(msg, url, line, col, err) {
       var root = document.getElementById('root');
       if (root && (!root.innerHTML || root.innerHTML.trim() === '')) {
-        root.innerHTML = '<div class="error-overlay"><pre>Runtime Error:\\n\\n' + msg + '\\n\\nLine: ' + line + '</pre></div>';
+        root.innerHTML = '<div class="error-overlay"><pre>Runtime Error:\n\n' + msg + '\n\nSource: ' + url + '\nLine: ' + line + (err ? '\n\nStack: ' + err.stack : '') + '</pre></div>';
       }
       return true;
     };
+    window.addEventListener('unhandledrejection', function(e) {
+      var root = document.getElementById('root');
+      if (root && (!root.innerHTML || root.innerHTML.trim() === '')) {
+        root.innerHTML = '<div class="error-overlay"><pre>Async Error:\n\n' + (e.reason?.message || e.reason || 'Unknown async error') + '</pre></div>';
+      }
+    });
   </script>
 </body>
 </html>`;
