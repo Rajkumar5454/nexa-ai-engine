@@ -257,10 +257,10 @@ async def generate_code_stream(request: GenerateCodeRequest, authorization: Opti
                     
                     # Save project
                     if not project:
-                        proj = Project(name=request.prompt[:60].strip(), files=[File(**f).dict() for f in files])
+                        proj = Project(name=request.prompt[:60].strip(), files=files)
                     else:
                         proj = project
-                        proj.files = [File(**f).dict() for f in files]
+                        proj.files = files
 
                     is_mod = existing_code is not None
                     msg_content = result.get("message", f"Built premium {request.prompt}")
@@ -268,7 +268,9 @@ async def generate_code_stream(request: GenerateCodeRequest, authorization: Opti
                     analysis = result.get("analysis", "")
 
                     user_msg = Message(role="user", content=request.prompt)
-                    asst_msg = Message(role="assistant", content=msg_content, files=files, steps=steps)
+                    
+                    result_files = [File(**f) if isinstance(f, dict) else f for f in files]
+                    asst_msg = Message(role="assistant", content=msg_content, files=result_files, steps=steps)
 
                     proj.messages.append(user_msg.dict())
                     proj.messages.append(asst_msg.dict())
