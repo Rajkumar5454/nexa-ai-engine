@@ -63,7 +63,7 @@ DESIGN DNA — MANDATORY FOR EVERY SECTION:
 - GLASS CARDS: ALL cards MUST use `style={{background:'rgba(255,255,255,0.05)',backdropFilter:'blur(20px)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'20px'}}`
 - GRADIENT TEXT: Hero headings MUST use `style={{background:'linear-gradient(135deg,#fff,#a78bfa,#60a5fa)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}`
 - BUTTONS: Use `style={{background:'linear-gradient(135deg,#7c3aed,#2563eb)',padding:'14px 32px',borderRadius:'50px',color:'#fff',fontWeight:700}}`
-- IMAGES: Use `https://source.unsplash.com/800x600/?TOPIC,KEYWORD` with niche-specific keywords.
+- IMAGES: Use `https://loremflickr.com/1200/800/TOPIC` with niche-specific keywords to ensure they load.
 {MANDATORY_AESTHETIC_RULES}"""
 
 
@@ -194,8 +194,7 @@ class AIService:
         import asyncio
 
         def _run():
-            # Exact model names confirmed available on this API key
-            fallbacks = [model_name, "gemini-3.1-pro-preview", "gemini-3-flash-preview", "gemini-2.5-pro", "gemini-2.5-flash"]
+            fallbacks = [model_name, "gemini-1.5-pro", "gemini-1.5-flash"]
             last_err = None
             
             for m_name in fallbacks:
@@ -412,9 +411,9 @@ class AIService:
             "4. Return a SINGLE valid React file ending with `export default App;`.\n\n"
             "CRITICAL DESIGN RULES (DO NOT IGNORE):\n"
             "-> ABSOLUTELY NO LOREM IPSUM. You must write real, compelling, niche-specific copy.\n"
-            "-> YOU MUST INCLUDE REAL, NICHE-SPECIFIC IMAGES using Unsplash:\n"
-            "   Format: `https://source.unsplash.com/800x600/?KEYWORD1,KEYWORD2`\n"
-            "   Example for a luxury clothing site: `https://source.unsplash.com/800x600/?luxury,fashion`, `https://source.unsplash.com/800x600/?clothing,model`, `https://source.unsplash.com/800x600/?silk,dress`\n"
+            "-> YOU MUST INCLUDE REAL, NICHE-SPECIFIC IMAGES using LoremFlickr:\n"
+            "   Format: `https://loremflickr.com/1200/800/KEYWORD` (e.g. `https://loremflickr.com/1200/800/architecture`)\n"
+            "   YOU MUST USE DIFFERENT KEYWORDS for each image so every image is unique and relevant.\n"
             "   YOU MUST USE DIFFERENT KEYWORDS for each image so every image is unique and relevant.\n"
             "-> Build a complete, complex UI. Do not just output giant text cards.\n\n"
             "~600-1000 lines total. Code only — no markdown."
@@ -544,11 +543,12 @@ class AIService:
                 err_str = str(e)
                 last_error = f"{resolved_model} failed: {err_str[:200]}"
                 
-                # If we hit a Rate Limit (429), wait longer and try ONE more time
+                # If we hit a Rate Limit (429), wait longer and try multiple times
                 if "429" in err_str or "quota" in err_str.lower():
-                    print(f"[AI_SERVICE] ⏳ Rate limit hit. Waiting 5s before retry...")
-                    await asyncio.sleep(5)
-                    if attempt < 1: continue
+                    wait_time = 15 if attempt == 0 else 30
+                    print(f"[AI_SERVICE] ⏳ Rate limit hit ({attempt+1}/3). Waiting {wait_time}s...")
+                    await asyncio.sleep(wait_time)
+                    if attempt < 2: continue
 
                 if attempt < 1:
                     await asyncio.sleep(2)
