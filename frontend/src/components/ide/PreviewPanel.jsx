@@ -30,10 +30,19 @@ const PreviewPanel = ({ files = [] }) => {
       const cssFile = findFile(files, ['index.css', 'App.css', 'styles.css']);
 
       if (appFile?.content) {
-        // Remove ALL import lines and export default
+        // Robust component detection
+        let mainComponentName = 'App';
+        const exportDefaultMatch = appFile.content.match(/export\s+default\s+(?:function\s+)?(\w+)/);
+        if (exportDefaultMatch) {
+          mainComponentName = exportDefaultMatch[1];
+        }
+
         let cleanCode = appFile.content
           .replace(/import\s+[\s\S]*?from\s+['"].*?['"];?/g, '')
-          .replace(/export\s+default\s+\w+;?/g, '');
+          .replace(/export\s+default\s+(?:function\s+)?\w+\s*\(?/g, (match) => {
+             if (match.includes('function')) return 'function ' + mainComponentName + ' (';
+             return '';
+          });
 
         const extraCss = cssFile?.content || '';
 
@@ -287,8 +296,8 @@ const PreviewPanel = ({ files = [] }) => {
     try {
       ${cleanCode}
 
-      // Auto-detect main component if App is missing
-      let MainComponent = typeof App !== 'undefined' ? App : null;
+      // Auto-detect main component
+      let MainComponent = typeof ${mainComponentName} !== 'undefined' ? ${mainComponentName} : null;
       if (!MainComponent) {
         // Try to find the first component defined in the script
         const defined = Object.keys(window).filter(k => /^[A-Z]/.test(k) && typeof window[k] === 'function');
