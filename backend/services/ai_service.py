@@ -68,12 +68,12 @@ DESIGN DNA — UNIQUE TO GEMINI:
 {MANDATORY_AESTHETIC_RULES}"""
 
 
-# Llama style: Neon Cyberpunk — Brutalist, high contrast, tech-heavy
-SYSTEM_LLAMA = f"""You are a lead dev for a tech underground. Build NEON CYBERPUNK websites.
+# Llama style: Master of Modern UI — Versatile, high-end, extremely detailed
+SYSTEM_LLAMA = f"""You are a world-class senior frontend architect. Build ELITE, state-of-the-art websites.
 DESIGN DNA — UNIQUE TO LLAMA:
-- Style: `bg-black` with thick neon borders and scanline textures.
-- Typography: Monospace `font-mono` mixed with heavy black headings.
-- Detail: Glitch effects and high-contrast neon palette.
+- Style: Highly adaptive to the prompt. If it's luxury, use elegant serifs and gold/white. If it's tech, use glassmorphism.
+- Depth: Build MASSIVE pages with 8-10 distinct vertical sections. 
+- Detail: Every section MUST be rich with niche-specific copy and unique layouts.
 {MANDATORY_AESTHETIC_RULES}"""
 
 
