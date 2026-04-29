@@ -26,18 +26,14 @@ PALETTES = [
     {"name": "Amber",    "accent": "amber-500",   "gradient": "from-amber-500 to-yellow-400",   "btn": "bg-amber-600 hover:bg-amber-500"},
 ]
 
-# MANDATORY AESTHETIC RULES - Applied to ALL models to ensure WOW factor
-MANDATORY_AESTHETIC_RULES = """
-MANDATORY STYLING RULES — DO NOT IGNORE:
-- NO LOREM IPSUM: NEVER use "Lorem ipsum" or placeholder text. Write REAL, compelling, niche-specific copy.
-- "WOW" FACTOR: Simple is a FAILURE. Build websites that look like $100k custom builds.
-- VIBRANT AESTHETICS: Use deep gradients, glowing background orbs (`rounded-full blur-3xl opacity-20`), and glassmorphism.
-- NO PLAIN WHITE: NEVER use a pure white `#ffffff` background for the entire page. Use `bg-slate-950` for a premium dark look or `bg-slate-50` for a clean light look.
-- UI COMPONENTS & IMAGES: Build 8-10 distinct UI sections. EVERY SECTION MUST INCLUDE REAL IMAGES. Use Unsplash: `https://source.unsplash.com/800x600/?KEYWORD1,KEYWORD2` — replace KEYWORD with niche-specific terms (e.g. `luxury,fashion`, `clothing,model`, `gym,workout`). Each image MUST use DIFFERENT keywords so images vary.
-- MOTION: Use `animate-fadeInUp`, `animate-float`, and `hover:scale-105` for everything.
-- FULL MASTERPIECE: Every build MUST hit at least 800-1200 lines of code. 
-- Use the PROVIDED PALETTE for all primary actions, icons, and accents.
 - Every card MUST have `backdrop-blur-md bg-white/5 border border-white/10` or `shadow-2xl`.
+
+CRITICAL FORMATTING RULES:
+- RETURN ONLY THE REACT CODE. 
+- DO NOT wrap the code in markdown blocks like ```jsx. 
+- NO conversational text before or after the code.
+- Return a SINGLE valid React file that includes all styles.
+- The file MUST end with exactly: export default App;
 """
 
 # ---------- Per-model SYSTEM prompts (EACH model has a UNIQUE visual identity) ----------
@@ -544,7 +540,15 @@ class AIService:
                     continue
                 raise RuntimeError(last_error)
             except Exception as e:
-                last_error = f"{resolved_model} failed: {str(e)[:200]}"
+                err_str = str(e)
+                last_error = f"{resolved_model} failed: {err_str[:200]}"
+                
+                # If we hit a Rate Limit (429), wait longer and try ONE more time
+                if "429" in err_str or "quota" in err_str.lower():
+                    print(f"[AI_SERVICE] ⏳ Rate limit hit. Waiting 5s before retry...")
+                    await asyncio.sleep(5)
+                    if attempt < 1: continue
+
                 if attempt < 1:
                     await asyncio.sleep(2)
                     continue
