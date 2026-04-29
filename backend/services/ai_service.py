@@ -26,6 +26,7 @@ PALETTES = [
     {"name": "Amber",    "accent": "amber-500",   "gradient": "from-amber-500 to-yellow-400",   "btn": "bg-amber-600 hover:bg-amber-500"},
 ]
 
+MANDATORY_AESTHETIC_RULES = """
 - Every card MUST have `backdrop-blur-md bg-white/5 border border-white/10` or `shadow-2xl`.
 
 CRITICAL FORMATTING RULES:
