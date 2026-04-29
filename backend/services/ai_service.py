@@ -202,14 +202,17 @@ class AIService:
                 ),
             )
             try:
+                print(f"[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: {model_name})...")
                 resp = model.generate_content(user)
+                print(f"[AI_SERVICE] 🎯 Response received from Google Gemini.")
                 try:
                     return resp.text
                 except Exception:
                     # If safety blocked it or parts are empty, text property raises ValueError
+                    print("[AI_SERVICE] ⚠️ Gemini response empty or blocked by safety filters.")
                     return ""
             except Exception as e:
-                print(f"[ai_service] Gemini API exception: {e}")
+                print(f"[AI_SERVICE] ❌ Gemini API exception: {e}")
                 raise e
 
         return await asyncio.to_thread(_run)
@@ -228,23 +231,27 @@ class AIService:
 
     def _call_openai_compat(self, client, system, user, max_tokens, model, temperature):
         """Synchronous OpenAI-format chat completion. Used for both direct OpenAI and the Emergent proxy."""
-        response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            max_tokens=max_tokens,
-            temperature=temperature,
-        )
-        return response.choices[0].message.content or ""
+        try:
+            print(f"[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: {model})...")
+            response = client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                max_tokens=max_tokens,
+                temperature=temperature,
+            )
+            print(f"[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.")
+            return response.choices[0].message.content or ""
+        except Exception as e:
+            print(f"[AI_SERVICE] ❌ OpenAI-compatible API error: {e}")
+            raise e
 
     async def _call_llm_async(self, system, user, max_tokens=3000, model=DEFAULT_MODEL, temperature=None):
         import asyncio
         if temperature is None:
             temperature = _temperature_for(model)
-
-        print(f"[AI_SERVICE] 🤖 Calling LLM: {model} (Provider ID: {provider_model}, Temp: {temperature}, Tokens: {max_tokens})")
 
         # Map internal Nexa names to provider-specific names
         provider_model = model
@@ -256,6 +263,8 @@ class AIService:
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
             provider_model = "anthropic/claude-3-5-sonnet"
+
+        print(f"[AI_SERVICE] 🤖 Calling LLM: {model} (Provider ID: {provider_model}, Temp: {temperature}, Tokens: {max_tokens})")
 
         # GEMINI → user's Google API key, native SDK
         if model.startswith("gemini"):
