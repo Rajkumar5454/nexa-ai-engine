@@ -154,7 +154,9 @@ GEMINI_PROVIDER_MAP = {
 def _resolve_model(requested):
     if requested and requested in SUPPORTED_MODELS:
         return requested
-    return DEFAULT_MODEL
+    # If no valid model is requested, use the first supported model as a starting point, 
+    # but don't force a "fallback brain" logic elsewhere.
+    return "gpt-4o" 
 
 
 def _is_gemini(model_id):
@@ -331,31 +333,8 @@ class AIService:
                 except Exception as e:
                     print(f"[ai_service] User OpenAI call failed: {e}")
 
-        # Fallback 1: NVIDIA NIM (Llama 3.3 70B)
-        if self.nvidia_client:
-            try:
-                return await asyncio.to_thread(
-                    self._call_openai_compat,
-                    self.nvidia_client, system, user, max_tokens, "meta/llama-3.3-70b-instruct", temperature,
-                )
-            except Exception as e:
-                print(f"[ai_service] NVIDIA fallback failed: {e}")
-
-        # Fallback 2: Emergent proxy
-        if self.emergent_client:
-            # Map for emergent fallback
-            emergent_fallback_model = provider_model
-            if model == "gemini-3-1-pro":
-                emergent_fallback_model = "google/gemini-3.1-pro-preview"
-            elif model == "gemini-3-flash":
-                emergent_fallback_model = "google/gemini-3.1-flash-lite-preview"
-                
-            return await asyncio.to_thread(
-                self._call_openai_compat,
-                self.emergent_client, system, user, max_tokens, emergent_fallback_model, temperature,
-            )
-            
-        raise ValueError(f"No valid API keys configured to handle model request: {model}")
+        # Final safeguard if no provider was triggered or all failed
+        raise Exception(f"Failed to generate response with the selected model: {model}")
 
     # ----- User prompt builder -----
 
