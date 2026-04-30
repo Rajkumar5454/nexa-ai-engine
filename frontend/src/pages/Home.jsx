@@ -95,7 +95,7 @@ const Home = () => {
                   <div
                     onMouseEnter={() => setShowFeatures(true)}
                     onMouseLeave={() => setShowFeatures(false)}
-                    className="absolute top-full right-0 mt-2 w-[480px] glass-morphism rounded-2xl shadow-2xl shadow-violet-900/20 p-2 animate-fade-in-up"
+                    className="absolute top-full right-0 mt-2 w-[480px] bg-[#0A0710]/95 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-2xl shadow-violet-900/40 p-2 animate-fade-in-up"
                   >
                     <div className="flex items-center justify-between px-3 py-2">
                       <span className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Roadmap</span>
