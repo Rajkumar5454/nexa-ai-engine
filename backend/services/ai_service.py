@@ -28,6 +28,8 @@ PALETTES = [
 
 MANDATORY_AESTHETIC_RULES = """
 - You MUST use Tailwind CSS for all styling. 
+- ABSOLUTELY NO UNSTYLED HTML. Every single element (div, h1, p, button) MUST have extensive Tailwind classes.
+- Example: `<div className="flex flex-col items-center justify-center bg-slate-900 text-white p-12">`
 - Every card MUST have `backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-6`.
 - LAYOUT: Use `flex` and `grid` for perfectly aligned, responsive layouts.
 - IMAGES: Use high-quality photography from loremflickr.com/1200/800.
