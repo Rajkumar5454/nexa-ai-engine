@@ -52,6 +52,7 @@ const PreviewPanel = ({ files = [] }) => {
 
         let cleanCode = rawContent
           .replace(/import\s+[\s\S]*?from\s+['"].*?['"];?/g, '')
+          .replace(/import\s+['"].*?['"];?/g, '')
           .replace(/export\s+default\s+(?:function\s+)?\w+\s*\(?/g, (match) => {
              if (match.includes('function')) return 'function ' + mainComponentName + ' (';
              return '';
