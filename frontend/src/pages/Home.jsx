@@ -52,6 +52,26 @@ const Home = () => {
 
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-xl bg-[#06040d]/60">
+        {/* Announcement Marquee */}
+        <div className="bg-gradient-to-r from-violet-900/40 via-blue-900/40 to-violet-900/40 border-b border-white/5 py-1.5 overflow-hidden flex items-center text-xs font-medium tracking-wide">
+          <div className="animate-marquee whitespace-nowrap flex w-max">
+            {[...Array(6)].map((_, i) => (
+              <span key={i} className="mx-8 text-violet-200 flex items-center gap-4">
+                <span className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                  <span className="font-bold text-white">GPT-5.4</span> &amp; <span className="font-bold text-white">GPT-5.5</span> are LIVE
+                </span>
+                <span className="text-white/30">•</span>
+                <span className="flex items-center gap-2">
+                  <span className="font-bold text-white opacity-80">Claude 3.5 Opus</span> coming soon ⚡️
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 group cursor-pointer" onClick={() => navigate('/')}>
