@@ -124,18 +124,19 @@ def _get_emergent_client():
 
 # ---------- Supported models + per-model config ----------
 SUPPORTED_MODELS = {
-    "gpt-4o-mini",
+    "gpt-5.5",
+    "gpt-5.4",
     "gpt-4o",
     "claude-sonnet-4-5",
     "gemini-3-flash",
     "gemini-3-1-pro",
     "llama-3-3-70b",
 }
-DEFAULT_MODEL = "gemini-3-1-pro"
 
 # Per-model temperature (higher = more creative variation between runs)
 MODEL_TEMPERATURES = {
-    "gpt-4o-mini": 0.4,
+    "gpt-5.5": 0.4,
+    "gpt-5.4": 0.4,
     "gpt-4o": 0.4,
     "claude-sonnet-4-5": 0.4,
     "gemini-3-flash": 0.4,
