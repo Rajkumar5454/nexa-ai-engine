@@ -323,22 +323,39 @@ const PreviewPanel = ({ files = [] }) => {
       const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<BrowserRouter><MainComponent /></BrowserRouter>);
     } catch (err) {
-      document.getElementById('root').innerHTML = '<div class="error-overlay"><pre>Preview Error:\\n\\n' + err.message + '</pre></div>';
       console.error('Preview render error:', err);
+      showFallbackLoading();
     }
   </script>
   <script>
+    function showFallbackLoading() {
+      var root = document.getElementById('root');
+      if (root) {
+        root.innerHTML = \`
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: #030712; color: #8b5cf6; font-family: ui-sans-serif, system-ui, sans-serif;">
+             <svg style="animation: spin 1s linear infinite; height: 3rem; width: 3rem; color: #8b5cf6; margin-bottom: 1rem;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+             </svg>
+             <h3 style="font-weight: 600; font-size: 1.25rem; color: #ffffff;">Rendering Complex Layout...</h3>
+             <p style="color: rgba(255,255,255,0.5); margin-top: 0.5rem; font-size: 0.875rem;">GPT-5 output is massive. Compiling dynamic React components.</p>
+             <style>@keyframes spin { 100% { transform: rotate(360deg); } }</style>
+          </div>
+        \`;
+      }
+    }
+
     window.onerror = function(msg, url, line, col, err) {
       var root = document.getElementById('root');
       if (root && (!root.innerHTML || root.innerHTML.trim() === '')) {
-        root.innerHTML = '<div class="error-overlay"><pre>Runtime Error:\n\n' + msg + '\n\nSource: ' + url + '\nLine: ' + line + (err ? '\n\nStack: ' + err.stack : '') + '</pre></div>';
+        showFallbackLoading();
       }
       return true;
     };
     window.addEventListener('unhandledrejection', function(e) {
       var root = document.getElementById('root');
       if (root && (!root.innerHTML || root.innerHTML.trim() === '')) {
-        root.innerHTML = '<div class="error-overlay"><pre>Async Error:\n\n' + (e.reason?.message || e.reason || 'Unknown async error') + '</pre></div>';
+        showFallbackLoading();
       }
     });
   </script>

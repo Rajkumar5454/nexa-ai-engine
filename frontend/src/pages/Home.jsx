@@ -66,7 +66,7 @@ const Home = () => {
                 </span>
                 <span className="text-white/30">•</span>
                 <span className="flex items-center gap-2">
-                  <span className="font-bold text-white opacity-80">Claude 3.5 Opus</span> coming soon ⚡️
+                  <span className="font-bold text-white opacity-80">Claude 4.7 Opus</span> &amp; <span className="font-bold text-white opacity-80">Claude 4.6 Sonnet</span> coming soon ⚡️
                 </span>
               </span>
             ))}
