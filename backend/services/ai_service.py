@@ -265,7 +265,7 @@ class AIService:
             print(f"[AI_SERVICE] ❌ OpenAI-compatible API error: {e}")
             raise e
 
-    async def _call_llm_async(self, system, user, max_tokens=3000, model=DEFAULT_MODEL, temperature=None):
+    async def _call_llm_async(self, system, user, max_tokens=3000, model="gpt-4o", temperature=None):
         import asyncio
         if temperature is None:
             temperature = _temperature_for(model)
