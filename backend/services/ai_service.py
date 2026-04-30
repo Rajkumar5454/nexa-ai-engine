@@ -259,15 +259,24 @@ class AIService:
         """Synchronous OpenAI-format chat completion. Used for both direct OpenAI and the Emergent proxy."""
         try:
             print(f"[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: {model})...")
-            response = client.chat.completions.create(
-                model=model,
-                messages=[
+            
+            # GPT-5 (and newer reasoning models like o1/o3) require max_completion_tokens instead of max_tokens
+            kwargs = {
+                "model": model,
+                "messages": [
                     {"role": "system", "content": system},
                     {"role": "user", "content": user},
-                ],
-                max_tokens=max_tokens,
-                temperature=temperature,
-            )
+                ]
+            }
+            
+            if "gpt-5" in model:
+                kwargs["max_completion_tokens"] = max_tokens
+                # Advanced reasoning models often don't support temperature.
+            else:
+                kwargs["max_tokens"] = max_tokens
+                kwargs["temperature"] = temperature
+
+            response = client.chat.completions.create(**kwargs)
             print(f"[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.")
             return response.choices[0].message.content or ""
         except Exception as e:
