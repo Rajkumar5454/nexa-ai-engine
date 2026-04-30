@@ -27,24 +27,24 @@ PALETTES = [
 ]
 
 MANDATORY_AESTHETIC_RULES = """
-- Every card MUST have `backdrop-blur-md bg-white/5 border border-white/10` or `shadow-2xl`.
+- You MUST use Tailwind CSS for all styling. 
+- Every card MUST have `backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-6`.
+- LAYOUT: Use `flex` and `grid` for perfectly aligned, responsive layouts.
+- IMAGES: Use high-quality photography from loremflickr.com/1200/800.
 
 CRITICAL FORMATTING RULES:
 - RETURN ONLY THE REACT CODE. 
 - DO NOT wrap the code in markdown blocks like ```jsx. 
-- NO conversational text before or after the code.
-- Return a SINGLE valid React file that includes all styles.
+- Return a SINGLE valid React file that includes all styles via Tailwind classes.
 - The file MUST end with exactly: export default App;
 """
 
-# ---------- Per-model SYSTEM prompts (EACH model has a UNIQUE visual identity) ----------
-
 # GPT style: Bento Box / Modern SaaS — Grid-heavy, clean, conversion-focused
-SYSTEM_OPENAI = f"""You are a senior product designer. Build BENTO BOX style SaaS websites.
+SYSTEM_OPENAI = f"""You are a WORLD-CLASS PRODUCT DESIGNER. Build BENTO BOX style SaaS websites.
 DESIGN DNA — UNIQUE TO GPT:
-- Architecture: GRID-HEAVY BENTO BOX layout. 
-- Detail: `bg-white border border-gray-100 rounded-[2.5rem] shadow-2xl p-8`
-- Colors: White/Gray with bold primary accents.
+- Architecture: GRID-HEAVY BENTO BOX layout using Tailwind `grid`.
+- Detail: `bg-slate-950 text-white min-h-screen font-sans`.
+- Accent: `bg-gradient-to-br from-blue-600 to-indigo-500 rounded-[2.5rem] p-8 shadow-2xl`.
 {MANDATORY_AESTHETIC_RULES}"""
 
 # Claude style: Ultra-Minimalist Editorial — High fashion, vertical typography, huge whitespace
