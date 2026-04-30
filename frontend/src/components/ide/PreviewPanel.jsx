@@ -68,7 +68,7 @@ const PreviewPanel = ({ files = [] }) => {
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.tailwindcss.com" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -89,19 +89,20 @@ const PreviewPanel = ({ files = [] }) => {
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.08); }
+      .glow-violet { box-shadow: 0 0 40px rgba(139,92,246,0.4); }
+      .gradient-text { background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    }
+    ${extraCss}
+  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body { margin: 0; padding: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: #030712; color: white; }
     #root { min-height: 100vh; }
-    /* Premium glassmorphism helpers */
-    .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.08); }
-    .glow-violet { box-shadow: 0 0 40px rgba(139,92,246,0.4); }
-    .gradient-text { background: linear-gradient(135deg, #fff 0%, #a78bfa 50%, #60a5fa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    /* Smooth scrolling */
     html { scroll-behavior: smooth; }
-    /* Custom scrollbar */
     ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #0f0f1a; } ::-webkit-scrollbar-thumb { background: #4c1d95; border-radius: 3px; }
-    /* Keyframes */
     @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
     @keyframes float { 0%,100% { transform:translateY(0px); } 50% { transform:translateY(-20px); } }
     @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 20px rgba(139,92,246,0.3); } 50% { box-shadow: 0 0 60px rgba(139,92,246,0.7); } }
@@ -112,7 +113,6 @@ const PreviewPanel = ({ files = [] }) => {
     .animate-orb { animation: orb 8s ease-in-out infinite; }
     .error-overlay { position:fixed; inset:0; background:#1a1a2e; color:#e94560; display:flex; align-items:center; justify-content:center; font-family:monospace; padding:2rem; text-align:left; }
     .error-overlay pre { white-space:pre-wrap; word-break:break-word; max-width:600px; font-size:14px; line-height:1.6; }
-    ${extraCss}
   </style>
 </head>
 <body>

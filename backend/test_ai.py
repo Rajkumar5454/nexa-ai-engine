@@ -1,29 +1,20 @@
 import asyncio
-import os
-import sys
-
-# Add current directory to python path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
 from services.ai_service import AIService
+import os
+from dotenv import load_dotenv
+import json
 
-async def run():
-    print("Testing AIService...")
-    svc = AIService()
-    print("Initializing...")
-    try:
-        res = await svc.generate_code(
-            prompt="add a login button",
-            session_id="test",
-            existing_code="import React from 'react';\nfunction App() { return <div>hello</div>; }\nexport default App;",
-            model="gemini-3-flash"
-        )
-        print("SUCCESS")
-        print("Generated files:", len(res.get("files", [])))
-    except Exception as e:
-        print("FAILED")
-        import traceback
-        traceback.print_exc()
+load_dotenv()
 
-if __name__ == "__main__":
-    asyncio.run(run())
+async def test():
+    ai = AIService()
+    res = await ai.generate_code('test_session', 'build a portfolio website', model='gpt-4o')
+    with open('debug_output.txt', 'w') as f:
+        # Check if it's a dict and write accordingly
+        if isinstance(res, dict):
+            f.write(json.dumps(res, indent=2))
+        else:
+            f.write(str(res))
+    print("Done writing to debug_output.txt")
+
+asyncio.run(test())
