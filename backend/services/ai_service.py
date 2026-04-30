@@ -32,6 +32,13 @@ MANDATORY_AESTHETIC_RULES = """
 - LAYOUT: Use `flex` and `grid` for perfectly aligned, responsive layouts.
 - IMAGES: Use high-quality photography from loremflickr.com/1200/800.
 
+CRITICAL ARCHITECTURE RULES (MANDATORY):
+1. You MUST build a COMPLETE website, not a snippet.
+2. You MUST include a sticky Header/Navbar with a logo and links.
+3. You MUST include a Hero Section with a clear value proposition and CTA buttons.
+4. You MUST include at least two content sections (e.g., Features, About, or Gallery).
+5. You MUST include a full Footer with copyright and links.
+
 CRITICAL FORMATTING RULES:
 - RETURN ONLY THE REACT CODE. 
 - DO NOT wrap the code in markdown blocks like ```jsx. 
