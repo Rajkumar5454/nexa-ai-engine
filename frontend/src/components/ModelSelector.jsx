@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronUp, Check, Sparkles } from 'lucide-react';
+import { ChevronUp, Check, Sparkles, Zap } from 'lucide-react';
 import { AI_MODELS, getModelById } from '../lib/aiModels';
 
 /**
@@ -129,8 +129,17 @@ const ModelSelector = ({ value, onChange, align = 'left', size = 'md', testId = 
                       <span>{m.provider} · {m.tagline}</span>
                     </div>
                     {!m.comingSoon && (
-                      <div className="text-[10px] text-violet-300/80 mt-1 font-medium">
-                        {m.cost} credits / generation
+                      <div className={`text-[10px] mt-1 font-semibold flex items-center gap-1 ${
+                        m.cost <= 5 ? 'text-emerald-400' : 'text-violet-300/80'
+                      }`}>
+                        {m.cost <= 5 ? (
+                          <>
+                            <Zap className="w-3 h-3" />
+                            <span>Only {m.cost} credits per build</span>
+                          </>
+                        ) : (
+                          <span>{m.cost} credits / generation</span>
+                        )}
                       </div>
                     )}
                   </div>

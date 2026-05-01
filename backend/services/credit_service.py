@@ -11,12 +11,15 @@ CREDIT_COSTS = {
 }
 
 # Per-model multipliers for the "generate" action.
-# Bigger / smarter models cost more credits.
+# Values are multiplied by CREDIT_COSTS["generate"] (10).
 MODEL_MULTIPLIERS = {
-    "gpt-4o-mini": 1.0,        # baseline → 10 credits
-    "gemini-3-flash": 1.4,     # → 14 credits
-    "gpt-4o": 2.0,             # → 20 credits
-    "claude-sonnet-4-5": 2.5,  # → 25 credits
+    "gemini-3-flash": 0.2,     # → 2 credits (Budget/Fast)
+    "llama-3-3-70b": 0.5,      # → 5 credits
+    "gpt-4o": 0.8,             # → 8 credits
+    "gpt-5.4": 1.0,            # → 10 credits (Pro)
+    "gpt-5.5": 2.0,            # → 20 credits (Elite)
+    "claude-sonnet-4-5": 1.5,  # → 15 credits
+    "gemini-3-1-pro": 1.2,     # → 12 credits
 }
 
 
