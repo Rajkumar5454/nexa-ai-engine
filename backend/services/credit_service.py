@@ -30,7 +30,7 @@ def get_generate_cost(model_id):
 from db import db as _db
 
 
-async def require_and_deduct_credits(user_id: str, action: str, model_id: str = None):
+async def require_and_deduct_credits(user_id: str, action: str, model_id: str | None = None):
     """
     Ensure the user has enough credits for the given action; if yes, deduct.
     Cost varies per model when action == "generate".

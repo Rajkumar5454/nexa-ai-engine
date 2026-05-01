@@ -52,8 +52,8 @@ const tiers = [
     features: [
       '1,500 AI credits / month',
       'Unlimited projects',
-      'GPT-4o + GPT-4o-mini',
-      'Priority generation queue',
+      'GPT-5.5 & GPT-5.4 Access',
+      'Gemini 1.5 Pro & Flash',
       'Cofounder Audit mode',
       'Email support',
     ],
@@ -73,8 +73,8 @@ const tiers = [
     features: [
       '4,000 AI credits / month',
       'Everything in Pro',
+      'Claude 3.5 Sonnet Support',
       'GitHub / Figma import',
-      'Template gallery',
       'Custom brand colors',
       'Priority email + chat support',
     ],
@@ -93,7 +93,7 @@ const tiers = [
     features: [
       '10,000 AI credits / month',
       'Everything in Business',
-      '5 team seats included',
+      'Claude 4.7 Opus (Coming Soon)',
       'White-label exports',
       'Private GitHub integration',
       'Dedicated account manager',
