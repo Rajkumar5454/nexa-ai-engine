@@ -9,7 +9,7 @@ export const AI_MODELS = [
     tagline: 'State-of-the-art intelligence — Nexa\'s flagship reasoning',
     badge: 'Best Quality',
     color: 'from-amber-400 to-yellow-600',
-    cost: 20,
+    cost: 30,
   },
   {
     id: 'gpt-5.4',
@@ -18,7 +18,7 @@ export const AI_MODELS = [
     tagline: 'Balanced performance for complex components',
     badge: 'Recommended',
     color: 'from-blue-600 to-indigo-500',
-    cost: 10,
+    cost: 25,
   },
   {
     id: 'gemini-3-1-pro',
@@ -27,7 +27,7 @@ export const AI_MODELS = [
     tagline: 'Advanced reasoning and complex logic',
     badge: 'Pro',
     color: 'from-fuchsia-500 to-purple-600',
-    cost: 12,
+    cost: 25,
   },
   {
     id: 'gpt-4o',
@@ -36,7 +36,7 @@ export const AI_MODELS = [
     tagline: 'Fast generation with clean, conversion-ready code',
     badge: 'Smart & Fast',
     color: 'from-blue-500 to-cyan-400',
-    cost: 8,
+    cost: 20,
   },
   {
     id: 'claude-sonnet-4-5',
@@ -45,8 +45,17 @@ export const AI_MODELS = [
     tagline: 'Elite aesthetic and clean brand identity',
     badge: 'Coming Soon',
     color: 'from-orange-500 to-rose-500',
-    cost: 15,
+    cost: 25,
     comingSoon: true,
+  },
+  {
+    id: 'gemini-3-flash',
+    name: 'Gemini 3 Flash',
+    provider: 'Google',
+    tagline: 'Ultra-fast experiments and quick iterations',
+    badge: 'Fast',
+    color: 'from-emerald-500 to-teal-400',
+    cost: 20,
   },
   {
     id: 'llama-3-3-70b',
@@ -55,16 +64,7 @@ export const AI_MODELS = [
     tagline: 'High-speed open source builds',
     badge: 'Fast',
     color: 'from-green-500 to-emerald-400',
-    cost: 5,
-  },
-  {
-    id: 'gemini-3-flash',
-    name: 'Gemini 3 Flash',
-    provider: 'Google',
-    tagline: 'Ultra-fast experiments and quick iterations',
-    badge: 'Fastest (Budget)',
-    color: 'from-emerald-500 to-teal-400',
-    cost: 2,
+    cost: 15,
   }
 ];
 
