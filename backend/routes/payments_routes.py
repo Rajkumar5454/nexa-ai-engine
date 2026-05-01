@@ -25,7 +25,7 @@ PLANS = {
     "business": {"name": "Business", "amount": 100000, "credits": 4000,  "duration_days": 30},
     "agency":   {"name": "Agency",   "amount": 200000, "credits": 10000, "duration_days": 30},
     # One-time Credit Packs
-    "pack_100":  {"name": "100 Credits Pack",  "amount": 9900,   "credits": 100,  "type": "pack"},
+    "pack_100":  {"name": "100 Credits Pack",  "amount": 1000,   "credits": 100,  "type": "pack"},
     "pack_500":  {"name": "500 Credits Pack",  "amount": 39900,  "credits": 500,  "type": "pack"},
     "pack_1000": {"name": "1000 Credits Pack", "amount": 74900,  "credits": 1000, "type": "pack"},
 }
