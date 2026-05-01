@@ -65,7 +65,7 @@ const tiers = [
     id: 'business',
     name: 'Business',
     tagline: 'For growing startups',
-    price: '₹1,000',
+    price: '₹2,500',
     period: '/ month',
     icon: Crown,
     accent: 'from-indigo-500 to-fuchsia-500',
@@ -85,7 +85,7 @@ const tiers = [
     id: 'agency',
     name: 'Agency',
     tagline: 'For teams shipping at scale',
-    price: '₹2,000',
+    price: '₹8,500',
     period: '/ month',
     icon: Rocket,
     accent: 'from-amber-500 to-pink-500',
@@ -331,7 +331,7 @@ const Pricing = () => {
           ) : (
             <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
               {[
-                { id: 'pack_100', name: '100 Credits', price: '₹10', description: 'Perfect for a few quick edits', icon: Zap, accent: 'from-blue-500/20 to-transparent' },
+                { id: 'pack_100', name: '100 Credits', price: '₹99', description: 'Perfect for a few quick edits', icon: Zap, accent: 'from-blue-500/20 to-transparent' },
                 { id: 'pack_500', name: '500 Credits', price: '₹399', description: 'Great for a full new project', icon: Rocket, accent: 'from-violet-500/20 to-transparent', popular: true },
                 { id: 'pack_1000', name: '1,000 Credits', price: '₹749', description: 'Best value for serious builders', icon: Crown, accent: 'from-amber-500/20 to-transparent' },
               ].map((pack) => {
