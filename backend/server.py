@@ -19,9 +19,39 @@ from routes.payments_routes import router as payments_router
 
 # MongoDB connection
 from db import client, db
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
 
 # Create the main app without a prefix
 app = FastAPI()
+
+class SecurityMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        response = await call_next(request)
+        
+        # Security Headers
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-XSS-Protection"] = "1; mode=block"
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        
+        # Content Security Policy (CSP)
+        # Allows self, Google Auth, and standard fonts/images
+        csp = (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' https://accounts.google.com https://checkout.razorpay.com; "
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+            "font-src 'self' https://fonts.gstatic.com; "
+            "img-src 'self' data: https:; "
+            "connect-src 'self' https://nexaai.live https://api.razorpay.com https://accounts.google.com; "
+            "frame-src https://checkout.razorpay.com https://accounts.google.com;"
+        )
+        response.headers["Content-Security-Policy"] = csp
+        
+        return response
+
+app.add_middleware(SecurityMiddleware)
 
 # HARDCODED ORIGINS for production reliability
 ALLOWED_ORIGINS = [
