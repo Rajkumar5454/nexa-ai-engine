@@ -57,29 +57,29 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
   };
 
   return (
-    <div className="h-14 border-b border-gray-800/50 backdrop-blur-xl flex items-center justify-between px-4 relative z-50">
+    <div className="h-14 border-b border-gray-800/50 backdrop-blur-xl flex items-center justify-between px-2 sm:px-4 relative z-50 overflow-x-auto no-scrollbar">
       {/* Left Section */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
         <button
           data-testid="topbar-logo"
           onClick={() => navigate('/')}
           className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
         >
-          <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-7 w-auto object-contain" />
-          <span className="font-bold text-base tracking-tight">
+          <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-6 sm:h-7 w-auto object-contain" />
+          <span className="font-bold text-base tracking-tight hidden sm:inline">
             <span className="text-white">Nexa</span>
             <span className="text-gray-500"> AI</span>
           </span>
         </button>
-        <div className="h-6 w-px bg-gray-800" />
+        <div className="h-6 w-px bg-gray-800 hidden sm:block" />
         <div className="relative">
           <button
             data-testid="project-dropdown-btn"
             onClick={() => setShowDropdown(!showDropdown)}
-            className="flex items-center space-x-2 text-sm text-gray-300 hover:text-white transition-colors px-2 py-1 rounded-md hover:bg-gray-800/50"
+            className="flex items-center space-x-1 sm:space-x-2 text-sm text-gray-300 hover:text-white transition-colors px-1 sm:px-2 py-1 rounded-md hover:bg-gray-800/50"
           >
-            <span className="max-w-[200px] truncate">{projectName}</span>
-            <ChevronDown className={`w-4 h-4 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
+            <span className="max-w-[80px] sm:max-w-[200px] truncate text-xs sm:text-sm">{projectName}</span>
+            <ChevronDown className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
           </button>
 
           {showDropdown && (
@@ -117,61 +117,65 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
       </div>
 
       {/* Center Section - View Toggle */}
-      <div className="flex items-center space-x-2 bg-gray-900/50 rounded-lg p-1">
+      <div className="flex items-center space-x-1 sm:space-x-2 bg-gray-900/50 rounded-lg p-1 shrink-0 mx-2">
         <button
           data-testid="view-preview-btn"
           onClick={() => setActiveView('preview')}
-          className={`px-3 py-1.5 rounded flex items-center space-x-2 transition-all ${
+          className={`px-2 sm:px-3 py-1.5 rounded flex items-center space-x-2 transition-all ${
             activeView === 'preview' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white'
           }`}
+          title="Preview"
         >
           <Monitor className="w-4 h-4" />
-          <span className="text-sm">Preview</span>
+          <span className="text-sm hidden sm:inline">Preview</span>
         </button>
         <button
           data-testid="view-code-btn"
           onClick={() => setActiveView('code')}
-          className={`px-3 py-1.5 rounded flex items-center space-x-2 transition-all ${
+          className={`px-2 sm:px-3 py-1.5 rounded flex items-center space-x-2 transition-all ${
             activeView === 'code' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white'
           }`}
+          title="Code"
         >
           <Code2 className="w-4 h-4" />
-          <span className="text-sm">Code</span>
+          <span className="text-sm hidden sm:inline">Code</span>
         </button>
         <button
           data-testid="view-split-btn"
           onClick={() => setActiveView('split')}
-          className={`px-3 py-1.5 rounded flex items-center space-x-2 transition-all ${
+          className={`px-2 sm:px-3 py-1.5 rounded flex items-center space-x-2 transition-all ${
             activeView === 'split' ? 'bg-gray-800 text-white' : 'text-gray-400 hover:text-white'
           }`}
+          title="Split"
         >
           <Columns className="w-4 h-4" />
-          <span className="text-sm">Split</span>
+          <span className="text-sm hidden sm:inline">Split</span>
         </button>
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-1 sm:space-x-2 shrink-0">
         {user && (
           <button
             data-testid="topbar-credits-pill"
             onClick={() => navigate('/pricing')}
             title="Click to buy more credits"
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-all ${
+            className={`flex items-center gap-1.5 px-2 sm:px-3 py-1.5 rounded-full border text-[10px] sm:text-xs font-semibold transition-all ${
               low
                 ? 'border-amber-500/50 bg-amber-500/10 text-amber-200 hover:bg-amber-500/20'
                 : 'border-violet-500/40 bg-violet-500/10 text-violet-200 hover:bg-violet-500/20'
             }`}
           >
-            <Zap className="w-3.5 h-3.5" />
-            {credits.toLocaleString()} credits
+            <Zap className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+            <span className="hidden sm:inline">{credits.toLocaleString()} credits</span>
+            <span className="sm:hidden">{credits > 999 ? (credits/1000).toFixed(1) + 'k' : credits}</span>
           </button>
         )}
         <Button
           data-testid="topbar-buy-credits-btn"
           size="sm"
           onClick={() => navigate('/pricing')}
-          className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full h-8 px-3 text-xs font-semibold shadow-md shadow-violet-600/20"
+          className="hidden sm:inline-flex bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full h-8 px-3 text-xs font-semibold shadow-md shadow-violet-600/20"
         >
           Buy Credits
         </Button>
@@ -180,19 +184,20 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
             data-testid="download-btn"
             variant="ghost"
             size="sm"
-            className="text-gray-400 hover:text-white"
+            className="text-gray-400 hover:text-white px-2 sm:px-3"
             onClick={handleDownload}
             disabled={downloading}
+            title="Export ZIP"
           >
-            <Download className="w-4 h-4 mr-2" />
-            {downloading ? 'Exporting…' : 'Export'}
+            <Download className={`w-4 h-4 ${downloading ? 'animate-bounce' : ''} sm:mr-2`} />
+            <span className="hidden sm:inline">{downloading ? 'Exporting…' : 'Export'}</span>
           </Button>
         )}
         <Button
           data-testid="share-btn"
           variant="ghost"
           size="sm"
-          className="text-gray-400 hover:text-white"
+          className="text-gray-400 hover:text-white px-2 sm:px-3"
           onClick={handleShare}
           title="Copy project link"
         >
@@ -202,7 +207,7 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
           data-testid="settings-btn"
           variant="ghost"
           size="sm"
-          className="text-gray-400 hover:text-white"
+          className="text-gray-400 hover:text-white px-2 sm:px-3"
           onClick={() => setShowSettings(true)}
           title="Settings"
         >
