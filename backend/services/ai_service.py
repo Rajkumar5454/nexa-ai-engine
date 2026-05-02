@@ -155,8 +155,8 @@ MODEL_TEMPERATURES = {
 
 # Maps for providers that aren't routable through the OpenAI-compat proxy
 GEMINI_PROVIDER_MAP = {
-    "gemini-3-flash": ("gemini", "gemini-1.5-flash-latest"),
-    "gemini-3-1-pro": ("gemini", "gemini-1.5-pro-latest"),
+    "gemini-3-flash": ("gemini", "gemini-3-flash-preview"),
+    "gemini-3-1-pro": ("gemini", "gemini-3.1-pro-preview"),
     "llama": ("nvidia", "meta/llama-3.3-70b-instruct"),
 }
 
@@ -204,7 +204,7 @@ class AIService:
         import asyncio
 
         def _run():
-            fallbacks = [model_name, "gemini-1.5-pro-latest", "gemini-1.5-flash-latest"]
+            fallbacks = [model_name, "gemini-3.1-pro-preview", "gemini-3-flash-preview"]
             last_err = None
             
             for m_name in fallbacks:
@@ -291,9 +291,9 @@ class AIService:
         # Map internal Nexa names to exact provider model IDs (confirmed from API key's ListModels)
         provider_model = model
         if model == "gemini-3-1-pro":
-            provider_model = "gemini-1.5-pro-latest"
+            provider_model = "gemini-3.1-pro-preview"
         elif model == "gemini-3-flash":
-            provider_model = "gemini-1.5-flash-latest"
+            provider_model = "gemini-3-flash-preview"
         elif model == "llama-3-3-70b":
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
