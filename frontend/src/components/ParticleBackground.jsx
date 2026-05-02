@@ -15,82 +15,75 @@ const ParticleBackground = () => {
     window.addEventListener('resize', handleResize);
     handleResize();
 
-    // Mouse tracking
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
-    let targetX = window.innerWidth / 2;
-    let targetY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
 
     const handleMouseMove = (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Generate points (Fibonacci sphere)
-    const points = [];
-    const numPoints = 400; // Dense dots like Antigravity
-    const radius = 250; // Fixed radius for the sphere that follows cursor
-
-    for (let i = 0; i < numPoints; i++) {
-      const phi = Math.acos(-1 + (2 * i) / numPoints);
-      const theta = Math.sqrt(numPoints * Math.PI) * phi;
-      
-      points.push({
-        x: radius * Math.cos(theta) * Math.sin(phi),
-        y: radius * Math.sin(theta) * Math.sin(phi),
-        z: radius * Math.cos(phi),
-        baseRadius: Math.random() * 1.5 + 1
-      });
-    }
-
-    let rotationX = 0;
-    let rotationY = 0;
+    const numDots = 600;
+    // The Golden Angle in radians (Phyllotaxis spiral)
+    const goldenAngle = 2.39996323; 
+    
+    let time = 0;
 
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Smoothly move the center to the mouse position
-      mouseX += (targetX - mouseX) * 0.05;
-      mouseY += (targetY - mouseY) * 0.05;
+      // Smoothly track mouse (the center of the galaxy follows the cursor)
+      currentX += (mouseX - currentX) * 0.08;
+      currentY += (mouseY - currentY) * 0.08;
 
-      const centerX = mouseX;
-      const centerY = mouseY;
+      time += 0.001; // slow rotation
 
-      // Slowly rotate the sphere itself
-      rotationX += 0.002;
-      rotationY += 0.003;
+      // Scale based on screen size
+      const c = Math.min(canvas.width, canvas.height) * 0.025;
 
-      const cosX = Math.cos(rotationX);
-      const sinX = Math.sin(rotationX);
-      const cosY = Math.cos(rotationY);
-      const sinY = Math.sin(rotationY);
-
-      points.forEach(p => {
-        // Rotate Y
-        const x1 = p.x * cosY - p.z * sinY;
-        const z1 = p.z * cosY + p.x * sinY;
+      for (let i = 1; i <= numDots; i++) {
+        // Distance from center (adding 100 to create the empty hole in the middle)
+        const r = c * Math.sqrt(i) + 120;
         
-        // Rotate X
-        const y2 = p.y * cosX - z1 * sinX;
-        const z2 = z1 * cosX + p.y * sinX;
+        // Angle (adding time makes the whole spiral rotate)
+        const theta = i * goldenAngle + time;
 
-        const focalLength = 800;
-        const scale = focalLength / (focalLength + z2);
+        // Position relative to center
+        const x = r * Math.cos(theta);
+        const y = r * Math.sin(theta);
+
+        // Absolute position
+        const px = currentX + x;
+        const py = currentY + y;
+
+        // Draw each particle as a short line (dash) pointing outwards
+        const dashLength = 3 + (i / numDots) * 5;
         
-        const xProjected = centerX + x1 * scale;
-        const yProjected = centerY + y2 * scale;
+        // The angle of the dash is exactly the angle from the center (theta)
+        const endX = px + Math.cos(theta) * dashLength;
+        const endY = py + Math.sin(theta) * dashLength;
+
+        // Calculate opacity based on distance (fade out at edges)
+        const normalizedDist = i / numDots;
+        let alpha = 1;
+        if (normalizedDist < 0.05) alpha = normalizedDist / 0.05; // Fade in near center
+        if (normalizedDist > 0.7) alpha = 1 - (normalizedDist - 0.7) / 0.3; // Fade out at edge
+
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(endX, endY);
         
-        // Draw dots (NO lines, just dots like Antigravity)
-        if (z2 > -focalLength) {
-          // Violet color: rgb(139, 92, 246)
-          const alpha = Math.min(1, Math.max(0.1, (z2 + radius) / (radius * 2)));
-          ctx.beginPath();
-          ctx.arc(xProjected, yProjected, p.baseRadius * scale, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(139, 92, 246, ${alpha})`;
-          ctx.fill();
-        }
-      });
+        // Stroke styling (thick, rounded dashes)
+        ctx.lineWidth = 3.5;
+        ctx.lineCap = 'round';
+        
+        // Violet color matches Nexa UI
+        ctx.strokeStyle = `rgba(139, 92, 246, ${alpha * 0.85})`;
+        ctx.stroke();
+      }
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -107,7 +100,7 @@ const ParticleBackground = () => {
   return (
     <canvas 
       ref={canvasRef} 
-      className="absolute inset-0 z-50 pointer-events-none"
+      className="absolute inset-0 z-0 pointer-events-none mix-blend-screen opacity-60"
     />
   );
 };
