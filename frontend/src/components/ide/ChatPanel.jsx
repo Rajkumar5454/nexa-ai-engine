@@ -132,7 +132,7 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
   const charCount = streamingText.length;
 
   return (
-    <div className="w-96 border-r border-gray-800 flex flex-col bg-[#0f0f0f]" data-testid="chat-panel">
+    <div className="w-full h-1/2 md:w-96 md:h-full shrink-0 border-b md:border-b-0 md:border-r border-gray-800 flex flex-col bg-[#0f0f0f]" data-testid="chat-panel">
       {/* Header */}
       <div className="p-3 border-b border-gray-800">
         <div className="flex items-center justify-between mb-2">
