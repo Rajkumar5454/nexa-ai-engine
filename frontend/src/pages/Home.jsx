@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button';
 import { useAuth } from '../context/AuthContext';
 import ModelSelector from '../components/ModelSelector';
 import { getStoredModel, setStoredModel } from '../lib/aiModels';
+import ParticleBackground from '../components/ParticleBackground';
 
 const COMING_SOON_FEATURES = [
   { icon: Rocket,    title: 'One-Click Deploy',    desc: 'Push apps to Vercel, Netlify, or your own domain in seconds.' },
@@ -43,6 +44,7 @@ const Home = () => {
     <div className="min-h-screen bg-[#06040d] text-white relative overflow-hidden">
       {/* Premium Background Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        <ParticleBackground />
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-600/10 rounded-full blur-[120px] animate-pulse-glow" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] animate-pulse-glow" style={{ animationDelay: '2s' }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-indigo-600/5 rounded-full blur-[150px]" />
