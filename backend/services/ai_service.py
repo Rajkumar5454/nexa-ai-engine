@@ -204,7 +204,13 @@ class AIService:
         import asyncio
 
         def _run():
-            fallbacks = [model_name, "gemini-3.1-pro-preview", "gemini-3-flash-preview"]
+            # Include robust fallbacks that are most likely to work on both Free and Paid tiers
+            fallbacks = [
+                model_name, 
+                "gemini-1.5-pro-latest", 
+                "gemini-1.5-flash-latest",
+                "gemini-pro"
+            ]
             last_err = None
             
             for m_name in fallbacks:
