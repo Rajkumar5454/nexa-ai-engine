@@ -10,6 +10,7 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import LowCreditsModal from './components/LowCreditsModal';
 
 // Google Client ID (Public)
@@ -47,6 +48,7 @@ function AppRoutes() {
         </ProtectedRoute>
       } />
       <Route path="/privacy" element={<Privacy />} />
+      <Route path="/terms" element={<Terms />} />
     </Routes>
   );
 }
