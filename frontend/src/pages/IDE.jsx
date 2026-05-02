@@ -334,7 +334,7 @@ const IDE = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-[#0a0a0a] text-white" data-testid="ide-page">
+    <div className="h-[100dvh] w-full overflow-hidden flex flex-col bg-[#0a0a0a] text-white" data-testid="ide-page">
       <TopBar
         activeView={activeView}
         setActiveView={setActiveView}
@@ -343,7 +343,7 @@ const IDE = () => {
         projectId={projectId}
       />
 
-      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
         <ChatPanel
           messages={messages}
           onSendMessage={handleSendMessage}
@@ -357,24 +357,26 @@ const IDE = () => {
           onStop={handleStop}
         />
 
-        <div className="flex-1 flex overflow-hidden">
+        <div className="flex-1 flex overflow-hidden min-h-0 relative">
           {activeView === 'preview' && (
             <PreviewPanel files={files} />
           )}
 
           {activeView === 'code' && (
-            <CodePanel selectedFile={selectedFile} files={files} onSelectFile={setSelectedFile} />
+            <div className="absolute inset-0">
+              <CodePanel selectedFile={selectedFile} files={files} onSelectFile={setSelectedFile} />
+            </div>
           )}
 
           {activeView === 'split' && (
-            <>
-              <div className="flex-1">
+            <div className="absolute inset-0 flex flex-col md:flex-row">
+              <div className="flex-1 min-h-0">
                 <PreviewPanel files={files} />
               </div>
-              <div className="flex-1 border-l border-gray-800">
+              <div className="flex-1 border-t md:border-t-0 md:border-l border-gray-800 min-h-0">
                 <CodePanel selectedFile={selectedFile} files={files} onSelectFile={setSelectedFile} />
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
