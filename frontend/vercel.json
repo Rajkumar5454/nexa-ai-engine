@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.nexaai.live"
+        }
+      ],
+      "destination": "https://nexaai.live/$1",
+      "permanent": true
+    }
+  ]
+}
