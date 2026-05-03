@@ -288,7 +288,7 @@ const Home = () => {
           {/* Trust Section */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-32 animate-fade-in-up-delay-4 border-y border-white/5 py-12 glass-morphism rounded-[2rem] px-8">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">10,000+</div>
+              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">250+</div>
               <div className="text-sm text-gray-500 uppercase tracking-widest font-bold">Websites Built</div>
             </div>
             <div className="text-center">
