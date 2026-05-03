@@ -9,7 +9,8 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Backend
-        run: curl -s https://nexa-backend.onrender.com/api/
-      - name: Ping Frontend
-        run: curl -s https://nexaai.live
+      - name: Keep Services Awake
+        run: |
+          curl -H "User-Agent: Mozilla/5.0 (NexaAI-KeepAlive)" -s https://nexa-backend.onrender.com/api/ > /dev/null
+          curl -H "User-Agent: Mozilla/5.0 (NexaAI-KeepAlive)" -s https://nexaai.live/ > /dev/null
+          echo "Pings sent at $(date)"
