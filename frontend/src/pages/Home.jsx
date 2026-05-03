@@ -192,7 +192,7 @@ const Home = () => {
                 ].map((text, i) => (
                   <div key={i} className="flex items-center px-10">
                     <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
-                    <span className="ml-4 text-[10px] font-bold text-white bg-violet-600 px-2 py-0.5 rounded-sm shadow-[0_0_10px_rgba(139,92,246,0.5)]">SOON</span>
+                    <span className="ml-4 text-[10px] font-bold text-white bg-violet-600/40 border border-violet-500/30 px-2 py-0.5 rounded-md shadow-[0_0_10px_rgba(139,92,246,0.2)]">(In Development)</span>
                     <div className="w-2 h-2 rounded-full bg-white/20 mx-8" />
                   </div>
                 ))}
@@ -203,7 +203,7 @@ const Home = () => {
                 ].map((text, i) => (
                   <div key={i + 10} className="flex items-center px-10">
                     <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
-                    <span className="ml-4 text-[10px] font-bold text-white bg-violet-600 px-2 py-0.5 rounded-sm shadow-[0_0_10px_rgba(139,92,246,0.5)]">SOON</span>
+                    <span className="ml-4 text-[10px] font-bold text-white bg-violet-600/40 border border-violet-500/30 px-2 py-0.5 rounded-md shadow-[0_0_10px_rgba(139,92,246,0.2)]">(In Development)</span>
                     <div className="w-2 h-2 rounded-full bg-white/20 mx-8" />
                   </div>
                 ))}
