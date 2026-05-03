@@ -41,11 +41,11 @@ class SecurityMiddleware(BaseHTTPMiddleware):
         # Allows self, Google Auth, and standard fonts/images
         csp = (
             "default-src 'self'; "
-            "script-src 'self' 'unsafe-inline' https://accounts.google.com https://checkout.razorpay.com; "
+            "script-src 'self' 'unsafe-inline' https://accounts.google.com https://checkout.razorpay.com https://www.googletagmanager.com; "
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
             "font-src 'self' https://fonts.gstatic.com; "
             "img-src 'self' data: https:; "
-            "connect-src 'self' https://nexaai.live https://api.razorpay.com https://accounts.google.com; "
+            "connect-src 'self' https://nexaai.live https://api.razorpay.com https://accounts.google.com https://www.google-analytics.com https://region1.google-analytics.com; "
             "frame-src https://checkout.razorpay.com https://accounts.google.com;"
         )
         response.headers["Content-Security-Policy"] = csp
