@@ -1,4 +1,4 @@
-// Nexa AI Frontend - SEO and Speed Optimized
+// Nexa AI Frontend - SEO and Speed Optimized (Build Refresh: 2026-05-04)
 import './App.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
