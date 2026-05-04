@@ -100,6 +100,11 @@ async def root():
 async def health_check():
     return {"status": "ok", "service": "nexa-backend"}
 
+@api_router.head("/health")
+async def health_check_head():
+    from starlette.responses import Response
+    return Response(status_code=200)
+
 @api_router.get("/config")
 async def get_config():
     return {
