@@ -217,12 +217,10 @@ class AIService:
         import asyncio
 
         def _run():
-            # Include robust fallbacks that are most likely to work on both Free and Paid tiers
+            # Only use models confirmed working on this API key/version
             fallbacks = [
-                model_name, 
-                "gemini-1.5-pro-latest", 
-                "gemini-1.5-flash-latest",
-                "gemini-pro"
+                model_name,
+                "gemini-3-flash-preview",  # confirmed working fallback
             ]
             last_err = None
             
@@ -305,8 +303,7 @@ class AIService:
         # Map internal Nexa names to exact provider model IDs (confirmed from API key's ListModels)
         provider_model = model
         if model == "gemini-3-1-pro":
-            # Use gemini-1.5-pro as the reliable, fast fallback for this tier
-            provider_model = "gemini-1.5-pro-latest"
+            provider_model = "gemini-3.1-pro-preview"
         elif model == "gemini-3-flash":
             provider_model = "gemini-3-flash-preview"
         elif model == "llama-3-3-70b":
