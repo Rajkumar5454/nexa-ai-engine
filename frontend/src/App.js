@@ -40,11 +40,21 @@ function AppRoutes() {
 
   useEffect(() => {
     // Manual page view tracking for GA4 in SPA
-    if (window.gtag) {
-      window.gtag('config', 'G-9EBJPGCGFH', {
-        page_path: location.pathname + location.search
-      });
-    }
+    const trackPageView = () => {
+      if (window.gtag) {
+        console.log('[GA] Tracking page view:', location.pathname + location.search);
+        window.gtag('config', 'G-9EBJPGCGFH', {
+          page_path: location.pathname + location.search,
+          send_page_view: true
+        });
+      } else {
+        console.warn('[GA] gtag not found on window');
+      }
+    };
+
+    // Small delay to ensure gtag is initialized
+    const timer = setTimeout(trackPageView, 500);
+    return () => clearTimeout(timer);
   }, [location]);
 
   return (
