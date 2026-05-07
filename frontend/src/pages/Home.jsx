@@ -182,8 +182,8 @@ const Home = () => {
               <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-[#06040d] to-transparent z-10" />
               <div className="flex whitespace-nowrap animate-marquee">
                 {[
-                  "Full-Stack Generation", "Backend Logic", "Postgres Integration", 
-                  "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
+                  "Modern UI/UX", "React Components", "Responsive Design", 
+                  "Tailwind Integration", "Clean Code", "Interactive Prototypes"
                 ].map((text, i) => (
                   <div key={i} className="flex items-center px-10">
                     <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
@@ -193,8 +193,8 @@ const Home = () => {
                 ))}
                 {/* Duplicate for seamless scroll */}
                 {[
-                  "Full-Stack Generation", "Backend Logic", "Postgres Integration", 
-                  "Custom Auth Flows", "One-Click Deploy", "Live Collaboration"
+                  "Modern UI/UX", "React Components", "Responsive Design", 
+                  "Tailwind Integration", "Clean Code", "Interactive Prototypes"
                 ].map((text, i) => (
                   <div key={i + 10} className="flex items-center px-10">
                     <span className="text-lg md:text-xl font-black uppercase tracking-tighter text-white whitespace-nowrap">{text}</span>
@@ -214,7 +214,7 @@ const Home = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed font-light animate-fade-in-up-delay-2 mb-6">
-              Transform your vision into a professional, multi-page website in seconds. 
+              Transform your vision into professional frontend designs and React code in seconds. 
               Powered by the world's most capable AI models.
             </p>
 
