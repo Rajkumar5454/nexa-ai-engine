@@ -27,73 +27,23 @@ PALETTES = [
 ]
 
 MANDATORY_AESTHETIC_RULES = """
-- You MUST use Tailwind CSS for all styling. 
-- ABSOLUTELY NO UNSTYLED HTML. Every single element (div, h1, p, button) MUST have extensive Tailwind classes.
-- Example: `<div className="flex flex-col items-center justify-center bg-slate-900 text-white p-12">`
-- Every card MUST have `backdrop-blur-md bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-6`.
-- LAYOUT: Use `flex` and `grid` for perfectly aligned, responsive layouts.
-- IMAGES: Use high-quality photography from loremflickr.com/1200/800.
-
-CRITICAL ARCHITECTURE RULES (MANDATORY):
-1. You MUST build a COMPLETE website, not a snippet.
-2. You MUST include a sticky Header/Navbar with a logo and links.
-3. You MUST include a Hero Section with a clear value proposition and CTA buttons.
-4. You MUST include at least two content sections (e.g., Features, About, or Gallery).
-5. You MUST include a full Footer with copyright and links.
-
-CRITICAL FORMATTING RULES:
-- RETURN ONLY THE REACT CODE. 
-- DO NOT wrap the code in markdown blocks like ```jsx. 
-- Return a SINGLE valid React file that includes all styles via Tailwind classes.
-- The file MUST end with exactly: export default App;
+STYLING RULES (CRITICAL):
+- EVERY element MUST have a `style={{...}}` prop for its primary look.
+- Use `rgba(255,255,255,0.05)` and `backdropFilter:'blur(20px)'` for all containers.
+- Use `linear-gradient` for all buttons and backgrounds.
+- High-end typography: Use `Inter` or `system-ui`.
+- VISUAL DNA: Floating orbs, glowing borders, and smooth transitions are MANDATORY.
 """
 
-# GPT style: Bento Box / Modern SaaS — Grid-heavy, clean, conversion-focused
-SYSTEM_OPENAI = f"""You are a WORLD-CLASS PRODUCT DESIGNER. Build BENTO BOX style SaaS websites.
-DESIGN DNA — UNIQUE TO GPT:
-- Architecture: GRID-HEAVY BENTO BOX layout using Tailwind `grid`.
-- Detail: `bg-slate-950 text-white min-h-screen font-sans`.
-- Accent: `bg-gradient-to-br from-blue-600 to-indigo-500 rounded-[2.5rem] p-8 shadow-2xl`.
-{MANDATORY_AESTHETIC_RULES}"""
-
-# Claude style: Ultra-Minimalist Editorial — High fashion, vertical typography, huge whitespace
-SYSTEM_CLAUDE = f"""You are a luxury brand director. Build MINIMALIST EDITORIAL magazine-style websites.
-DESIGN DNA — UNIQUE TO CLAUDE:
-- Style: Pitch Black `bg-black` or Stark White `bg-white`.
-- Typography: SERIF fonts. `text-[12vw] tracking-tighter italic`
-- Detail: Use thin 1px border lines and high-contrast palette accents.
-{MANDATORY_AESTHETIC_RULES}"""
-
-# Gemini style: Immersive Glassmorphism — Glowing 3D, floating layers, futuristic
-SYSTEM_GEMINI = f"""You are a creative technologist. Build IMMERSIVE, VISUALLY STUNNING glassmorphism websites.
-DESIGN DNA — MANDATORY FOR EVERY SECTION:
-- BACKGROUND: ALWAYS start with `style={{background:'linear-gradient(135deg,#020617 0%,#0f172a 50%,#1e1b4b 100%)'}}`. NEVER use plain black or white.
-- GLOWING ORBS: Every hero section MUST have at least 2 glowing blurred orbs like: `<div style={{position:'absolute',width:'600px',height:'600px',background:'radial-gradient(circle,rgba(139,92,246,0.4),transparent)',borderRadius:'50%',filter:'blur(80px)',top:'-100px',left:'-100px'}}></div>`
-- GLASS CARDS: ALL cards MUST use `style={{background:'rgba(255,255,255,0.05)',backdropFilter:'blur(20px)',border:'1px solid rgba(255,255,255,0.1)',borderRadius:'20px'}}`
-- GRADIENT TEXT: Hero headings MUST use `style={{background:'linear-gradient(135deg,#fff,#a78bfa,#60a5fa)',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent'}}`
-- BUTTONS: Use `style={{background:'linear-gradient(135deg,#7c3aed,#2563eb)',padding:'14px 32px',borderRadius:'50px',color:'#fff',fontWeight:700}}`
-- IMAGES: Use `https://loremflickr.com/1200/800/TOPIC` with niche-specific keywords to ensure they load.
-{MANDATORY_AESTHETIC_RULES}"""
-
-
-# Llama style: Master of Modern UI — Versatile, high-end, extremely detailed
-SYSTEM_LLAMA = f"""You are a world-class senior frontend architect. Build ELITE, "WOW-FACTOR" websites.
-DESIGN DNA — UNIQUE TO LLAMA:
-- NO PLAIN WHITE: Strictly FORBIDDEN to use a plain white background for the whole page. Use `bg-slate-950` (Dark) or `bg-slate-50` (Light) with deep colored accents.
-- GRADIENT OBSESSED: Every section MUST use a `bg-gradient-to-br` or have floating glowing orbs in the background.
-- GLASSMORPHISM: Use `backdrop-blur-xl bg-white/5 border border-white/10` for all cards and sections.
-- DEPTH: Build MASSIVE pages with 8-10 distinct vertical sections. 
-- Detail: Every section MUST be rich with niche-specific copy and unique layouts.
-{MANDATORY_AESTHETIC_RULES}"""
-
+SYSTEM_OPENAI = f"You are a WORLD-CLASS SOFTWARE ENGINEER. Build ELITE, single-page React landing pages and apps. {MANDATORY_AESTHETIC_RULES}"
+SYSTEM_CLAUDE = f"You are a luxury brand director. Build MINIMALIST EDITORIAL magazine-style websites. {MANDATORY_AESTHETIC_RULES}"
+SYSTEM_GEMINI = f"You are a creative technologist. Build IMMERSIVE, FULLY INTERACTIVE UI products. {MANDATORY_AESTHETIC_RULES}"
+SYSTEM_LLAMA = f"You are a master of Modern UI. Build ELITE, 'WOW-FACTOR' websites. {MANDATORY_AESTHETIC_RULES}"
 
 def _system_for(model_id):
-    if model_id and model_id.startswith("claude"):
-        return SYSTEM_CLAUDE
-    if model_id and model_id.startswith("gemini"):
-        return SYSTEM_GEMINI
-    if model_id and model_id.startswith("llama"):
-        return SYSTEM_LLAMA
+    if model_id and model_id.startswith("claude"): return SYSTEM_CLAUDE
+    if model_id and model_id.startswith("gemini"): return SYSTEM_GEMINI
+    if model_id and model_id.startswith("llama"): return SYSTEM_LLAMA
     return SYSTEM_OPENAI
 
 
@@ -272,15 +222,10 @@ class AIService:
                 "messages": [
                     {"role": "system", "content": system},
                     {"role": "user", "content": user},
-                ]
+                ],
+                "max_tokens": max_tokens,
+                "temperature": temperature,
             }
-            
-            if "gpt-5" in model:
-                kwargs["max_completion_tokens"] = max_tokens
-                # Advanced reasoning models often don't support temperature.
-            else:
-                kwargs["max_tokens"] = max_tokens
-                kwargs["temperature"] = temperature
 
             response = client.chat.completions.create(**kwargs)
             print(f"[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.")
@@ -304,6 +249,11 @@ class AIService:
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
             provider_model = "anthropic/claude-3-5-sonnet"
+        # Map Nexa UI names to real, valid OpenAI API model IDs
+        elif model == "gpt-5.5":
+            provider_model = "gpt-4o"   # Best available OpenAI model
+        elif model == "gpt-5.4":
+            provider_model = "gpt-4o"   # Fast, capable OpenAI model
 
         print(f"[AI_SERVICE] 🤖 Calling LLM: {model} (Provider ID: {provider_model}, Temp: {temperature}, Tokens: {max_tokens})")
 
@@ -334,29 +284,54 @@ class AIService:
         # LLAMA → route directly to NVIDIA NIM
         if model.startswith("llama"):
             if self.nvidia_client:
-                return await asyncio.to_thread(
-                    self._call_openai_compat,
-                    self.nvidia_client, system, user, max_tokens, provider_model, temperature,
-                )
+                try:
+                    return await asyncio.to_thread(
+                        self._call_openai_compat,
+                        self.nvidia_client, system, user, max_tokens, provider_model, temperature,
+                    )
+                except Exception as e:
+                    print(f"[AI_SERVICE] ❌ NVIDIA NIM failed for {model}: {e}")
+            if self.emergent_client:
+                try:
+                    return await asyncio.to_thread(
+                        self._call_openai_compat,
+                        self.emergent_client, system, user, max_tokens, f"meta/{provider_model}", temperature,
+                    )
+                except Exception as e:
+                    print(f"[AI_SERVICE] ❌ Emergent fallback for llama failed: {e}")
 
         # CLAUDE → Emergent proxy
         if model.startswith("claude"):
             if self.emergent_client:
-                return await asyncio.to_thread(
-                    self._call_openai_compat,
-                    self.emergent_client, system, user, max_tokens, provider_model, temperature,
-                )
-
-        # GPT → user's OpenAI key, direct
-        if model.startswith("gpt"):
-            if self.openai_direct:
                 try:
                     return await asyncio.to_thread(
                         self._call_openai_compat,
-                        self.openai_direct, system, user, max_tokens, provider_model, temperature,
+                        self.emergent_client, system, user, max_tokens, provider_model, temperature,
                     )
                 except Exception as e:
+                    print(f"[AI_SERVICE] ❌ Emergent Claude proxy failed: {e}")
+
+        # GPT → user's OpenAI key, direct; Emergent as fallback
+        if model.startswith("gpt"):
+            if self.openai_direct:
+                try:
+                    result = await asyncio.to_thread(
+                        self._call_openai_compat,
+                        self.openai_direct, system, user, max_tokens, provider_model, temperature,
+                    )
+                    if result and len(result.strip()) > 10:
+                        return result
+                    print(f"[AI_SERVICE] ⚠️ OpenAI direct returned empty for {model}, trying Emergent fallback...")
+                except Exception as e:
                     print(f"[ai_service] User OpenAI call failed: {e}")
+            if self.emergent_client:
+                try:
+                    return await asyncio.to_thread(
+                        self._call_openai_compat,
+                        self.emergent_client, system, user, max_tokens, provider_model, temperature,
+                    )
+                except Exception as e:
+                    print(f"[AI_SERVICE] ❌ Emergent GPT fallback failed: {e}")
 
         # Final safeguard if no provider was triggered or all failed
         raise Exception(f"Failed to generate response with the selected model: {model}")
@@ -403,35 +378,21 @@ class AIService:
         ])
 
         return (
-            f"BUILD: {prompt}\n\n"
-            f"STRUCTURAL STRATEGY: {layout_seed}.\n"
-            f"AESTHETIC MOOD: {style_mood}.\n"
-            f"PALETTE \"{p['name']}\" — accent={p['accent']}, gradient={p['gradient']}, btn={p['btn']}.\n\n"
-            f"MANDATORY ARCHITECTURE: You MUST include a fixed, premium Top Navigation Bar (Header) with a SOLID, non-transparent background (use `bg-slate-900/95` or similar) and standard links. It MUST be clearly distinct from the Hero section. DO NOT use sidebars for main navigation. Use the STRUCTURAL STRATEGY above for the body content.\n"
-            f"Make it SPECIFIC to \"{prompt}\".\n\n"
-            "MAX_CAPACITY_MODE: You have a massive token budget. Build a LARGE, detailed masterpiece.\n"
-            "ARCHITECTURE: Build a MASSIVE, long-scrolling Single-Page Application (Landing Page style).\n"
-            "You MUST include at least 6-8 distinct vertical sections (e.g., Hero, Features, Gallery, Pricing, Testimonials, FAQ, About Us, Footer).\n"
-            "DO NOT build separate routes or use react-router. Stack the components vertically so the user can scroll down through a rich experience.\n"
-            "Every section must be rich with copy and premium visuals specific to the niche. DO NOT output a short 200-line stub.\n\n"
-            "TECHNICAL SANDBOX RULES (CRITICAL):\n"
-            "1. NO EXTERNAL DEPENDENCIES. You can ONLY import from 'react'. Do not use react-router-dom.\n"
-            "2. DO NOT import lucide-react, framer-motion, or heroicons. Use pure inline <svg> tags for all icons.\n"
-            "3. The code MUST compile cleanly. All variables must be defined. No syntax errors.\n"
-            "4. Return a SINGLE valid React file ending with `export default App;`.\n\n"
-            "CRITICAL DESIGN RULES (DO NOT IGNORE):\n"
-            "-> ABSOLUTELY NO LOREM IPSUM. You must write real, compelling, niche-specific copy.\n"
-            "-> YOU MUST INCLUDE REAL, NICHE-SPECIFIC IMAGES using LoremFlickr:\n"
-            "   Format: `https://loremflickr.com/1200/800/KEYWORD` (e.g. `https://loremflickr.com/1200/800/architecture`)\n"
-            "   YOU MUST USE DIFFERENT KEYWORDS for each image so every image is unique and relevant.\n"
-            "   YOU MUST USE DIFFERENT KEYWORDS for each image so every image is unique and relevant.\n"
-            "-> Build a complete, complex UI. Do not just output giant text cards.\n\n"
-            "~600-1000 lines total. Code only — no markdown."
+            f"BUILD A STUNNING FRONTEND UI FOR: {prompt}\n\n"
+            f"AESTHETIC: {style_mood} with {p['name']} palette.\n\n"
+            "MANDATORY OUTPUT FORMAT:\n"
+            "Return a SINGLE valid React file inside a ```javascript block.\n"
+            "The component MUST be named App and end with: export default App;\n\n"
+            "TECHNICAL RULES:\n"
+            "- NO EXTERNAL DEPS. Use ONLY 'react'.\n"
+            "- ALL STYLES INLINE via style={{...}}.\n"
+            "- USE SVGS for all icons.\n"
+            "- ~1000+ lines total."
         )
 
     # ----- Public API -----
 
-    async def stream_generate_code(self, prompt, session_id, existing_code=None, model=None):
+    async def stream_generate_code(self, prompt, session_id, existing_code=None, model=None, **kwargs):
         """Async generator that yields status updates and final result"""
         import asyncio
         yield {"type": "status", "content": "Analyzing your requirements..."}
@@ -466,7 +427,7 @@ class AIService:
         except Exception as e:
             yield {"type": "error", "content": str(e)}
 
-    async def generate_code(self, prompt, session_id, existing_code=None, model=None):
+    async def generate_code(self, prompt, session_id, existing_code=None, model=None, **kwargs):
         import asyncio
         user_prompt = self._build_code_prompt(prompt, existing_code)
         is_mod = existing_code is not None
@@ -495,6 +456,33 @@ class AIService:
                     timeout=300,
                 )
                 print(f"[AI_SERVICE] ✅ Generation successful with {resolved_model} ({len(ai_response)} chars)")
+                
+                # Hard fail immediately if model returned nothing — try cross-model fallback
+                if not ai_response or len(ai_response.strip()) < 50:
+                    print(f"[AI_SERVICE] ⚠️ {resolved_model} returned empty. Activating fallback chain...")
+                    FALLBACK_CHAIN = ["gemini-3-flash", "gpt-4o", "gemini-3-1-pro"]
+                    fallback_models = [m for m in FALLBACK_CHAIN if m != resolved_model]
+                    for fb_model in fallback_models:
+                        try:
+                            fb_system = _system_for(fb_model)
+                            print(f"[AI_SERVICE] 🔄 Fallback attempt with {fb_model}...")
+                            fb_response = await asyncio.wait_for(
+                                self._call_llm_async(fb_system, user_prompt, max_tokens=max_tokens_budget, model=fb_model, temperature=temperature),
+                                timeout=300,
+                            )
+                            if fb_response and len(fb_response.strip()) > 50:
+                                ai_response = fb_response
+                                resolved_model = fb_model
+                                print(f"[AI_SERVICE] ✅ Fallback succeeded with {fb_model} ({len(ai_response)} chars)")
+                                break
+                        except Exception as fb_err:
+                            print(f"[AI_SERVICE] ❌ Fallback {fb_model} also failed: {fb_err}")
+                    else:
+                        raise ValueError(
+                            f"All models failed to generate code. Primary model '{resolved_model}' returned empty. "
+                            f"Please check your API keys or try again later."
+                        )
+
                 code = self._clean_code(ai_response)
 
                 has_app_component = 'export default' in code or 'function ' in code or 'const ' in code
@@ -623,12 +611,19 @@ class AIService:
         if '```' in code:
             lines = code.split('\n')
             in_block, cl = False, []
+            has_closed = False
             for line in lines:
                 if line.strip().startswith('```'):
+                    if in_block:
+                        has_closed = True
                     in_block = not in_block
                     continue
                 if in_block:
                     cl.append(line)
+                    
+            if not has_closed and len(cl) > 50:
+                raise ValueError("The code is too large and the AI hit its maximum output limit. Please try breaking your request into smaller pieces, or ask the AI to summarize the code.")
+                
             if cl:
                 code = '\n'.join(cl)
         # Skip leading explanation paragraphs
@@ -637,17 +632,26 @@ class AIService:
                 if line.strip().startswith(('import', 'function', 'const')):
                     code = '\n'.join(code.split('\n')[i:])
                     break
-        if 'export default' not in code:
-            code += "\n\nexport default App;"
         if 'import React' not in code:
             code = "import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';\n" + code
         return code
 
-    def _build_files(self, code):
+    def _build_files(self, raw_output):
+        import re
+        js_blocks = re.findall(r"```(?:javascript|jsx|js)?\s*([\s\S]*?)```", raw_output, re.IGNORECASE)
+        frontend_code = js_blocks[0].strip() if js_blocks else raw_output
+        frontend_code = self._clean_code(frontend_code)
+
+        baseline_css = """
+        body { background: #020617; color: white; margin: 0; font-family: Inter, sans-serif; overflow-x: hidden; }
+        #root { min-height: 100vh; }
+        .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+        """
+
         return [
-            {"path": "/package.json", "content": '{"name":"app","private":true,"dependencies":{"react":"^19.0.0","react-dom":"^19.0.0","react-router-dom":"^6.20.0"}}', "language": "json"},
-            {"path": "/index.html", "content": '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>App</title></head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>', "language": "html"},
-            {"path": "/src/main.jsx", "content": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\nimport './index.css';\n\nReactDOM.createRoot(document.getElementById('root')).render(<App />);", "language": "javascript"},
-            {"path": "/src/App.jsx", "content": code, "language": "javascript"},
-            {"path": "/src/index.css", "content": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n*{box-sizing:border-box;margin:0;padding:0}\nhtml{scroll-behavior:smooth}\nbody{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;background:#050505;color:#e5e5e5}\n\n@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}\n@keyframes fadeIn{from{opacity:0}to{opacity:1}}\n@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}\n@keyframes pulse-glow{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.8;transform:scale(1.05)}}\n\n.animate-fadeInUp{animation:fadeInUp 0.8s ease-out forwards}\n.animate-float{animation:float 4s ease-in-out infinite}\n.animate-pulse-glow{animation:pulse-glow 3s ease-in-out infinite}\n\n::-webkit-scrollbar{width:6px}\n::-webkit-scrollbar-track{background:#0a0a0a}\n::-webkit-scrollbar-thumb{background:#333;border-radius:3px}", "language": "css"},
+            {"path": "/package.json", "content": '{"name":"nexa-app","version":"1.0.0","dependencies":{"react":"^18.2.0","react-dom":"^18.2.0"}}', "language": "json"},
+            {"path": "/index.html", "content": f'<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Nexa AI</title><style>{baseline_css}</style></head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>', "language": "html"},
+            {"path": "/src/main.jsx", "content": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\nimport '../index.css';\n\nReactDOM.createRoot(document.getElementById('root')).render(<App />);", "language": "javascript"},
+            {"path": "/src/App.jsx", "content": frontend_code, "language": "javascript"},
+            {"path": "/index.css", "content": "/* Core Styling */\n*{box-sizing:border-box;margin:0;padding:0}\nbody{background:#020617;color:white;font-family:Inter,sans-serif}\n", "language": "css"},
         ]

@@ -16,7 +16,7 @@ const COMING_SOON_FEATURES = [
   { icon: BarChart3, title: 'Analytics Dashboard', desc: 'Real-time usage, conversion, and credit consumption metrics.' },
 ];
 
-const Home = () => {
+const Home_v2 = () => {
   const [prompt, setPrompt] = useState('');
   const [showFeatures, setShowFeatures] = useState(false);
   const [selectedModel, setSelectedModel] = useState(getStoredModel());
@@ -35,7 +35,7 @@ const Home = () => {
       if (user) {
         navigate('/v2/ide', { state: { initialPrompt: prompt } });
       } else {
-        navigate('/signup', { state: { initialPrompt: prompt } });
+        navigate('/signup', { state: { redirectTo: '/v2/ide' } });
       }
     }
   };
@@ -174,13 +174,12 @@ const Home = () => {
         <div className="container mx-auto max-w-6xl">
           {/* Hero Section */}
           <div className="flex flex-col items-center text-center mb-10">
-              <Link to="/v2" className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-sm text-violet-300 mb-6 animate-fade-in-up border border-violet-500/20 shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:scale-105 transition-all group">
-                <Sparkles className="w-4 h-4 animate-pulse group-hover:text-violet-400" />
-                <span className="font-medium">Next-Gen AI Website Generation</span>
-                <div className="w-1 h-1 rounded-full bg-violet-400 mx-1" />
-                <span className="text-white font-bold bg-violet-600/20 px-2 py-0.5 rounded-md group-hover:bg-violet-600/40">v2.0 Beta</span>
-                <ArrowRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </Link>
+            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-sm text-violet-300 mb-6 animate-fade-in-up border border-violet-500/20 shadow-[0_0_15px_rgba(139,92,246,0.15)]">
+              <Sparkles className="w-4 h-4 animate-pulse" />
+              <span className="font-medium">Next-Gen AI Website Generation</span>
+              <div className="w-1 h-1 rounded-full bg-violet-400 mx-1" />
+              <span className="text-white font-bold bg-purple-600/30 px-2 py-0.5 rounded-md border border-purple-500/50">v2.0 Full-Stack Sandbox</span>
+            </div>
 
             {/* Scrolling Ticker */}
             <div className="w-full max-w-lg overflow-hidden mb-6 relative">
@@ -435,8 +434,7 @@ const Home = () => {
               <div>
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Platform</h4>
                 <ul className="space-y-4 text-white/70 text-sm font-light">
-                  <li><Link to="/ide" className="hover:text-white transition-colors">AI Builder</Link></li>
-                  <li><Link to="/v2" className="hover:text-white transition-colors text-purple-400 font-medium">AI Builder v2.0</Link></li>
+                  <li><Link to="/v2/ide" className="hover:text-white transition-colors text-purple-400">AI Builder v2.0</Link></li>
                   <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
                   <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
                 </ul>
@@ -486,13 +484,13 @@ const Home = () => {
                   const siteData = previewSite;
                   setPreviewSite(null);
                   if (user) {
-                    navigate('/ide', { 
+                    navigate('/v2/ide', { 
                       state: { 
                         initialPrompt: `Create a professional website like ${siteData.title} for ${siteData.niche}. Ensure a high-end, premium aesthetic with deep integration of visuals and modern layout.` 
                       } 
                     });
                   } else {
-                    navigate('/signup', { state: { redirectTo: '/ide', initialPrompt: `Create a professional website like ${siteData.title} for ${siteData.niche}.` } });
+                    navigate('/signup', { state: { redirectTo: '/v2/ide', initialPrompt: `Create a professional website like ${siteData.title} for ${siteData.niche}.` } });
                   }
                 }}
                 className="bg-gradient-to-r from-violet-600 to-blue-600 text-white rounded-full px-8 py-4 font-bold"
@@ -507,4 +505,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Home_v2;
