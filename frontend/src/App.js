@@ -43,7 +43,12 @@ function AppRoutes() {
     const trackPageView = () => {
       if (window.gtag) {
         console.log('[GA] Tracking page view:', location.pathname + location.search);
+        // Track both properties
         window.gtag('config', 'G-9EBJPGCGFH', {
+          page_path: location.pathname + location.search,
+          send_page_view: true
+        });
+        window.gtag('config', 'G-D8VPRK7MVC', {
           page_path: location.pathname + location.search,
           send_page_view: true
         });
