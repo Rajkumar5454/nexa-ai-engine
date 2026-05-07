@@ -43,11 +43,11 @@ const Contact = () => {
               For all support requests, billing questions, account issues, or general inquiries, please contact us at:
             </p>
             <a
-              href="mailto:support@nexaai.live"
+              href="mailto:kingrajkumar071@gmail.com"
               className="inline-flex items-center gap-2 text-violet-400 hover:text-violet-300 text-lg font-semibold transition-colors"
             >
               <Mail className="w-5 h-5" />
-              support@nexaai.live
+              kingrajkumar071@gmail.com
             </a>
           </section>
 
@@ -66,7 +66,7 @@ const Contact = () => {
             <address className="not-italic space-y-2">
               <p><span className="text-white font-medium">Product:</span> Nexa.AI</p>
               <p><span className="text-white font-medium">Website:</span> <a href="https://nexaai.live" className="text-violet-400 hover:text-violet-300">https://nexaai.live</a></p>
-              <p><span className="text-white font-medium">Email:</span> <a href="mailto:support@nexaai.live" className="text-violet-400 hover:text-violet-300">support@nexaai.live</a></p>
+              <p><span className="text-white font-medium">Email:</span> <a href="mailto:kingrajkumar071@gmail.com" className="text-violet-400 hover:text-violet-300">kingrajkumar071@gmail.com</a></p>
               <p><span className="text-white font-medium">Status:</span> Currently in Beta</p>
             </address>
           </section>

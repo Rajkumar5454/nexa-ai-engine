@@ -64,8 +64,8 @@ const Refund = () => {
             <h2 className="text-2xl font-semibold text-white mb-4">How to Request a Refund</h2>
             <p>
               To request a refund, please email us at{' '}
-              <a href="mailto:support@nexaai.live" className="text-violet-400 hover:text-violet-300">
-                support@nexaai.live
+              <a href="mailto:kingrajkumar071@gmail.com" className="text-violet-400 hover:text-violet-300">
+                kingrajkumar071@gmail.com
               </a>{' '}
               with the following information:
             </p>
@@ -91,8 +91,8 @@ const Refund = () => {
             <h2 className="text-xl font-semibold text-white mb-4">Questions?</h2>
             <p>
               If you have any questions about this Refund Policy, please contact us at{' '}
-              <a href="mailto:support@nexaai.live" className="text-violet-400 hover:text-violet-300">
-                support@nexaai.live
+              <a href="mailto:kingrajkumar071@gmail.com" className="text-violet-400 hover:text-violet-300">
+                kingrajkumar071@gmail.com
               </a>.
             </p>
             <div className="flex flex-wrap gap-4 mt-6">
