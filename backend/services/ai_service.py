@@ -86,10 +86,11 @@ SIGNATURE STYLE — Claude “Editorial Luxury”:
 
 SYSTEM_GEMINI = SYSTEM_ALL_BASE + """
 SIGNATURE STYLE — Gemini “Immersive Gradient”:
-- BACKGROUNDS: Bold, vibrant multi-stop gradients (violet → indigo → cyan).
-- EFFECTS: Floating glowing orbs (absolutely positioned blurred radial gradients).
-- ANIMATIONS: Smooth parallax-style movement, pulsing glow effects on key elements.
-- HERO: Oversized kinetic typography with gradient text fill.
+- BACKGROUNDS: Deep cosmic backgrounds (#030308) with vibrant multi-stop gradients (indigo → violet → cyan).
+- TEXT: YOU MUST USE COLOR: 'WHITE' OR 'VIOLET-100' FOR ALL TEXT TO ENSURE READABILITY OVER DARK GRADIENTS.
+- EFFECTS: Floating glowing orbs (absolutely positioned blurred radial gradients with opacity: 0.15).
+- ANIMATIONS: Smooth parallax-style movement, pulsing glow effects on key buttons.
+- HERO: Oversized kinetic typography with high-contrast gradient text fill.
 - FEEL: Futuristic, alive, immersive — feels like it's from 2030.
 """
 
@@ -192,7 +193,8 @@ def _get_nvidia_client():
         return None
     return openai.OpenAI(
         api_key=NVIDIA_KEY,
-        base_url="https://integrate.api.nvidia.com/v1"
+        base_url="https://integrate.api.nvidia.com/v1",
+        timeout=120.0  # Increased timeout to handle complex frontend generations
     )
 
 class AIService:
@@ -215,7 +217,8 @@ class AIService:
             # Only use models confirmed working on this API key/version
             fallbacks = [
                 model_name,
-                "gemini-3-flash-preview",  # confirmed working fallback
+                "gemini-1.5-flash",  # Reliable stable fallback
+                "gemini-1.5-pro",    # Capable high-end fallback
             ]
             last_err = None
             
@@ -233,10 +236,14 @@ class AIService:
                     resp = model.generate_content(user)
                     print(f"[AI_SERVICE] 🎯 Response received from Google Gemini ({m_name}).")
                     try:
-                        return resp.text
+                        text = resp.text
+                        if not text or len(text) < 50:
+                            print("[AI_SERVICE] ⚠️ Gemini response too short or empty.")
+                            continue
+                        return text
                     except Exception:
-                        print("[AI_SERVICE] ⚠️ Gemini response empty or blocked by safety filters.")
-                        return ""
+                        print("[AI_SERVICE] ⚠️ Gemini response blocked by safety filters.")
+                        continue # Try next model or fallback
                 except Exception as e:
                     err_msg = str(e)
                     print(f"[AI_SERVICE] ⚠️ Failed with {m_name}: {err_msg[:200]}")
@@ -300,7 +307,7 @@ class AIService:
         if model == "gemini-3-1-pro":
             provider_model = "gemini-3.1-pro-preview"
         elif model == "gemini-3-flash":
-            provider_model = "gemini-3-flash-preview"
+            provider_model = "gemini-1.5-flash"  # Use stable GA model for Flash tasks
         elif model == "llama-3-3-70b":
             provider_model = "meta/llama-3.3-70b-instruct"
         elif model == "claude-sonnet-4-5":
@@ -349,9 +356,10 @@ class AIService:
                     print(f"[AI_SERVICE] ❌ NVIDIA NIM failed for {model}: {e}")
             if self.emergent_client:
                 try:
+                    # provider_model is already 'meta/llama-3.3-70b-instruct'
                     return await asyncio.to_thread(
                         self._call_openai_compat,
-                        self.emergent_client, system, user, max_tokens, f"meta/{provider_model}", temperature,
+                        self.emergent_client, system, user, max_tokens, provider_model, temperature,
                     )
                 except Exception as e:
                     print(f"[AI_SERVICE] ❌ Emergent fallback for llama failed: {e}")
