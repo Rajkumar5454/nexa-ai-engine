@@ -14,8 +14,6 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import Contact from './pages/Contact';
 import Refund from './pages/Refund';
-import IDE_v2 from './pages/IDE_v2';
-import Home_v2 from './pages/Home_v2';
 import Admin from './pages/Admin';
 import LowCreditsModal from './components/LowCreditsModal';
 
@@ -53,8 +51,6 @@ function AppRoutes() {
           <IDE />
         </ProtectedRoute>
       } />
-      <Route path="/v2" element={<Home_v2 />} />
-      <Route path="/v2/ide" element={<IDE_v2 />} />
       <Route path="/admin" element={
         <ProtectedRoute>
           <Admin />

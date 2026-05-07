@@ -33,7 +33,7 @@ const Home = () => {
     e.preventDefault();
     if (prompt.trim()) {
       if (user) {
-        navigate('/v2/ide', { state: { initialPrompt: prompt } });
+        navigate('/ide', { state: { initialPrompt: prompt } });
       } else {
         navigate('/signup', { state: { initialPrompt: prompt } });
       }

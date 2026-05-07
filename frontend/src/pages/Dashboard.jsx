@@ -105,16 +105,13 @@ const Dashboard = () => {
           <div>
             <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3" data-testid="projects-heading">
               Your Projects
-              <span className="bg-purple-600/20 text-purple-400 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full border border-purple-500/30">
-                v2 Sandbox Active
-              </span>
             </h2>
             <p className="text-gray-400">Build amazing apps with AI</p>
           </div>
           <div className="flex items-center gap-3">
             <Button
               data-testid="new-project-btn"
-              onClick={() => navigate('/v2/ide')}
+              onClick={() => navigate('/ide')}
               className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-full px-8 shadow-lg shadow-purple-600/25 border-0"
             >
               <Zap className="w-4 h-4 mr-2 text-yellow-400 fill-yellow-400" />
@@ -132,14 +129,14 @@ const Dashboard = () => {
           <div className="text-center py-16" data-testid="empty-projects">
             <FolderOpen className="w-16 h-16 text-gray-600 mx-auto mb-4 opacity-50" />
             <h3 className="text-xl font-semibold text-white mb-2">No projects yet</h3>
-            <p className="text-gray-400 mb-8">Ready to build the future? Start your first advanced project with Nexa V2.</p>
+            <p className="text-gray-400 mb-8">Ready to build the future? Start your first advanced project with Nexa.</p>
             <div className="flex justify-center gap-4">
               <Button
-                onClick={() => navigate('/v2/ide')}
+                onClick={() => navigate('/ide')}
                 className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-full px-10 py-6 text-lg shadow-xl shadow-purple-600/30 border-0"
               >
                 <Zap className="w-5 h-5 mr-2 text-yellow-400 fill-yellow-400" />
-                Start Building with V2
+                Start Building
               </Button>
             </div>
           </div>
@@ -149,15 +146,10 @@ const Dashboard = () => {
               <div
                 key={project.id}
                 data-testid={`project-card-${project.id}`}
-                onClick={() => navigate(project.is_v2 ? `/v2/ide?project=${project.id}` : `/ide?project=${project.id}`)}
+                onClick={() => navigate(`/ide?project=${project.id}`)}
                 className="bg-white/5 rounded-2xl shadow-sm hover:shadow-xl transition-all cursor-pointer overflow-hidden border border-white/10 hover:border-violet-500/30 group"
               >
                 <div className={`h-32 bg-gradient-to-br ${project.is_v2 ? 'from-purple-600/40 to-blue-600/40' : 'from-violet-600/30 to-blue-600/30'} relative`}>
-                  {project.is_v2 && (
-                    <div className="absolute top-3 left-3 bg-purple-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow-lg border border-white/20">
-                      v2.0
-                    </div>
-                  )}
                   <button
                     data-testid={`delete-project-${project.id}`}
                     onClick={(e) => handleDeleteProject(e, project.id)}

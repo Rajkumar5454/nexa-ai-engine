@@ -62,7 +62,7 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
       <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
         <button
           data-testid="topbar-logo"
-          onClick={() => navigate(is_v2 ? '/v2' : '/')}
+          onClick={() => navigate('/')}
           className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
         >
           <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-6 sm:h-7 w-auto object-contain" />
@@ -70,11 +70,6 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
             <span className="text-white">Nexa</span>
             <span className="text-gray-500"> AI</span>
           </span>
-          {is_v2 && (
-            <span className="ml-2 bg-gradient-to-r from-purple-600 to-blue-600 text-[9px] uppercase font-bold px-2 py-0.5 rounded-full border border-white/20 shadow-lg animate-pulse whitespace-nowrap">
-              v2.0 Beta
-            </span>
-          )}
         </button>
         <div className="h-6 w-px bg-gray-800 hidden sm:block" />
         <div className="relative">
