@@ -33,6 +33,8 @@ STYLING RULES (CRITICAL):
 - Use `linear-gradient` for all buttons and backgrounds.
 - High-end typography: Use `Inter` or `system-ui`.
 - VISUAL DNA: Floating orbs, glowing borders, and smooth transitions are MANDATORY.
+- IMAGERY (STRICT): YOU MUST USE REAL IMAGES. Use <img src="https://images.unsplash.com/photo-...?auto=format&fit=crop&w=800&q=80" />.
+- DO NOT use placeholders, empty divs, or simple icons as image replacements.
 """
 
 SYSTEM_OPENAI = f"You are a WORLD-CLASS SOFTWARE ENGINEER. Build ELITE, single-page React landing pages and apps. {MANDATORY_AESTHETIC_RULES}"
@@ -346,8 +348,8 @@ class AIService:
                 "1. You MUST return the ENTIRE, COMPLETE code of the modified App.jsx from start to finish.\n"
                 "2. NEVER use placeholders like '// ... existing code'. I am piping this to a compiler.\n"
                 "3. NO EXTERNAL DEPENDENCIES. Only import from 'react'.\n"
-                "4. RETAIN THE NICHE: Look at the existing code's theme (e.g., Fitness, SaaS, Portfolio) and ENSURE any new images or text you add MATCH that theme exactly.\n"
-                "5. NO WATCHES/CATS: Do not use generic images unless the website is actually about watches or cats. Use Unsplash or loremflickr with relevant keywords.\n"
+                "5. REAL PHOTOGRAPHY ONLY: Use high-resolution Unsplash URLs for ALL visual sections (hero, product cards, gallery). No empty boxes or icons.\n"
+                "6. THEME CONSISTENCY: Keywords in Unsplash URLs must match the site's niche perfectly.\n"
                 f"{MANDATORY_AESTHETIC_RULES}\n\n"
                 f"EXISTING CODE:\n{existing_code}\n\n"
                 f"CHANGE REQUEST: {prompt}\n\n"
@@ -387,6 +389,7 @@ class AIService:
             "- NO EXTERNAL DEPS. Use ONLY 'react'.\n"
             "- ALL STYLES INLINE via style={{...}}.\n"
             "- USE SVGS for all icons.\n"
+            "- REAL IMAGERY: Use <img src=\"https://images.unsplash.com/photo-...?auto=format&fit=crop&w=800&q=80\" /> for all sections. Ensure keywords match the niche.\n"
             "- ~1000+ lines total."
         )
 
