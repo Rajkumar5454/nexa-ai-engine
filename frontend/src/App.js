@@ -1,6 +1,7 @@
 // Nexa AI Frontend - SEO and Speed Optimized (Build Refresh: 2026-05-04)
 import './App.css';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Toaster } from './components/ui/toaster';
@@ -35,6 +36,17 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function AppRoutes() {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Manual page view tracking for GA4 in SPA
+    if (window.gtag) {
+      window.gtag('config', 'G-9EBJPGCGFH', {
+        page_path: location.pathname + location.search
+      });
+    }
+  }, [location]);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
