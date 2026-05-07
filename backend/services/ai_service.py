@@ -337,7 +337,22 @@ class AIService:
         # Final safeguard if no provider was triggered or all failed
         raise Exception(f"Failed to generate response with the selected model: {model}")
 
-    # ----- User prompt builder -----
+    # ----- Unsplash image library -----
+    UNSPLASH_LIBRARY = """
+REAL UNSPLASH PHOTO URLS (USE THESE EXACT URLs - THEY ARE GUARANTEED TO WORK):
+- Fashion/Clothing: https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80 | https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80 | https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=800&q=80 | https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80 | https://images.unsplash.com/photo-1558171813-1e9e6fd8b1c9?w=800&q=80 | https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800&q=80
+- Shoes/Footwear: https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80 | https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800&q=80 | https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?w=800&q=80 | https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800&q=80 | https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=800&q=80 | https://images.unsplash.com/photo-1539185441755-769473a23570?w=800&q=80
+- Food/Restaurant: https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80 | https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80 | https://images.unsplash.com/photo-1476224203421-9ac39bcb3df1?w=800&q=80 | https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&q=80 | https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80
+- Fitness/Gym: https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80 | https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80 | https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80 | https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=800&q=80
+- Tech/SaaS: https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80 | https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80 | https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80 | https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&q=80
+- Travel: https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80 | https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&q=80 | https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80 | https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?w=800&q=80
+- Beauty/Spa: https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80 | https://images.unsplash.com/photo-1552693673-1bf958298935?w=800&q=80 | https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800&q=80
+- Real Estate: https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80 | https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80 | https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80
+- Education: https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80 | https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80 | https://images.unsplash.com/photo-1529390079861-591de354faf5?w=800&q=80
+- General Hero/People: https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80 | https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=800&q=80 | https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&q=80
+
+INSTRUCTION: Pick the MOST RELEVANT category above and use those exact URLs in your <img> tags.
+"""
 
     def _build_code_prompt(self, prompt, existing_code=None):
         if existing_code:
@@ -347,8 +362,8 @@ class AIService:
                 "1. You MUST return the ENTIRE, COMPLETE code of the modified App.jsx from start to finish.\n"
                 "2. NEVER use placeholders like '// ... existing code'. I am piping this to a compiler.\n"
                 "3. NO EXTERNAL DEPENDENCIES. Only import from 'react'.\n"
-                "5. REAL PHOTOGRAPHY ONLY: Use high-resolution Unsplash URLs for ALL visual sections (hero, product cards, gallery). No empty boxes or icons.\n"
-                "6. THEME CONSISTENCY: Keywords in Unsplash URLs must match the site's niche perfectly.\n"
+                "4. RETAIN THE NICHE: Match the theme of the existing code.\n"
+                f"5. MANDATORY IMAGES: Use these EXACT working Unsplash URLs — do NOT invent fake paths like /shoe1.jpg:\n{self.UNSPLASH_LIBRARY}\n"
                 f"{MANDATORY_AESTHETIC_RULES}\n\n"
                 f"EXISTING CODE:\n{existing_code}\n\n"
                 f"CHANGE REQUEST: {prompt}\n\n"
@@ -356,7 +371,6 @@ class AIService:
             )
 
         p = random.choice(PALETTES)
-        # Randomize the architectural strategy to prevent repetitive layouts
         layout_seed = random.choice([
             "Bento-box grid with asymmetrical cards",
             "Diagonal-cut section transitions and floating elements",
@@ -380,12 +394,13 @@ class AIService:
 
         return (
             f"BUILD A STUNNING FRONTEND UI FOR: {prompt}\n\n"
-            f"AESTHETIC: {style_mood} with {p['name']} palette.\n\n"
+            f"AESTHETIC: {style_mood} with {p['name']} palette. Layout: {layout_seed}.\n\n"
             "MANDATORY OUTPUT FORMAT:\n"
             "Return a SINGLE valid React file inside a ```javascript block.\n"
             "The component MUST be named App and end with: export default App;\n\n"
+            f"MANDATORY IMAGE LIBRARY — USE THESE EXACT WORKING URLs (NO FAKE PATHS LIKE /shoe1.jpg):\n{self.UNSPLASH_LIBRARY}\n"
             "TECHNICAL RULES:\n"
-            "- REAL IMAGERY: YOU MUST USE <img src=\"https://images.unsplash.com/photo-...?auto=format&fit=crop&w=800&q=80\" /> for all sections. Keywords must match the niche.\n"
+            "- IMAGES: Pick the relevant category above and use those exact Unsplash URLs in every <img> tag.\n"
             "- NO EXTERNAL DEPS. Use ONLY 'react'.\n"
             "- ALL STYLES INLINE via style={{...}}.\n"
             "- USE SVGS for all icons.\n"
