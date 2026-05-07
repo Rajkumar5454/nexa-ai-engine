@@ -49,7 +49,7 @@ const FormattedMessage = ({ content }) => {
   return <div className="space-y-0">{elements}</div>;
 };
 
-const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = false, onNewProject, streamingText = '', projectId, onAnalyze, onClearChat, onStop }) => {
+const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = false, onNewProject, streamingText = '', projectId, onAnalyze, onClearChat, onStop, onOpenConnector }) => {
   const [input, setInput] = useState('');
   const [mode, setMode] = useState('build'); // 'build' or 'chat'
   const [nudgeDismissed, setNudgeDismissed] = useState(false);
@@ -221,26 +221,62 @@ const ChatPanel = ({ messages, onSendMessage, onChatMessage, isGenerating = fals
                   <span className="text-[11px] text-gray-400">{message.isAnalysis ? 'Project Audit' : 'Nexa AI'}</span>
                 </div>
               )}
-              {message.isStreaming && streamingText ? (
-                <div>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <Loader2 className="w-3.5 h-3.5 text-blue-400 animate-spin" />
-                    <span className="text-xs text-blue-400 font-medium">{progressMessages[progressStep]}</span>
+              {message.isStreaming ? (
+                <div className="flex flex-col space-y-3">
+                  <div className="flex items-center space-x-2">
+                    <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
+                    <span className="text-sm text-gray-400 font-medium">
+                      {message.currentStatus || progressMessages[progressStep]}
+                    </span>
                   </div>
-                  <div className="bg-gray-900/50 rounded p-2 max-h-24 overflow-hidden border border-gray-800/50">
+                  
+                  <div className="bg-gray-900/50 rounded p-2 max-h-24 overflow-hidden border border-gray-800/50 relative">
                     <div className="flex justify-between items-center mb-1 px-1">
-                      <span className="text-[10px] text-gray-500 font-mono">Stream: {streamingText.length} chars</span>
+                      <span className="text-[10px] text-gray-500 font-mono">
+                        {streamingText ? `Stream: ${streamingText.length} chars` : 'Initializing engine...'}
+                      </span>
                     </div>
-                    <pre className="text-[10px] text-gray-500 font-mono whitespace-pre-wrap break-all">{streamingText.slice(-150)}</pre>
+                    <pre className="text-[10px] text-gray-400 font-mono whitespace-pre-wrap break-all min-h-[40px]">
+                      {streamingText ? streamingText.slice(-150) : <span className="animate-pulse">_</span>}
+                    </pre>
                   </div>
-                </div>
-              ) : message.isStreaming ? (
-                <div className="flex items-center space-x-2">
-                  <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
-                  <span className="text-sm text-gray-400">{progressMessages[progressStep]}</span>
+
+                  <button 
+                    onClick={() => window.dispatchEvent(new CustomEvent('switch-view', { detail: 'code' }))}
+                    className="w-fit px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/30 transition-all flex items-center gap-2"
+                  >
+                    📂 Open Code Editor
+                  </button>
                 </div>
               ) : (
-                <FormattedMessage content={message.content} />
+                <>
+                  <FormattedMessage content={message.content} />
+                  {message.buttons && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {message.buttons.map((btn, bidx) => (
+                        <button
+                          key={bidx}
+                          onClick={() => {
+                            if (btn.action === 'OPEN_CONNECTOR' && onOpenConnector) {
+                              onOpenConnector();
+                            } else if (btn.action === 'DISMISS') {
+                              return; // Do nothing
+                            } else {
+                              onSendMessage(btn.value || btn.label);
+                            }
+                          }}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shadow-lg ${
+                            btn.primary 
+                              ? 'bg-blue-600 hover:bg-blue-500 text-white border border-blue-400/30' 
+                              : 'bg-gray-700 hover:bg-gray-600 text-gray-100 border border-gray-600'
+                          }`}
+                        >
+                          {btn.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
               {message.actions && !message.isStreaming && (
                 <div className="mt-2 pt-2 border-t border-gray-700/50 space-y-1">

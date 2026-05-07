@@ -23,14 +23,18 @@ class Project(BaseModel):
     files: List[File] = []
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
+    is_v2: bool = False
 
 class ChatRequest(BaseModel):
     message: str
     session_id: str
     project_id: Optional[str] = None
+    is_v2: bool = False
 
 class GenerateCodeRequest(BaseModel):
     prompt: str
     session_id: str
     project_id: Optional[str] = None
-    model: Optional[str] = None  # e.g. "gpt-4o-mini", "gpt-4o", "claude-sonnet-4-5", "gemini-2.0-flash"
+    model: Optional[str] = None
+    is_v2: bool = False
+    fullstack_mode: bool = False

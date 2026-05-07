@@ -64,11 +64,11 @@ const Home = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                   </span>
-                  <span className="font-bold text-white">GPT-5.4</span> &amp; <span className="font-bold text-white">GPT-5.5</span> are LIVE
+                  <span className="font-bold text-white">GPT-4o</span> &amp; <span className="font-bold text-white">Gemini 1.5 Pro</span> are LIVE
                 </span>
                 <span className="text-white/30">•</span>
                 <span className="flex items-center gap-2">
-                  <span className="font-bold text-white opacity-80">Claude 4.7 Opus</span> &amp; <span className="font-bold text-white opacity-80">Claude 4.6 Sonnet</span> coming soon ⚡️
+                  <span className="font-bold text-white opacity-80">Claude 3.5 Sonnet</span> &amp; <span className="font-bold text-white opacity-80">Llama 3</span> optimized ⚡️
                 </span>
               </span>
             ))}
@@ -428,7 +428,7 @@ const Home = () => {
                 <span className="text-xl font-bold tracking-tight text-white">Nexa AI</span>
               </div>
               <p className="text-gray-300 text-sm leading-relaxed font-light">
-                Empowering creators to build the web of tomorrow, one prompt at a time. Professional-grade AI generation for modern teams.
+                Empowering creators to build the web of tomorrow, one prompt at a time. Nexa.AI is an AI-powered website builder currently in beta.
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-16">
@@ -446,6 +446,8 @@ const Home = () => {
                 <ul className="space-y-4 text-white/70 text-sm font-light">
                   <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
                   <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+                  <li><Link to="/refund" className="hover:text-white transition-colors">Refund Policy</Link></li>
+                  <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
                 </ul>
               </div>
             </div>

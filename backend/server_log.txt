@@ -1,0 +1,1978 @@
+INFO:     Will watch for changes in these directories: ['/Users/rajkumar/Desktop/Nexa-AI/backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [36987] using WatchFiles
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/server.py", line 68, in serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/config.py", line 467, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/server.py", line 16, in <module>
+    from routes.ai_routes import router as ai_router
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/routes/ai_routes.py", line 61
+    nonlocal project
+    ^^^^^^^^^^^^^^^^
+SyntaxError: name 'project' is used prior to nonlocal declaration
+WARNING:  WatchFiles detected changes in 'routes/ai_routes.py'. Reloading...
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/server.py", line 68, in serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/config.py", line 467, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/server.py", line 16, in <module>
+    from routes.ai_routes import router as ai_router
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/routes/ai_routes.py", line 4, in <module>
+    from services.ai_service import AIService
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py", line 823
+    async def analyze_project(self, project, session_id, model=None):
+    ^^^^^
+IndentationError: expected an indented block after function definition on line 821
+WARNING:  WatchFiles detected changes in 'routes/ai_routes.py'. Reloading...
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 76, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/server.py", line 61, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/server.py", line 68, in serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/config.py", line 467, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/uvicorn/importer.py", line 21, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/server.py", line 16, in <module>
+    from routes.ai_routes import router as ai_router
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/routes/ai_routes.py", line 4, in <module>
+    from services.ai_service import AIService
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py", line 823
+    async def analyze_project(self, project, session_id, model=None):
+    ^^^^^
+IndentationError: expected an indented block after function definition on line 821
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [37084]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+2026-05-05 16:23:35,183 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:50533 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50539 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50539 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50539 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50539 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50559 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50559 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50565 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50591 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50591 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50565 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50591 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50565 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50637 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50637 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50637 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50639 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51535 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51537 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51535 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51537 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51537 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51535 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51537 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51535 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55962 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55964 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55966 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55964 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55964 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55966 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56067 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56067 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:56100 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56103 - "OPTIONS /api/ai/project/cd3e43a2-7074-4876-bdd5-d936ba3b0806 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56100 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56103 - "GET /api/ai/project/cd3e43a2-7074-4876-bdd5-d936ba3b0806 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56105 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56126 - "GET /api/ai/project/cd3e43a2-7074-4876-bdd5-d936ba3b0806 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56105 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56128 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:56242 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56242 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56242 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56242 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56244 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56242 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56244 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56260 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56260 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56522 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56524 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56524 - "OPTIONS /api/ai/project/cd3e43a2-7074-4876-bdd5-d936ba3b0806 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56524 - "GET /api/ai/project/cd3e43a2-7074-4876-bdd5-d936ba3b0806 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57255 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57255 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [37084]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42002]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42002]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42020]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42020]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42028]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:57648 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57650 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57648 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:57650 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:57705 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-06 11:36:47,997 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:57705 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57705 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57705 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57707 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57705 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57707 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57714 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57714 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42028]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42186]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42186]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42242]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42242]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42272]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:58047 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58049 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58049 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58047 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58061 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-06 11:48:06,370 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:58061 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58061 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58061 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58061 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58063 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58061 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58085 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58085 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:58174 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58174 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42272]
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42391]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42391]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42419]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+2026-05-06 11:56:06,088 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:58364 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58364 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58364 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58364 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58367 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42419]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42606]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42606]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [42646]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:58626 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58626 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+INFO:     127.0.0.1:58807 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:59142 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59142 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [42646]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [43132]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:59397 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:59543 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59545 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59543 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:59545 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:59555 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-06 12:32:16,536 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:59555 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59555 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59555 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59559 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59555 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59559 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59576 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59576 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:59665 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:59894 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59894 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:59966 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+INFO:     127.0.0.1:60090 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60092 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60090 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60092 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60094 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60096 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60094 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60096 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60102 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+INFO:     127.0.0.1:60163 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60163 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+INFO:     127.0.0.1:60294 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60355 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60379 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60400 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60400 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60436 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60466 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60484 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60792 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60792 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60890 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60972 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:61087 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61087 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+INFO:     127.0.0.1:61176 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+INFO:     127.0.0.1:61266 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61268 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61266 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61268 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61275 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61275 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61275 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61275 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61277 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61275 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61277 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61281 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+[AI_SERVICE] ⚠️ Gemini response empty or blocked by safety filters.
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-1-pro (Provider ID: gemini-3.1-pro-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3.1-pro-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3.1-pro-preview).
+INFO:     127.0.0.1:61391 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61391 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61393 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61393 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:62595 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62597 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62597 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62595 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62615 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62615 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:62702 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:62840 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:62840 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:62842 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62842 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62842 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62842 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62851 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62842 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62851 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62866 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [43132]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [46433]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:63075 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63077 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:63077 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+2026-05-06 15:56:24,356 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:63084 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63084 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63084 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63084 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63086 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63086 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:63133 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:63135 - "OPTIONS /api/ai/project/e0362077-3240-445e-824e-1f7427f6341d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63133 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:63135 - "GET /api/ai/project/e0362077-3240-445e-824e-1f7427f6341d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63137 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [46433]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [46570]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:63343 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:63343 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:63345 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-06 16:05:03,159 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:63345 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63345 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63345 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63348 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63345 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63345 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63352 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:63570 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63572 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63572 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63570 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63579 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63579 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:63629 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [46570]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47034]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47034]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47047]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:63870 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63872 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63870 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:63872 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:63888 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-06 16:23:48,731 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:63888 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63888 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63888 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63891 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63888 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63891 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63895 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63895 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47047]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47132]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47132]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47139]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47139]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:8: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47160]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:64045 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64045 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+2026-05-06 16:29:38,450 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:64047 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64047 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64047 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64047 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64056 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47160]
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.7, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.5, Tokens: 4096)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47231]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47231]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47242]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47242]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47248]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:64225 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+Traceback (most recent call last):
+  File "/Users/rajkumar/Desktop/Nexa-AI/backend/routes/ai_routes.py", line 301, in event_generator
+    async for event in ai_service.stream_generate_code(
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        request.prompt, request.session_id,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        fullstack_mode=request.fullstack_mode
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+TypeError: AIService.stream_generate_code() got an unexpected keyword argument 'is_v2'
+INFO:     127.0.0.1:64225 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64225 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64225 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47248]
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47389]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:64328 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47389]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Create a booking web application.
+
+Requirements:
+
+- Homepage...'
+[AI_SERVICE] 📍 Selected Model: gemini-3-flash
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] ✅ Generation successful with gemini-3-flash (28405 chars)
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47629]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:64515 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47629]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Create a booking web application.
+
+Requirements:
+
+- Homepage...'
+[AI_SERVICE] 📍 Selected Model: gemini-3-flash
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] ✅ Generation successful with gemini-3-flash (25167 chars)
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [47667]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:64740 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64742 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64744 - "OPTIONS /api/ai/project/50f3d3aa-3d64-4fc1-ad54-9b24f7a18de2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64744 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64742 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64740 - "OPTIONS /api/ai/project/50f3d3aa-3d64-4fc1-ad54-9b24f7a18de2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64742 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64744 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64740 - "GET /api/ai/project/50f3d3aa-3d64-4fc1-ad54-9b24f7a18de2 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:64763 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-06 16:50:42,394 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:64763 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64763 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64763 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64765 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64765 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64763 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64767 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64767 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a SaaS admin panel with authentication.
+
+Requirements:...'
+[AI_SERVICE] 📍 Selected Model: gemini-3-flash
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] ✅ Generation successful with gemini-3-flash (29187 chars)
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:64918 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64920 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64922 - "OPTIONS /api/ai/project/a4c5e13e-7b89-4bdd-9ee4-b5bc4f5f876d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64922 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64920 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64918 - "GET /api/ai/project/a4c5e13e-7b89-4bdd-9ee4-b5bc4f5f876d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64948 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64948 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64948 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64948 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64950 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+
+[AI_SERVICE] 🚀 GENERATING project: 'Create a CRM SaaS web app.
+
+Requirements:
+
+- Homepage with p...'
+[AI_SERVICE] 📍 Selected Model: gemini-3-flash
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] ✅ Generation successful with gemini-3-flash (31616 chars)
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:64983 - "OPTIONS /api/ai/project/fd01b76c-de0d-4e13-bcc7-bea051d38289 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64981 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64983 - "GET /api/ai/project/fd01b76c-de0d-4e13-bcc7-bea051d38289 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64981 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64981 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:64983 - "GET /api/ai/project/fd01b76c-de0d-4e13-bcc7-bea051d38289 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64985 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:65003 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+
+[AI_SERVICE] 🚀 MODIFYING project: 'features,pricing,about and signin buttons are not working
+
+p...'
+[AI_SERVICE] 📍 Selected Model: gemini-3-flash
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] ✅ Generation successful with gemini-3-flash (33338 chars)
+INFO:     127.0.0.1:65034 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+
+[AI_SERVICE] 🚀 MODIFYING project: 'sign in button is also not working...'
+[AI_SERVICE] 📍 Selected Model: gemini-3-flash
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] ✅ Generation successful with gemini-3-flash (21591 chars)
+INFO:     127.0.0.1:65180 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:65180 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:65182 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65182 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65182 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65182 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65202 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65182 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65202 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65204 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65204 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:08:02,482 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 17:10:41,515 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a SaaS platform with subscription plans.
+
+Requirements...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.5
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-5.5, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-5.5)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.5 (0 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-5.5, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-5.5)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.5 (0 chars)
+INFO:     127.0.0.1:65204 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65204 - "GET /api/auth/me HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47667]
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48375]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:65404 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65404 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+2026-05-06 17:13:27,345 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:65406 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65406 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65406 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65406 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65408 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for connections to close. (CTRL+C to force quit)
+2026-05-06 17:14:18,529 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 17:14:20,410 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48375]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a SaaS platform with subscription plans.
+
+Requirements...'
+[AI_SERVICE] 📍 Selected Model: gpt-4o
+[AI_SERVICE] 🤖 Calling LLM: gpt-4o (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-4o (10021 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-4o (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48444]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:65485 - "OPTIONS /api/ai/project/a71e394c-5c9c-4f0d-a58a-461ce776253d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65483 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:65485 - "GET /api/ai/project/a71e394c-5c9c-4f0d-a58a-461ce776253d HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65483 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:65483 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:65485 - "GET /api/ai/project/a71e394c-5c9c-4f0d-a58a-461ce776253d HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:65487 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:65495 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:15:51,072 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 17:15:52,638 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48444]
+
+[AI_SERVICE] 🚀 GENERATING project: 'login button once check dashboard is not working...'
+[AI_SERVICE] 📍 Selected Model: gpt-4o
+[AI_SERVICE] 🤖 Calling LLM: gpt-4o (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-4o (9845 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-4o (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48496]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48496]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48515]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:49273 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49273 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:19:39,181 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 17:19:41,549 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+[AI_SERVICE] 🚀 GENERATING project: 'Create a CRM SaaS web app.
+
+Requirements:
+
+- Homepage with p...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.5
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.5 (7272 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+INFO:     127.0.0.1:49297 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:20:51,434 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+[AI_SERVICE] 🚀 MODIFYING project: 'login and logout buttons are not working...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.5
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.5 (7343 chars)
+INFO:     127.0.0.1:49344 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:21:51,643 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+[AI_SERVICE] 🚀 MODIFYING project: 'i cant see any login data here ...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.5
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.5 (8364 chars)
+INFO:     127.0.0.1:49373 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:23:01,751 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48515]
+
+[AI_SERVICE] 🚀 MODIFYING project: 'to show data its not showimg me ...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.5
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.5 (10429 chars)
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48648]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48648]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48710]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:49507 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49509 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49507 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:49509 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:49515 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-06 17:27:00,621 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:49515 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49517 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49515 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49517 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49519 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:27:29,798 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 17:27:33,230 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48710]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Create a CRM SaaS with a premium dashboard" and you will see...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.5
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.5 (4280 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.5 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48825]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:49623 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49623 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:31:33,545 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 17:31:39,229 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48825]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Create a high-end Fintech SaaS platform called 'Nexus Capita...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.4
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.4 (5224 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48936]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48936]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [48948]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:49733 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:34:49,623 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-06 17:34:53,120 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+[AI_SERVICE] 🚀 GENERATING project: 'Create a CRM SaaS web app.
+
+Requirements:
+
+- Homepage with p...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.4
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.4 (8305 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+INFO:     127.0.0.1:49766 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-06 17:36:14,081 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [48948]
+
+[AI_SERVICE] 🚀 MODIFYING project: 'signup button is not working...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.4
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.4 (8325 chars)
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [57347]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [57347]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [57376]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:58806 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58808 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58806 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58808 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58816 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-07 11:01:23,414 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:58816 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58816 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58816 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58818 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58816 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58818 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58833 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58833 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-07 11:01:45,634 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-07 11:01:48,717 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [57376]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a high-end Project Management SaaS...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.4
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.4 (4007 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [57563]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:59048 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:59048 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+2026-05-07 11:08:11,758 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:59050 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59050 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59050 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59050 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59052 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-07 11:08:27,595 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-07 11:08:30,044 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [57563]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a high-end Project Management SaaS...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.4
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.4 (5487 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [57624]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [57624]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [57640]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:59119 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:59121 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+2026-05-07 11:10:18,951 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:59124 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59124 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59128 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59124 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59131 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-07 11:10:36,600 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-07 11:10:39,399 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [57640]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a high-end Project Management SaaS...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.4
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.4 (4524 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [57688]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:59205 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59207 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59205 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59207 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:59209 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-07 11:13:21,428 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:59209 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59209 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59209 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59213 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59209 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59213 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59217 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59217 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-07 11:13:35,312 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-07 11:13:37,804 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [57688]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a high-end Project Management SaaS...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.4
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.4 (5090 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [58489]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:60049 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60051 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60053 - "OPTIONS /api/ai/project/01e1e398-df9f-4532-b9c7-a10860d9b500 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60051 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60053 - "GET /api/ai/project/01e1e398-df9f-4532-b9c7-a10860d9b500 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60049 - "GET /api/auth/me HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60078 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+2026-05-07 11:29:58,468 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:60078 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60078 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60082 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60078 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60082 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60078 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60084 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60084 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+2026-05-07 11:30:19,122 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-05-07 11:30:22,538 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [58489]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a fullstack task management SaaS app.
+
+Requirements:
+-...'
+[AI_SERVICE] 📍 Selected Model: gpt-5.4
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+[AI_SERVICE] ✅ Generation successful with gpt-5.4 (8540 chars)
+[AI_SERVICE] 🤖 Calling LLM: gpt-5.4 (Provider ID: gpt-4o, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending request to OpenAI-compatible API (Model: gpt-4o)...
+[AI_SERVICE] 🎯 Response received from OpenAI-compatible API.
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [58615]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [58615]
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [58665]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:60272 - "OPTIONS /api/ai/project/0aac2eaa-3e5a-48b1-988f-0f0e382c9d2b HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60270 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60272 - "GET /api/ai/project/0aac2eaa-3e5a-48b1-988f-0f0e382c9d2b HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60274 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+2026-05-07 11:38:24,628 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+INFO:     127.0.0.1:60299 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60299 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60299 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60299 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60301 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a fullstack ecommerce web app for a fashion store.
+
+Re...'
+[AI_SERVICE] 📍 Selected Model: gemini-3-flash
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] ✅ Generation successful with gemini-3-flash (26431 chars)
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+INFO:     127.0.0.1:60493 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60495 - "OPTIONS /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60493 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60495 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60511 - "OPTIONS /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60511 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60511 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60511 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60513 - "OPTIONS /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60511 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60513 - "GET /api/projects HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60517 - "OPTIONS /api/ai/generate/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60517 - "POST /api/ai/generate/stream HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'services/ai_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [58665]
+
+[AI_SERVICE] 🚀 GENERATING project: 'Build a fullstack task management SaaS app.
+
+Requirements:
+-...'
+[AI_SERVICE] 📍 Selected Model: gemini-3-flash
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 16384)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+[AI_SERVICE] ✅ Generation successful with gemini-3-flash (31332 chars)
+[AI_SERVICE] 🤖 Calling LLM: gemini-3-flash (Provider ID: gemini-3-flash-preview, Temp: 0.4, Tokens: 500)
+[AI_SERVICE] 📡 Sending native request to Google Gemini (Model: gemini-3-flash-preview)...
+[AI_SERVICE] 🎯 Response received from Google Gemini (gemini-3-flash-preview).
+/Users/rajkumar/Desktop/Nexa-AI/backend/services/ai_service.py:6: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [59061]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+DEBUG: Initializing AIService. OpenAI: True, Google: True, NVIDIA: True
+INFO:     127.0.0.1:60639 - "OPTIONS /api/ai/project/56859746-8edd-4e16-a964-06faf7d13a0c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60637 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60639 - "GET /api/ai/project/56859746-8edd-4e16-a964-06faf7d13a0c HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:60637 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:60637 - "GET /api/ai/project/56859746-8edd-4e16-a964-06faf7d13a0c HTTP/1.1" 404 Not Found

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/button';
@@ -12,17 +12,25 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
 
   const handleGoogleSuccess = async (credentialResponse) => {
+    console.log('Google Auth Success:', credentialResponse);
     try {
       await loginWithGoogle(credentialResponse.credential);
       toast({ title: 'Welcome!', description: 'Signed in with Google' });
-      navigate('/dashboard');
+      const prompt = location.state?.initialPrompt;
+      if (prompt) {
+        navigate('/v2/ide', { state: { initialPrompt: prompt } });
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error) {
+      console.error('Google Auth Backend Error:', error);
       toast({
         title: 'Google sign-in failed',
-        description: error.response?.data?.detail || 'Could not sign in with Google',
+        description: error.response?.data?.detail || 'Could not sign in with Google. Check backend logs.',
         variant: 'destructive',
       });
     }
@@ -34,7 +42,12 @@ const Login = () => {
     try {
       await login(email, password);
       toast({ title: "Welcome back!", description: "Successfully logged in" });
-      navigate('/dashboard');
+      const prompt = location.state?.initialPrompt;
+      if (prompt) {
+        navigate('/v2/ide', { state: { initialPrompt: prompt } });
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error) {
       toast({ title: "Login failed", description: error.response?.data?.detail || "Invalid credentials", variant: "destructive" });
     } finally {
@@ -61,7 +74,10 @@ const Login = () => {
           <div className="flex justify-center" data-testid="login-google-btn">
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
-              onError={() => toast({ title: 'Google sign-in failed', variant: 'destructive' })}
+              onError={(err) => {
+                console.error('Google Login Popup Error:', err);
+                toast({ title: 'Google sign-in failed', variant: 'destructive' });
+              }}
               theme="filled_black"
               size="large"
               text="continue_with"

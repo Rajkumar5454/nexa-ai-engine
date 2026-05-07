@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Plus, LogOut, FolderOpen, Clock, Trash2, MessageSquare } from 'lucide-react';
+import { Plus, LogOut, FolderOpen, Clock, Trash2, MessageSquare, Shield, Zap } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import axios from 'axios';
 
@@ -76,6 +76,16 @@ const Dashboard = () => {
               <p className="text-sm font-medium text-white" data-testid="user-name">{user?.name}</p>
               <p className="text-xs text-gray-400" data-testid="user-credits">{user?.credits} credits</p>
             </div>
+            {(user?.email === 'admin@nexaai.live' || user?.email === 'rajkumar@nexaai.live') && (
+              <Button
+                onClick={() => navigate('/admin')}
+                variant="outline"
+                className="border-violet-500/50 text-violet-400 hover:bg-violet-500/10 hidden md:flex"
+              >
+                <Shield className="w-4 h-4 mr-2" />
+                Admin
+              </Button>
+            )}
             <Button
               data-testid="logout-btn"
               variant="ghost"
@@ -91,39 +101,47 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12">
-        <div className="mb-8 flex items-center justify-between">
+        <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-3xl font-bold text-white mb-2" data-testid="projects-heading">Your Projects</h2>
+            <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-3" data-testid="projects-heading">
+              Your Projects
+              <span className="bg-purple-600/20 text-purple-400 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full border border-purple-500/30">
+                v2 Sandbox Active
+              </span>
+            </h2>
             <p className="text-gray-400">Build amazing apps with AI</p>
           </div>
-          <Button
-            data-testid="new-project-btn"
-            onClick={() => navigate('/ide')}
-            className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full px-6 shadow-lg shadow-violet-600/25"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            New Project
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button
+              data-testid="new-project-btn"
+              onClick={() => navigate('/v2/ide')}
+              className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-full px-8 shadow-lg shadow-purple-600/25 border-0"
+            >
+              <Zap className="w-4 h-4 mr-2 text-yellow-400 fill-yellow-400" />
+              New Project
+            </Button>
+          </div>
         </div>
 
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <div className="inline-block w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
             <p className="text-gray-600 mt-4">Loading projects...</p>
           </div>
         ) : projects.length === 0 ? (
           <div className="text-center py-16" data-testid="empty-projects">
-            <FolderOpen className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+            <FolderOpen className="w-16 h-16 text-gray-600 mx-auto mb-4 opacity-50" />
             <h3 className="text-xl font-semibold text-white mb-2">No projects yet</h3>
-            <p className="text-gray-400 mb-6">Start building your first app with AI</p>
-            <Button
-              data-testid="create-first-project-btn"
-              onClick={() => navigate('/ide')}
-              className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full px-6 shadow-lg shadow-violet-600/25"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Create Project
-            </Button>
+            <p className="text-gray-400 mb-8">Ready to build the future? Start your first advanced project with Nexa V2.</p>
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={() => navigate('/v2/ide')}
+                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-full px-10 py-6 text-lg shadow-xl shadow-purple-600/30 border-0"
+              >
+                <Zap className="w-5 h-5 mr-2 text-yellow-400 fill-yellow-400" />
+                Start Building with V2
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-testid="projects-grid">
@@ -131,10 +149,15 @@ const Dashboard = () => {
               <div
                 key={project.id}
                 data-testid={`project-card-${project.id}`}
-                onClick={() => navigate(`/ide?project=${project.id}`)}
+                onClick={() => navigate(project.is_v2 ? `/v2/ide?project=${project.id}` : `/ide?project=${project.id}`)}
                 className="bg-white/5 rounded-2xl shadow-sm hover:shadow-xl transition-all cursor-pointer overflow-hidden border border-white/10 hover:border-violet-500/30 group"
               >
-                <div className="h-32 bg-gradient-to-br from-violet-600/30 to-blue-600/30 relative">
+                <div className={`h-32 bg-gradient-to-br ${project.is_v2 ? 'from-purple-600/40 to-blue-600/40' : 'from-violet-600/30 to-blue-600/30'} relative`}>
+                  {project.is_v2 && (
+                    <div className="absolute top-3 left-3 bg-purple-600 text-white text-[9px] font-black uppercase px-2 py-0.5 rounded shadow-lg border border-white/20">
+                      v2.0
+                    </div>
+                  )}
                   <button
                     data-testid={`delete-project-${project.id}`}
                     onClick={(e) => handleDeleteProject(e, project.id)}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/button';
@@ -13,13 +13,19 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const { signup, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
 
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
       await loginWithGoogle(credentialResponse.credential);
       toast({ title: 'Welcome to Nexa.AI!', description: 'Account created with Google' });
-      navigate('/dashboard');
+      const prompt = location.state?.initialPrompt;
+      if (prompt) {
+        navigate('/v2/ide', { state: { initialPrompt: prompt } });
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error) {
       toast({
         title: 'Google sign-in failed',
@@ -35,7 +41,12 @@ const Signup = () => {
     try {
       await signup(name, email, password);
       toast({ title: "Account created!", description: "Welcome to Nexa AI" });
-      navigate('/dashboard');
+      const prompt = location.state?.initialPrompt;
+      if (prompt) {
+        navigate('/v2/ide', { state: { initialPrompt: prompt } });
+      } else {
+        navigate('/dashboard');
+      }
     } catch (error) {
       toast({ title: "Signup failed", description: error.response?.data?.detail || "Failed to create account", variant: "destructive" });
     } finally {

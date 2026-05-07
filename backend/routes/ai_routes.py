@@ -29,12 +29,67 @@ async def get_user_id_from_token(authorization: Optional[str] = None):
     return None
 
 
+@router.post("/chat/stream")
+async def chat_stream(request: ChatRequest, authorization: Optional[str] = Header(None)):
+    """Streaming chat with project awareness — SSE mode"""
+    user_id = await get_user_id_from_token(authorization)
+    credits_remaining = await require_and_deduct_credits(user_id, "chat", is_v2=request.is_v2)
+
+    project = None
+    if request.project_id:
+        project_data = await db.projects.find_one({"id": request.project_id})
+        if project_data:
+            project = Project(**project_data)
+
+    async def event_generator():
+        nonlocal project
+        try:
+            full_response = ""
+            async for token in ai_service.chat_message_stream(
+                request.message,
+                request.session_id,
+                conversation_history=project.messages if project else [],
+                project=project,
+                is_v2=request.is_v2
+            ):
+                full_response += token
+                yield f"data: {json.dumps({'type': 'token', 'content': token})}\n\n"
+
+            # Save to DB on completion
+            user_msg = Message(role="user", content=request.message)
+            asst_msg = Message(role="assistant", content=full_response)
+
+            if not project:
+                project = Project(
+                    name=request.message[:50],
+                    messages=[user_msg, asst_msg],
+                    is_v2=request.is_v2
+                )
+            else:
+                project.messages.append(user_msg)
+                project.messages.append(asst_msg)
+                project.updated_at = datetime.now(timezone.utc)
+
+            proj_dict = project.dict()
+            if user_id:
+                proj_dict["user_id"] = user_id
+
+            await db.projects.update_one({"id": project.id}, {"$set": proj_dict}, upsert=True)
+
+            yield f"data: {json.dumps({'type': 'done', 'project_id': project.id, 'credits_remaining': credits_remaining})}\n\n"
+
+        except Exception as e:
+            yield f"data: {json.dumps({'type': 'error', 'detail': str(e)})}\n\n"
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
 @router.post("/chat")
 async def chat(request: ChatRequest, authorization: Optional[str] = Header(None)):
     """Smart chat with project awareness — cofounder mode"""
     try:
         user_id = await get_user_id_from_token(authorization)
-        credits_remaining = await require_and_deduct_credits(user_id, "chat")
+        credits_remaining = await require_and_deduct_credits(user_id, "chat", is_v2=request.is_v2)
 
         project = None
         if request.project_id:
@@ -43,12 +98,15 @@ async def chat(request: ChatRequest, authorization: Optional[str] = Header(None)
                 project = Project(**project_data)
 
         # Pass full project and history to AI for context-aware responses
-        response = await ai_service.chat_message(
+        response = ""
+        async for token in ai_service.chat_message_stream(
             request.message,
             request.session_id,
             conversation_history=project.messages if project else [],
-            project=project
-        )
+            project=project,
+            is_v2=request.is_v2
+        ):
+            response += token
 
         user_message = Message(role="user", content=request.message)
         assistant_message = Message(role="assistant", content=response)
@@ -80,12 +138,9 @@ async def chat(request: ChatRequest, authorization: Optional[str] = Header(None)
         }
 
     except Exception as e:
-        import traceback
-        traceback.print_exc()
-        error_msg = str(e)
-        if "budget" in error_msg.lower() or "exceeded" in error_msg.lower():
-            raise HTTPException(status_code=402, detail="AI budget exceeded. Please add more balance to your Universal Key under Profile -> Universal Key -> Add Balance.")
-        raise HTTPException(status_code=500, detail=error_msg)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 
 
 @router.post("/analyze/{project_id}")
@@ -141,6 +196,7 @@ async def generate_code(request: GenerateCodeRequest, authorization: Optional[st
             request.session_id,
             existing_code=existing_code,
             model=request.model,
+            is_v2=request.is_v2
         )
 
         if not project:
@@ -224,7 +280,7 @@ async def generate_code_stream(request: GenerateCodeRequest, authorization: Opti
     """Stream code generation with SSE"""
     user_id = await get_user_id_from_token(authorization)
     # Enforce + deduct BEFORE opening the stream so 402 is returned as a real HTTP error.
-    credits_remaining = await require_and_deduct_credits(user_id, "generate", request.model)
+    credits_remaining = await require_and_deduct_credits(user_id, "generate", request.model, is_v2=request.is_v2)
 
     # Get existing project for modification
     project = None
@@ -243,7 +299,11 @@ async def generate_code_stream(request: GenerateCodeRequest, authorization: Opti
     async def event_generator():
         try:
             async for event in ai_service.stream_generate_code(
-                request.prompt, request.session_id, existing_code=existing_code, model=request.model
+                request.prompt, request.session_id, 
+                existing_code=existing_code, 
+                model=request.model, 
+                is_v2=request.is_v2,
+                fullstack_mode=request.fullstack_mode
             ):
                 if event["type"] == "status":
                     yield f"data: {json.dumps({'type': 'token', 'content': event['content']})}\n\n"
@@ -257,7 +317,11 @@ async def generate_code_stream(request: GenerateCodeRequest, authorization: Opti
                     
                     # Save project
                     if not project:
-                        proj = Project(name=request.prompt[:60].strip(), files=[File(**f) for f in files])
+                        proj = Project(
+                            name=request.prompt[:60].strip(), 
+                            files=[File(**f) for f in files],
+                            is_v2=request.is_v2
+                        )
                     else:
                         proj = project
                         proj.files = [File(**f) for f in files]

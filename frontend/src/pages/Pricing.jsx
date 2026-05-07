@@ -52,8 +52,8 @@ const tiers = [
     features: [
       '1,500 AI credits / month',
       'Unlimited projects',
-      'GPT-5.5 & GPT-5.4 Access',
-      'Gemini 1.5 Pro & Flash',
+      'GPT-4o & Gemini 1.5 Pro Access',
+      'Claude 3.5 Sonnet & Llama 3',
       'Cofounder Audit mode',
       'Email support',
     ],
@@ -93,7 +93,7 @@ const tiers = [
     features: [
       '10,000 AI credits / month',
       'Everything in Business',
-      'Claude 4.7 Opus (Coming Soon)',
+      'Advanced Claude Support',
       'White-label exports',
       'Private GitHub integration',
       'Dedicated account manager',
@@ -383,7 +383,7 @@ const Pricing = () => {
             <h2 className="text-3xl font-bold mb-3">Ready to ship something new?</h2>
             <p className="text-gray-300 mb-6">Start free. No credit card. Build your first app in 60 seconds.</p>
             <Button
-              onClick={() => navigate(user ? '/ide' : '/signup')}
+              onClick={() => navigate(user ? '/v2/ide' : '/signup')}
               className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 text-white rounded-full px-8 py-6 text-base font-semibold shadow-xl shadow-violet-600/30"
               data-testid="pricing-bottom-cta"
             >
@@ -392,6 +392,19 @@ const Pricing = () => {
           </div>
         </div>
       </main>
+
+      <footer className="py-12 border-t border-white/5 bg-[#0a0a1a] text-center">
+        <div className="container mx-auto px-6">
+          <p className="text-sm text-gray-500 mb-6">Nexa.AI is an AI-powered website builder currently in beta.</p>
+          <div className="flex flex-wrap justify-center gap-8 text-sm font-medium text-gray-400">
+            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link to="/refund" className="hover:text-white transition-colors text-violet-400">Refund Policy</Link>
+            <Link to="/contact" className="hover:text-white transition-colors text-violet-400">Contact Us</Link>
+          </div>
+          <p className="mt-8 text-[10px] text-gray-600 uppercase tracking-[0.2em]">© 2026 Nexa AI. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };

@@ -1,130 +1,118 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups" />
-        <link rel="canonical" href="https://nexaai.live" />
-        <meta name="theme-color" content="#000000" />
-        <link rel="icon" href="%PUBLIC_URL%/favicon.ico?v=3" />
-        <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png?v=3" />
-        <link rel="icon" type="image/png" sizes="64x64" href="%PUBLIC_URL%/favicon-64.png?v=3" />
-        <link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/favicon-192.png?v=3" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon-192.png?v=3" />
-        <meta name="description" content="Nexa.AI - Build your dream website with AI" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
-        <!--
-        manifest.json provides metadata used when your web app is installed on a
-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-        -->
-        <!--
-        Notice the use of %PUBLIC_URL% in the tags above.
-        It will be replaced with the URL of the `public` folder during the build.
-        Only files inside the `public` folder can be referenced from the HTML.
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups" />
 
-        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-        work correctly both with client-side routing and a non-root public URL.
-        Learn how to configure a non-root public URL by running `npm run build`.
-        -->
-        <title>Nexa.AI | Build With AI</title>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9EBJPGCGFH"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+    <!-- SEO Meta Tags -->
+    <title>Nexa.AI — AI Website Builder</title>
+    <meta name="description" content="Create frontend website designs with AI. Nexa.AI helps users generate modern website layouts quickly. Currently in beta." />
+    <meta name="keywords" content="AI website builder, website generator, no-code website builder, frontend generator, AI web design, generate website from prompt" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Nexa.AI" />
+    <link rel="canonical" href="https://nexaai.live" />
 
-          gtag('config', 'G-9EBJPGCGFH');
-        </script>
-        <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nexaai.live" />
+    <meta property="og:title" content="Nexa.AI — AI Website Builder" />
+    <meta property="og:description" content="Create frontend website designs with AI. Nexa.AI helps users generate modern website layouts from text prompts. Currently in beta." />
+    <meta property="og:image" content="https://nexaai.live/nexa-logo-clean.png" />
+    <meta property="og:site_name" content="Nexa.AI" />
+    <meta property="og:locale" content="en_US" />
 
-    </head>
-    <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root"></div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nexa.AI — AI Website Builder" />
+    <meta name="twitter:description" content="Create frontend website designs with AI. Generate modern website layouts from text prompts. Currently in beta." />
+    <meta name="twitter:image" content="https://nexaai.live/nexa-logo-clean.png" />
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <!-- Favicon -->
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico?v=3" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png?v=3" />
+    <link rel="icon" type="image/png" sizes="64x64" href="%PUBLIC_URL%/favicon-64.png?v=3" />
+    <link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/favicon-192.png?v=3" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon-192.png?v=3" />
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
 
-        <script>
-            !(function (t, e) {
-                var o, n, p, r;
-                e.__SV ||
-                    ((window.posthog = e),
-                    (e._i = []),
-                    (e.init = function (i, s, a) {
-                        function g(t, e) {
-                            var o = e.split(".");
-                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
-                                (t[e] = function () {
-                                    t.push(
-                                        [e].concat(
-                                            Array.prototype.slice.call(
-                                                arguments,
-                                                0,
-                                            ),
-                                        ),
-                                    );
-                                });
-                        }
-                        ((p = t.createElement("script")).type =
-                            "text/javascript"),
-                            (p.crossOrigin = "anonymous"),
-                            (p.async = !0),
-                            (p.src =
-                                s.api_host.replace(
-                                    ".i.posthog.com",
-                                    "-assets.i.posthog.com",
-                                ) + "/static/array.js"),
-                            (r =
-                                t.getElementsByTagName(
-                                    "script",
-                                )[0]).parentNode.insertBefore(p, r);
-                        var u = e;
-                        for (
-                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
-                                u.people = u.people || [],
-                                u.toString = function (t) {
-                                    var e = "posthog";
-                                    return (
-                                        "posthog" !== a && (e += "." + a),
-                                        t || (e += " (stub)"),
-                                        e
-                                    );
-                                },
-                                u.people.toString = function () {
-                                    return u.toString(1) + ".people (stub)";
-                                },
-                                o =
-                                    "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
-                                        " ",
-                                    ),
-                                n = 0;
-                            n < o.length;
-                            n++
-                        )
-                            g(u, o[n]);
-                        e._i.push([i, s, a]);
-                    }),
-                    (e.__SV = 1));
-            })(document, window.posthog || []);
-            posthog.init("phc_xAvL2Iq4tFmANRE7kzbKwaSqp1HJjN7x48s3vr0CMjs", {
-                api_host: "https://us.i.posthog.com",
-                person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well,
-                session_recording: {
-                    recordCrossOriginIframes: true,
-                    capturePerformance: false,
-                },
-            });
-        </script>
-    </body>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9EBJPGCGFH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9EBJPGCGFH');
+    </script>
+
+    <!-- Error Shield -->
+    <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
+  </head>
+  <body>
+    <!-- Meaningful noscript fallback for crawlers & ad platforms -->
+    <noscript>
+      <style>
+        .ns-wrapper { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; }
+        .ns-wrapper h1 { color: #1a1a2e; }
+        .ns-wrapper a { color: #5c67f2; }
+        .ns-wrapper nav a { margin-right: 16px; }
+      </style>
+      <div class="ns-wrapper">
+        <h1>Nexa.AI — AI Website Builder</h1>
+        <p>Nexa.AI is an AI-powered website generation platform that helps users create frontend website designs from text prompts. Nexa.AI is currently in beta.</p>
+        <p>Please enable JavaScript in your browser to use the Nexa.AI builder.</p>
+        <h2>What is Nexa.AI?</h2>
+        <p>Nexa.AI helps you generate modern, professional frontend website layouts using AI. Simply describe the website you want, and Nexa.AI generates the code for you. No design experience required.</p>
+        <h2>Features</h2>
+        <ul>
+          <li>Generate website designs from text prompts</li>
+          <li>Export clean HTML, CSS, and React code</li>
+          <li>Preview your website instantly</li>
+          <li>Multiple AI models to choose from</li>
+        </ul>
+        <h2>Quick Links</h2>
+        <nav>
+          <a href="/pricing">Pricing</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/refund">Refund Policy</a>
+          <a href="/contact">Contact Us</a>
+        </nav>
+        <p style="margin-top:20px;">Contact: <a href="mailto:support@nexaai.live">support@nexaai.live</a></p>
+      </div>
+    </noscript>
+
+    <div id="root"></div>
+
+    <!-- Static crawler content (off-screen, visible to bots) -->
+    <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;">
+      <h1>Nexa.AI — AI Website Builder</h1>
+      <p>Create frontend website designs with AI. Nexa.AI is an AI-powered website builder that helps users generate modern website layouts from text prompts. Currently in beta.</p>
+      <p>Nexa.AI does not guarantee specific results. Website designs are generated by AI and may require review before publishing.</p>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/refund">Refund Policy</a>
+        <a href="/contact">Contact Us</a>
+      </nav>
+      <address>
+        Nexa.AI<br />
+        Email: support@nexaai.live<br />
+        Website: https://nexaai.live
+      </address>
+    </div>
+
+    <!-- PostHog Analytics -->
+    <script>
+      !(function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]));
+      posthog.init("phc_xAvL2Iq4tFmANRE7kzbKwaSqp1HJjN7x48s3vr0CMjs",{api_host:"https://us.i.posthog.com",person_profiles:"identified_only",session_recording:{recordCrossOriginIframes:true,capturePerformance:false}});
+    </script>
+  </body>
 </html>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, Share2, Settings, Monitor, Code2, Columns, Plus, LayoutDashboard, FolderOpen, Download, Zap, X, LogOut } from 'lucide-react';
+import { ChevronDown, Share2, Settings, Monitor, Code2, Columns, Plus, LayoutDashboard, FolderOpen, Download, Zap, X, LogOut, Database } from 'lucide-react';
 import { Button } from '../ui/button';
 import { chatAPI } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../hooks/use-toast';
 
-const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewProject, projectId }) => {
+const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewProject, projectId, is_v2 = false, onOpenConnector }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [downloading, setDownloading] = useState(false);
@@ -62,7 +62,7 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
       <div className="flex items-center space-x-2 sm:space-x-4 shrink-0">
         <button
           data-testid="topbar-logo"
-          onClick={() => navigate('/')}
+          onClick={() => navigate(is_v2 ? '/v2' : '/')}
           className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
         >
           <img src="/nexa-logo-tight.png" alt="Nexa.AI" className="h-6 sm:h-7 w-auto object-contain" />
@@ -70,6 +70,11 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
             <span className="text-white">Nexa</span>
             <span className="text-gray-500"> AI</span>
           </span>
+          {is_v2 && (
+            <span className="ml-2 bg-gradient-to-r from-purple-600 to-blue-600 text-[9px] uppercase font-bold px-2 py-0.5 rounded-full border border-white/20 shadow-lg animate-pulse whitespace-nowrap">
+              v2.0 Beta
+            </span>
+          )}
         </button>
         <div className="h-6 w-px bg-gray-800 hidden sm:block" />
         <div className="relative">
@@ -193,6 +198,7 @@ const TopBar = ({ activeView, setActiveView, projectName = 'New Project', onNewP
             <span className="hidden sm:inline">{downloading ? 'Exporting…' : 'Export'}</span>
           </Button>
         )}
+
         <Button
           data-testid="share-btn"
           variant="ghost"

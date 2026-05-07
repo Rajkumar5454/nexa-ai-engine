@@ -64,11 +64,11 @@ const Home_v2 = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                   </span>
-                  <span className="font-bold text-white">GPT-5.4</span> &amp; <span className="font-bold text-white">GPT-5.5</span> are LIVE
+                  <span className="font-bold text-white">GPT-4o</span> &amp; <span className="font-bold text-white">Gemini 1.5 Pro</span> are LIVE
                 </span>
                 <span className="text-white/30">•</span>
                 <span className="flex items-center gap-2">
-                  <span className="font-bold text-white opacity-80">Claude 4.7 Opus</span> &amp; <span className="font-bold text-white opacity-80">Claude 4.6 Sonnet</span> coming soon ⚡️
+                  <span className="font-bold text-white opacity-80">Claude 3.5 Sonnet</span> &amp; <span className="font-bold text-white opacity-80">Llama 3</span> optimized ⚡️
                 </span>
               </span>
             ))}

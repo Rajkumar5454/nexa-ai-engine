@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
 const API = `${BACKEND_URL}/api`;
 
 // Emit a low-credits event the global LowCreditsModal listens for
@@ -45,14 +45,86 @@ axiosInstance.interceptors.response.use(
   },
 );
 
+export const authAPI = {
+  getAdminUsers: async () => {
+    const response = await axiosInstance.get(`${API}/auth/admin/users`);
+    return response.data;
+  },
+};
+
 export const chatAPI = {
-  sendMessage: async (message, sessionId, projectId = null) => {
+  sendMessage: async (message, sessionId, projectId = null, is_v2 = false) => {
     const response = await axiosInstance.post(`${API}/ai/chat`, {
       message,
       session_id: sessionId,
-      project_id: projectId
+      project_id: projectId,
+      is_v2
     });
     return response.data;
+  },
+
+  sendMessageStream: (message, sessionId, projectId, { onToken, onDone, onError }, model = null, is_v2 = false) => {
+    const token = localStorage.getItem('token');
+    const body = JSON.stringify({
+      message,
+      session_id: sessionId,
+      project_id: projectId,
+      model: model || undefined,
+      is_v2
+    });
+
+    const controller = new AbortController();
+
+    fetch(`${API}/ai/chat/stream`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {})
+      },
+      body,
+      signal: controller.signal
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const txt = await response.text().catch(() => 'Chat stream failed');
+          onError(txt);
+          return;
+        }
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              try {
+                const data = JSON.parse(line.slice(6));
+                if (data.type === 'token') {
+                  onToken(data.content);
+                } else if (data.type === 'done') {
+                  onDone(data);
+                } else if (data.type === 'error') {
+                  onError(data.detail || 'Chat failed');
+                }
+              } catch (e) {}
+            }
+          }
+        }
+      })
+      .catch((err) => {
+        if (err.name !== 'AbortError') {
+          onError(err.message || 'Chat stream connection failed');
+        }
+      });
+
+    return () => controller.abort();
   },
 
   generateCode: async (prompt, sessionId, projectId = null) => {
@@ -64,13 +136,15 @@ export const chatAPI = {
     return response.data;
   },
 
-  generateCodeStream: (prompt, sessionId, projectId, { onToken, onDone, onError }, model = null) => {
+  generateCodeStream: (prompt, sessionId, projectId, { onToken, onDone, onError }, model = null, is_v2 = false, fullstack_mode = false) => {
     const token = localStorage.getItem('token');
     const body = JSON.stringify({
       prompt,
       session_id: sessionId,
       project_id: projectId,
       model: model || undefined,
+      is_v2,
+      fullstack_mode
     });
 
     const controller = new AbortController();
@@ -85,7 +159,7 @@ export const chatAPI = {
       signal: controller.signal
     })
       .then(async (response) => {
-        if (response.status === 402 || response.status === 403) {
+        if ((response.status === 402 || response.status === 403) && !is_v2) {
           // Try to parse the detail; body may be empty if the ingress strips it.
           const txt = await response.text().catch(() => '');
           try {

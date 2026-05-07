@@ -1,4 +1,4 @@
-# Nexa AI Backend - Production Secure (Build Refresh: 2026-05-04)
+# Nexa AI Backend - Production Secure (Build Refresh: 2026-05-05)
 from fastapi import FastAPI, APIRouter
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -141,6 +141,26 @@ app.include_router(ai_router, prefix="/api")
 app.include_router(auth_router, prefix="/api")
 app.include_router(projects_router, prefix="/api")
 app.include_router(payments_router, prefix="/api")
+
+# Root-level /health so generated apps that call /health (not /api/health) work
+@app.get("/health")
+async def root_health():
+    return {"status": "ok", "service": "nexa-backend"}
+
+@app.head("/health")
+async def root_health_head():
+    from starlette.responses import Response
+    return Response(status_code=200)
+
+# Generic /api/dashboard stub so generated dashboards don't crash with 404
+@app.get("/api/dashboard")
+async def dashboard_stub():
+    return {
+        "users": 1240, "revenue": 45200, "sessions": 8301,
+        "growth": 12.4, "conversionRate": 3.8,
+        "recentActivity": [],
+        "message": "Dashboard data (preview stub)"
+    }
 
 # Configure logging
 logging.basicConfig(

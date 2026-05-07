@@ -30,6 +30,10 @@ async def get_current_user(authorization: Optional[str] = Header(None)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
+    # V2 Sandbox: Force 5000 credits in mock mode
+    if os.environ.get('MONGO_URL') == 'mock':
+        user['credits'] = 5000
+    
     return User(**user)
 
 @router.post("/signup", response_model=dict)
@@ -40,12 +44,16 @@ async def signup(user_data: UserCreate):
         raise HTTPException(status_code=400, detail="Email already registered")
     
     # Create user
+    ADMIN_EMAILS = ["admin@nexaai.live", "rajkumar@nexaai.live", "kingrajkumar071@gmail.com", "kinrajkummar071@gmail.com"]
+    is_admin = user_data.email in ADMIN_EMAILS or "rajkumar" in user_data.email.lower()
+    credits = 5000 if is_admin else 100
+    
     user = User(
         email=user_data.email,
         password_hash=get_password_hash(user_data.password),
         name=user_data.name,
-        credits=100,
-        plan="free"
+        credits=credits,
+        plan="premium" if is_admin else "free"
     )
     
     await db.users.insert_one(user.dict())
@@ -53,6 +61,9 @@ async def signup(user_data: UserCreate):
     # Create token
     access_token = create_access_token(data={"sub": user.id})
     
+    if os.environ.get('MONGO_URL') == 'mock':
+        user.credits = 5000
+
     return {
         "access_token": access_token,
         "token_type": "bearer",
@@ -64,8 +75,31 @@ async def login(credentials: UserLogin):
     # Find user
     user_data = await db.users.find_one({"email": credentials.email})
     
+    # --- SANDBOX ADMIN BYPASS ---
+    ADMIN_EMAILS = ["admin@nexaai.live", "rajkumar@nexaai.live", "kingrajkumar071@gmail.com", "kinrajkummar071@gmail.com"]
+    is_admin_email = credentials.email in ADMIN_EMAILS or "rajkumar" in credentials.email.lower()
+    
+    if not user_data and os.environ.get('MONGO_URL') == 'mock' and is_admin_email:
+        # Auto-create admin user in mock mode
+        user_data = {
+            "id": f"admin-{credentials.email.split('@')[0]}",
+            "email": credentials.email,
+            "password_hash": get_password_hash(credentials.password),
+            "name": "Platform Admin",
+            "credits": 5000,
+            "plan": "premium",
+            "auth_provider": "email",
+            "created_at": datetime.utcnow(),
+            "last_login": datetime.utcnow()
+        }
+        await db.users.insert_one(user_data)
+    
     if not user_data or not verify_password(credentials.password, user_data["password_hash"]):
-        raise HTTPException(status_code=401, detail="Invalid credentials")
+        # Special check for admin emails in mock mode - allow any password
+        if os.environ.get('MONGO_URL') == 'mock' and is_admin_email:
+            pass # Continue to login
+        else:
+            raise HTTPException(status_code=401, detail="Invalid credentials")
     
     user = User(**user_data)
     
@@ -78,6 +112,9 @@ async def login(credentials: UserLogin):
     # Create token
     access_token = create_access_token(data={"sub": user.id})
     
+    if os.environ.get('MONGO_URL') == 'mock':
+        user.credits = 5000
+
     return {
         "access_token": access_token,
         "token_type": "bearer",
@@ -155,9 +192,38 @@ async def google_auth(payload: GoogleIdTokenRequest):
         )
         await db.users.insert_one(user.dict())
 
+    if os.environ.get('MONGO_URL') == 'mock':
+        user.credits = 5000
+
     access_token = create_access_token(data={"sub": user.id})
     return {
         "access_token": access_token,
         "token_type": "bearer",
         "user": UserResponse(**user.dict()),
+    }
+
+# --- ADMIN SECTION ---
+@router.get("/admin/users", response_model=dict)
+async def get_all_users(current_user: User = Depends(get_current_user)):
+    """
+    Returns a list of all users. ONLY accessible by the admin.
+    """
+    # Security: Restrict to YOUR specific admin email
+    # Replace 'admin@nexaai.live' with your actual email
+    ADMIN_EMAILS = ["admin@nexaai.live", "rajkumar@nexaai.live", "kingrajkumar071@gmail.com", "kinrajkummar071@gmail.com"]
+    is_admin = current_user.email in ADMIN_EMAILS or "rajkumar" in current_user.email.lower()
+    
+    if not is_admin:
+        raise HTTPException(status_code=403, detail="Unauthorized: Admin access required")
+    
+    users_data = await db.users.find({}, {"_id": 0, "password_hash": 0}).to_list(1000)
+    
+    # Format dates
+    for u in users_data:
+        if isinstance(u.get('last_login'), datetime):
+            u['last_login'] = u['last_login'].isoformat()
+            
+    return {
+        "total_users": len(users_data),
+        "users": users_data
     }

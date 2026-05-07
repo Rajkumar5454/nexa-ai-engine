@@ -12,10 +12,15 @@ import Dashboard from './pages/Dashboard';
 import Pricing from './pages/Pricing';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import Contact from './pages/Contact';
+import Refund from './pages/Refund';
+import IDE_v2 from './pages/IDE_v2';
+import Home_v2 from './pages/Home_v2';
+import Admin from './pages/Admin';
 import LowCreditsModal from './components/LowCreditsModal';
 
 // Google Client ID (Public)
-const GOOGLE_CLIENT_ID = "422402573935-uf0e7rf9q2qa29elpbc9r8e4f77hbkof.apps.googleusercontent.com";
+const GOOGLE_CLIENT_ID = "422402573935-uf0e7rf9q2qa29elpbc9r8e4f77hbkof.apps.googleusercontent.com".trim();
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -48,8 +53,17 @@ function AppRoutes() {
           <IDE />
         </ProtectedRoute>
       } />
+      <Route path="/v2" element={<Home_v2 />} />
+      <Route path="/v2/ide" element={<IDE_v2 />} />
+      <Route path="/admin" element={
+        <ProtectedRoute>
+          <Admin />
+        </ProtectedRoute>
+      } />
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/refund" element={<Refund />} />
     </Routes>
   );
 }
