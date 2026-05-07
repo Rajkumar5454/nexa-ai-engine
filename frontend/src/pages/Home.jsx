@@ -174,13 +174,7 @@ const Home = () => {
         <div className="container mx-auto max-w-6xl">
           {/* Hero Section */}
           <div className="flex flex-col items-center text-center mb-10">
-              <Link to="/v2" className="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass-morphism text-sm text-violet-300 mb-6 animate-fade-in-up border border-violet-500/20 shadow-[0_0_15px_rgba(139,92,246,0.15)] hover:scale-105 transition-all group">
-                <Sparkles className="w-4 h-4 animate-pulse group-hover:text-violet-400" />
-                <span className="font-medium">Next-Gen AI Website Generation</span>
-                <div className="w-1 h-1 rounded-full bg-violet-400 mx-1" />
-                <span className="text-white font-bold bg-violet-600/20 px-2 py-0.5 rounded-md group-hover:bg-violet-600/40">v2.0 Beta</span>
-                <ArrowRight className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </Link>
+
 
             {/* Scrolling Ticker */}
             <div className="w-full max-w-lg overflow-hidden mb-6 relative">
@@ -436,7 +430,6 @@ const Home = () => {
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Platform</h4>
                 <ul className="space-y-4 text-white/70 text-sm font-light">
                   <li><Link to="/ide" className="hover:text-white transition-colors">AI Builder</Link></li>
-                  <li><Link to="/v2" className="hover:text-white transition-colors text-purple-400 font-medium">AI Builder v2.0</Link></li>
                   <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
                   <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
                 </ul>

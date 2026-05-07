@@ -434,7 +434,7 @@ const Home_v2 = () => {
               <div>
                 <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Platform</h4>
                 <ul className="space-y-4 text-white/70 text-sm font-light">
-                  <li><Link to="/v2/ide" className="hover:text-white transition-colors text-purple-400">AI Builder v2.0</Link></li>
+                  <li><Link to="/ide" className="hover:text-white transition-colors">AI Builder</Link></li>
                   <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
                   <li><Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link></li>
                 </ul>
