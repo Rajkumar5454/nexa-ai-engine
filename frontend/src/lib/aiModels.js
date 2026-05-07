@@ -21,15 +21,6 @@ export const AI_MODELS = [
     cost: 25,
   },
   {
-    id: 'gemini-3-1-pro',
-    name: 'Gemini 3.1 Pro',
-    provider: 'Google',
-    tagline: 'Advanced reasoning and complex logic',
-    badge: 'Pro',
-    color: 'from-fuchsia-500 to-purple-600',
-    cost: 25,
-  },
-  {
     id: 'gpt-4o',
     name: 'GPT-4o',
     provider: 'OpenAI',
@@ -37,16 +28,6 @@ export const AI_MODELS = [
     badge: 'Smart & Fast',
     color: 'from-blue-500 to-cyan-400',
     cost: 20,
-  },
-  {
-    id: 'claude-sonnet-4-5',
-    name: 'Claude 3.5 Sonnet',
-    provider: 'Anthropic',
-    tagline: 'Elite aesthetic and clean brand identity',
-    badge: 'Coming Soon',
-    color: 'from-orange-500 to-rose-500',
-    cost: 25,
-    comingSoon: true,
   },
   {
     id: 'gemini-3-flash',

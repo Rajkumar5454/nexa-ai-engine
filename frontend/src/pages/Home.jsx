@@ -64,11 +64,11 @@ const Home = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                   </span>
-                  <span className="font-bold text-white">GPT-4o</span> &amp; <span className="font-bold text-white">Gemini 1.5 Pro</span> are LIVE
+                  <span className="font-bold text-white">GPT-5.5</span> &amp; <span className="font-bold text-white">GPT-5.4</span> are LIVE
                 </span>
                 <span className="text-white/30">•</span>
                 <span className="flex items-center gap-2">
-                  <span className="font-bold text-white opacity-80">Claude 3.5 Sonnet</span> &amp; <span className="font-bold text-white opacity-80">Llama 3</span> optimized ⚡️
+                  <span className="font-bold text-white opacity-80">Gemini 3 Flash</span> &amp; <span className="font-bold text-white opacity-80">Llama 3</span> optimized ⚡️
                 </span>
               </span>
             ))}
@@ -314,10 +314,10 @@ const Home = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { title: "FitLife Pro", niche: "Fitness & Gym", img: "/previews/fitness.png", model: "Gemini 3.1 Pro", time: "42s" },
+                { title: "FitLife Pro", niche: "Fitness & Gym", img: "/previews/fitness.png", model: "GPT-5.5", time: "42s" },
                 { title: "Quantum AI", niche: "SaaS Dashboard", img: "/previews/saas.png", model: "GPT-4o", time: "38s" },
                 { title: "Luxe Decor", niche: "Interior Design", img: "/previews/interior.png", model: "Llama 3.3 70B", time: "45s" },
-                { title: "Chronos", niche: "Luxury E-commerce", img: "/previews/ecommerce.png", model: "Claude 3.5 Sonnet", time: "41s" }
+                { title: "Chronos", niche: "Luxury E-commerce", img: "/previews/ecommerce.png", model: "Gemini 3 Flash", time: "41s" }
               ].map((site, i) => (
                 <div key={i} className="group relative">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600/40 to-blue-600/40 rounded-[2rem] blur opacity-0 group-hover:opacity-100 transition duration-500" />
@@ -407,6 +407,48 @@ const Home = () => {
                 >
                   View Pricing
                 </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Lead Capture / Newsletter */}
+          <div className="mt-40 mb-20">
+            <div className="glass-morphism rounded-[2.5rem] p-12 border border-white/10 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-violet-600/10 rounded-full blur-[100px] pointer-events-none" />
+              <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div className="max-w-md">
+                  <h3 className="text-3xl font-black text-white mb-4 tracking-tight">Stay ahead of the curve.</h3>
+                  <p className="text-gray-400 font-light">Get exclusive AI web design templates and platform updates delivered to your inbox.</p>
+                </div>
+                <div className="w-full md:w-auto">
+                  <form 
+                    className="flex flex-col sm:flex-row gap-3"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const email = e.target.elements.email.value;
+                      fetch('/api/contact/submit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: 'Newsletter Subscriber', email, subject: 'Newsletter', message: 'I want to stay updated!' })
+                      }).then(() => {
+                        alert('Thank you for subscribing!');
+                        e.target.reset();
+                      });
+                    }}
+                  >
+                    <input 
+                      type="email" 
+                      name="email"
+                      required
+                      placeholder="Enter your email"
+                      className="bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white outline-none focus:border-violet-500 transition-all w-full md:w-80"
+                    />
+                    <Button className="bg-violet-600 hover:bg-violet-500 text-white rounded-2xl px-8 py-4 h-auto font-bold">
+                      Subscribe
+                    </Button>
+                  </form>
+                  <p className="text-[10px] text-gray-500 mt-4 px-2">We care about your data. Read our <Link to="/privacy" className="text-violet-400 hover:underline">Privacy Policy</Link>.</p>
+                </div>
               </div>
             </div>
           </div>

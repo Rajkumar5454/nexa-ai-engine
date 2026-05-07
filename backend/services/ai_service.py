@@ -149,9 +149,7 @@ SUPPORTED_MODELS = {
     "gpt-5.5",
     "gpt-5.4",
     "gpt-4o",
-    "claude-sonnet-4-5",
     "gemini-3-flash",
-    "gemini-3-1-pro",
     "llama-3-3-70b",
 }
 
@@ -160,16 +158,13 @@ MODEL_TEMPERATURES = {
     "gpt-5.5": 0.4,
     "gpt-5.4": 0.4,
     "gpt-4o": 0.4,
-    "claude-sonnet-4-5": 0.4,
     "gemini-3-flash": 0.4,
-    "gemini-3-1-pro": 0.4,
     "llama-3-3-70b": 0.4,
 }
 
 # Maps for providers that aren't routable through the OpenAI-compat proxy
 GEMINI_PROVIDER_MAP = {
     "gemini-3-flash": ("gemini", "gemini-3-flash-preview"),
-    "gemini-3-1-pro": ("gemini", "gemini-3.1-pro-preview"),
     "llama": ("nvidia", "meta/llama-3.3-70b-instruct"),
 }
 

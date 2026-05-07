@@ -17,6 +17,7 @@ from routes.ai_routes import router as ai_router
 from routes.auth_routes import router as auth_router
 from routes.projects_routes import router as projects_router
 from routes.payments_routes import router as payments_router
+from routes.contact_routes import router as contact_router
 
 # MongoDB connection
 from db import client, db
@@ -141,6 +142,7 @@ app.include_router(ai_router, prefix="/api")
 app.include_router(auth_router, prefix="/api")
 app.include_router(projects_router, prefix="/api")
 app.include_router(payments_router, prefix="/api")
+app.include_router(contact_router, prefix="/api")
 
 # Root-level /health so generated apps that call /health (not /api/health) work
 @app.get("/health")
