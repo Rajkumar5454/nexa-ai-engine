@@ -26,20 +26,39 @@ PALETTES = [
     {"name": "Amber",    "accent": "amber-500",   "gradient": "from-amber-500 to-yellow-400",   "btn": "bg-amber-600 hover:bg-amber-500"},
 ]
 
+MANDATORY_SECTION_STRUCTURE = """
+YOU MUST BUILD ALL OF THESE SECTIONS — NO EXCEPTIONS:
+1. NAVIGATION: Full-width sticky nav with logo, links, and CTA button.
+2. HERO: Full-screen split-screen section (image on RIGHT, oversized headline + subtext + CTA on LEFT). Use a large real photo.
+3. FEATURED SECTION: 3-4 product/service cards in a grid, each with a real photo, title, price/label, and hover effect.
+4. ABOUT/STORY: A rich editorial section with a large background image and text overlay.
+5. SECONDARY GRID: A bento-box style grid of 4-6 items, each with a unique real photo.
+6. TESTIMONIALS or STATS: Social proof section with 3 quotes or 4 key metrics.
+7. NEWSLETTER/CTA: Full-width call-to-action section with an email input and bold headline.
+8. FOOTER: Full footer with logo, navigation links, social icons, and copyright.
+MINIMUM: 900+ lines of code. A short output is a FAILURE.
+"""
+
 MANDATORY_AESTHETIC_RULES = """
 CRITICAL VISUAL RULES:
-1. IMAGERY: YOU MUST USE REAL IMAGES. Use <img src="https://images.unsplash.com/photo-...?auto=format&fit=crop&w=800&q=80" />.
+1. IMAGERY: YOU MUST USE REAL IMAGES in every section. Use exact URLs from the UNSPLASH LIBRARY provided.
 2. NO PLACEHOLDERS: Prohibited to use empty divs, icons, or color blocks as image replacements.
 3. STYLING: Every element must have a `style={{...}}` prop.
 4. GLASSMORPHISM: Use `rgba(255,255,255,0.05)` and `backdropFilter:'blur(20px)'` for all containers.
 5. GRADIENTS: Use `linear-gradient` for all buttons and backgrounds.
-6. TYPOGRAPHY: High-end fonts only (Inter/system-ui).
+6. TYPOGRAPHY: High-end fonts only (Inter/system-ui). Use @import for Google Fonts.
+7. ANIMATIONS: Add hover effects (scale, shadow, color transition) on all interactive elements.
 """
 
-SYSTEM_OPENAI = f"You are a WORLD-CLASS SOFTWARE ENGINEER. Your #1 PRIORITY is REAL IMAGERY. Build ELITE landing pages. {MANDATORY_AESTHETIC_RULES}"
-SYSTEM_CLAUDE = f"You are a luxury brand director. Your #1 PRIORITY is STUNNING PHOTOGRAPHY. Build MINIMALIST EDITORIAL websites. {MANDATORY_AESTHETIC_RULES}"
-SYSTEM_GEMINI = f"You are a creative technologist. Your #1 PRIORITY is IMMERSIVE VISUALS. Build INTERACTIVE UI products. {MANDATORY_AESTHETIC_RULES}"
-SYSTEM_LLAMA = f"You are a master of Modern UI. Your #1 PRIORITY is WOW-FACTOR IMAGES. Build ELITE websites. {MANDATORY_AESTHETIC_RULES}"
+SYSTEM_ALL = f"""You are a WORLD-CLASS frontend engineer who builds stunning, premium, multi-section websites that WIN design awards. 
+You NEVER build simple or short pages. You ALWAYS build full, rich, multi-section experiences with stunning photography.
+{MANDATORY_SECTION_STRUCTURE}
+{MANDATORY_AESTHETIC_RULES}"""
+
+SYSTEM_OPENAI = SYSTEM_ALL
+SYSTEM_CLAUDE = SYSTEM_ALL
+SYSTEM_GEMINI = SYSTEM_ALL
+SYSTEM_LLAMA = SYSTEM_ALL
 
 def _system_for(model_id):
     if model_id and model_id.startswith("claude"): return SYSTEM_CLAUDE
@@ -393,18 +412,28 @@ INSTRUCTION: Pick the MOST RELEVANT category above and use those exact URLs in y
         ])
 
         return (
-            f"BUILD A STUNNING FRONTEND UI FOR: {prompt}\n\n"
-            f"AESTHETIC: {style_mood} with {p['name']} palette. Layout: {layout_seed}.\n\n"
+            f"BUILD A STUNNING, FULL-FEATURED WEBSITE FOR: {prompt}\n\n"
+            f"STYLE: {style_mood} aesthetic with {p['name']} color palette. Layout strategy: {layout_seed}.\n\n"
             "MANDATORY OUTPUT FORMAT:\n"
-            "Return a SINGLE valid React file inside a ```javascript block.\n"
-            "The component MUST be named App and end with: export default App;\n\n"
+            "- Return a SINGLE valid React file inside a ```javascript block.\n"
+            "- The component MUST be named App and end with: export default App;\n"
+            "- MINIMUM 900 LINES. A short output is a critical failure.\n\n"
             f"MANDATORY IMAGE LIBRARY — USE THESE EXACT WORKING URLs (NO FAKE PATHS LIKE /shoe1.jpg):\n{self.UNSPLASH_LIBRARY}\n"
+            "MANDATORY SECTIONS (ALL REQUIRED — DO NOT SKIP ANY):\n"
+            "1. STICKY NAV: Logo + menu links + CTA button, dark background.\n"
+            "2. HERO: Split-screen. LEFT: giant headline (3+ lines), subtitle, 2 CTA buttons. RIGHT: large real <img> filling half the screen.\n"
+            "3. FEATURED GRID: 3-4 cards with real <img> (300px height), product name, description, price, hover scale effect.\n"
+            "4. EDITORIAL SECTION: Full-width dark section with background image and bold overlaid text.\n"
+            "5. BENTO GRID: 4-6 asymmetric cells each with a unique real <img> and caption.\n"
+            "6. SOCIAL PROOF: 3 testimonial cards OR 4 large stat numbers with labels.\n"
+            "7. CTA BANNER: Bold headline + email input + subscribe button.\n"
+            "8. FOOTER: Logo, 3 link columns, social icons, copyright.\n\n"
             "TECHNICAL RULES:\n"
-            "- IMAGES: Pick the relevant category above and use those exact Unsplash URLs in every <img> tag.\n"
+            "- IMAGES: Use exact Unsplash URLs from the library above. Pick the matching niche category.\n"
             "- NO EXTERNAL DEPS. Use ONLY 'react'.\n"
-            "- ALL STYLES INLINE via style={{...}}.\n"
-            "- USE SVGS for all icons.\n"
-            "- ~1000+ lines total."
+            "- ALL STYLES INLINE via style={{}}.\n"
+            "- USE SVG for all icons (no icon libraries).\n"
+            "- Add smooth hover/transition effects on ALL cards and buttons."
         )
 
     # ----- Public API -----
