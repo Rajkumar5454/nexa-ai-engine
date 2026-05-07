@@ -50,21 +50,64 @@ CRITICAL VISUAL RULES:
 7. ANIMATIONS: Add hover effects (scale, shadow, color transition) on all interactive elements.
 """
 
-SYSTEM_ALL = f"""You are a WORLD-CLASS frontend engineer who builds stunning, premium, multi-section websites that WIN design awards. 
+SYSTEM_ALL_BASE = f"""You are a WORLD-CLASS frontend engineer who builds stunning, premium, multi-section websites that WIN design awards. 
 You NEVER build simple or short pages. You ALWAYS build full, rich, multi-section experiences with stunning photography.
 {MANDATORY_SECTION_STRUCTURE}
 {MANDATORY_AESTHETIC_RULES}"""
 
-SYSTEM_OPENAI = SYSTEM_ALL
-SYSTEM_CLAUDE = SYSTEM_ALL
-SYSTEM_GEMINI = SYSTEM_ALL
-SYSTEM_LLAMA = SYSTEM_ALL
+# Each model has a UNIQUE signature design fingerprint
+SYSTEM_OPENAI = SYSTEM_ALL_BASE + """
+SIGNATURE STYLE — GPT-5.5 “Glass Luxe”:
+- HEAVY GLASSMORPHISM: Every card and panel uses frosted glass (background: rgba(255,255,255,0.07), backdropFilter: blur(24px)).
+- BORDERS: Subtle glowing borders (border: 1px solid rgba(255,255,255,0.15), boxShadow: 0 0 20px rgba(139,92,246,0.2)).
+- COLOR SCHEME: Deep navy/black background (#05091a) with violet and cyan accents.
+- HERO: Full bleed glass panel hero with text floating over a blurred image background.
+- FEEL: Premium, Apple Vision Pro-inspired. Ultra-modern luxury.
+"""
+
+SYSTEM_GPT54 = SYSTEM_ALL_BASE + """
+SIGNATURE STYLE — GPT-5.4 “Dark Hacker”:
+- BACKGROUND: Pure pitch black (#000000) with dark gray containers (#111111, #0d0d0d).
+- ACCENTS: Electric green (#00ff88) and hot pink (#ff0066) neon glows.
+- TYPOGRAPHY: Monospace fonts (font-family: 'Courier New', monospace) for headings.
+- BORDERS: Neon-glow borders (boxShadow: 0 0 10px #00ff88, border: 1px solid #00ff88).
+- HERO: Full terminal/CLI aesthetic hero with a blinking cursor animation.
+- FEEL: Underground, cyberpunk, Matrix-inspired hacker aesthetic.
+"""
+
+SYSTEM_CLAUDE = SYSTEM_ALL_BASE + """
+SIGNATURE STYLE — Claude “Editorial Luxury”:
+- BACKGROUND: Warm off-white (#faf8f5) and deep espresso (#1a0f00) alternating sections.
+- TYPOGRAPHY: Serif headings (Georgia, 'Times New Roman') with extra-wide letter spacing.
+- ACCENTS: Gold (#c9a96e) and deep forest green (#1a3a2a).
+- LAYOUT: Magazine editorial layout. Bold full-bleed photography. Large pull quotes.
+- FEEL: High-fashion editorial. Think Vogue or LVMH brand website.
+"""
+
+SYSTEM_GEMINI = SYSTEM_ALL_BASE + """
+SIGNATURE STYLE — Gemini “Immersive Gradient”:
+- BACKGROUNDS: Bold, vibrant multi-stop gradients (violet → indigo → cyan).
+- EFFECTS: Floating glowing orbs (absolutely positioned blurred radial gradients).
+- ANIMATIONS: Smooth parallax-style movement, pulsing glow effects on key elements.
+- HERO: Oversized kinetic typography with gradient text fill.
+- FEEL: Futuristic, alive, immersive — feels like it's from 2030.
+"""
+
+SYSTEM_LLAMA = SYSTEM_ALL_BASE + """
+SIGNATURE STYLE — Llama “Bold Brutalist”:
+- BACKGROUNDS: Raw white (#ffffff) and sharp black (#000000). No gradients.
+- TYPOGRAPHY: Extra-bold, oversized headings (fontWeight: 900, fontSize: clamp(3rem, 8vw, 7rem)).
+- ACCENTS: Pure primary colors (red #ff0000, yellow #ffff00) used as sharp blocks.
+- LAYOUT: Brutal grid. No rounded corners (borderRadius: 0). Exposed grid lines.
+- FEEL: Bold, unapologetic, design-forward brutalism. Think Balenciaga or Supreme.
+"""
 
 def _system_for(model_id):
     if model_id and model_id.startswith("claude"): return SYSTEM_CLAUDE
     if model_id and model_id.startswith("gemini"): return SYSTEM_GEMINI
     if model_id and model_id.startswith("llama"): return SYSTEM_LLAMA
-    return SYSTEM_OPENAI
+    if model_id == "gpt-5.4": return SYSTEM_GPT54
+    return SYSTEM_OPENAI  # gpt-5.5, gpt-4o
 
 
 CHAT_SYSTEM = """You are Nexa AI, a brilliant co-founder and lead engineer. 
@@ -262,7 +305,8 @@ class AIService:
         # Map internal Nexa names to exact provider model IDs (confirmed from API key's ListModels)
         provider_model = model
         if model == "gemini-3-1-pro":
-            provider_model = "gemini-3.1-pro-preview"
+            # Use gemini-1.5-pro as the reliable, fast fallback for this tier
+            provider_model = "gemini-1.5-pro-latest"
         elif model == "gemini-3-flash":
             provider_model = "gemini-3-flash-preview"
         elif model == "llama-3-3-70b":
