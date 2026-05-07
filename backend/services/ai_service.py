@@ -27,20 +27,19 @@ PALETTES = [
 ]
 
 MANDATORY_AESTHETIC_RULES = """
-STYLING RULES (CRITICAL):
-- EVERY element MUST have a `style={{...}}` prop for its primary look.
-- Use `rgba(255,255,255,0.05)` and `backdropFilter:'blur(20px)'` for all containers.
-- Use `linear-gradient` for all buttons and backgrounds.
-- High-end typography: Use `Inter` or `system-ui`.
-- VISUAL DNA: Floating orbs, glowing borders, and smooth transitions are MANDATORY.
-- IMAGERY (STRICT): YOU MUST USE REAL IMAGES. Use <img src="https://images.unsplash.com/photo-...?auto=format&fit=crop&w=800&q=80" />.
-- DO NOT use placeholders, empty divs, or simple icons as image replacements.
+CRITICAL VISUAL RULES:
+1. IMAGERY: YOU MUST USE REAL IMAGES. Use <img src="https://images.unsplash.com/photo-...?auto=format&fit=crop&w=800&q=80" />.
+2. NO PLACEHOLDERS: Prohibited to use empty divs, icons, or color blocks as image replacements.
+3. STYLING: Every element must have a `style={{...}}` prop.
+4. GLASSMORPHISM: Use `rgba(255,255,255,0.05)` and `backdropFilter:'blur(20px)'` for all containers.
+5. GRADIENTS: Use `linear-gradient` for all buttons and backgrounds.
+6. TYPOGRAPHY: High-end fonts only (Inter/system-ui).
 """
 
-SYSTEM_OPENAI = f"You are a WORLD-CLASS SOFTWARE ENGINEER. Build ELITE, single-page React landing pages and apps. {MANDATORY_AESTHETIC_RULES}"
-SYSTEM_CLAUDE = f"You are a luxury brand director. Build MINIMALIST EDITORIAL magazine-style websites. {MANDATORY_AESTHETIC_RULES}"
-SYSTEM_GEMINI = f"You are a creative technologist. Build IMMERSIVE, FULLY INTERACTIVE UI products. {MANDATORY_AESTHETIC_RULES}"
-SYSTEM_LLAMA = f"You are a master of Modern UI. Build ELITE, 'WOW-FACTOR' websites. {MANDATORY_AESTHETIC_RULES}"
+SYSTEM_OPENAI = f"You are a WORLD-CLASS SOFTWARE ENGINEER. Your #1 PRIORITY is REAL IMAGERY. Build ELITE landing pages. {MANDATORY_AESTHETIC_RULES}"
+SYSTEM_CLAUDE = f"You are a luxury brand director. Your #1 PRIORITY is STUNNING PHOTOGRAPHY. Build MINIMALIST EDITORIAL websites. {MANDATORY_AESTHETIC_RULES}"
+SYSTEM_GEMINI = f"You are a creative technologist. Your #1 PRIORITY is IMMERSIVE VISUALS. Build INTERACTIVE UI products. {MANDATORY_AESTHETIC_RULES}"
+SYSTEM_LLAMA = f"You are a master of Modern UI. Your #1 PRIORITY is WOW-FACTOR IMAGES. Build ELITE websites. {MANDATORY_AESTHETIC_RULES}"
 
 def _system_for(model_id):
     if model_id and model_id.startswith("claude"): return SYSTEM_CLAUDE
@@ -386,10 +385,10 @@ class AIService:
             "Return a SINGLE valid React file inside a ```javascript block.\n"
             "The component MUST be named App and end with: export default App;\n\n"
             "TECHNICAL RULES:\n"
+            "- REAL IMAGERY: YOU MUST USE <img src=\"https://images.unsplash.com/photo-...?auto=format&fit=crop&w=800&q=80\" /> for all sections. Keywords must match the niche.\n"
             "- NO EXTERNAL DEPS. Use ONLY 'react'.\n"
             "- ALL STYLES INLINE via style={{...}}.\n"
             "- USE SVGS for all icons.\n"
-            "- REAL IMAGERY: Use <img src=\"https://images.unsplash.com/photo-...?auto=format&fit=crop&w=800&q=80\" /> for all sections. Ensure keywords match the niche.\n"
             "- ~1000+ lines total."
         )
 
