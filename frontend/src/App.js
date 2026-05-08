@@ -52,6 +52,10 @@ function AppRoutes() {
           page_path: location.pathname + location.search,
           send_page_view: true
         });
+        window.gtag('config', 'AW-18028885320', {
+          page_path: location.pathname + location.search,
+          send_page_view: true
+        });
       } else {
         console.warn('[GA] gtag not found on window');
       }
