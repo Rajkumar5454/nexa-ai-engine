@@ -66,6 +66,22 @@ function AppRoutes() {
     return () => clearTimeout(timer);
   }, [location]);
 
+  // Keep-Alive Heartbeat for Render (Pings every 10 mins while site is open)
+  useEffect(() => {
+    const keepAlive = async () => {
+      try {
+        const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
+        await fetch(`${BACKEND_URL}/health`, { mode: 'no-cors' });
+        console.log('[System] Keep-alive heartbeat sent to Render.');
+      } catch (e) {
+        // Silently fail
+      }
+    };
+    keepAlive();
+    const interval = setInterval(keepAlive, 600000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
